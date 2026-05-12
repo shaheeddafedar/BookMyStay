@@ -1,4 +1,4 @@
-# Airbnb Clone (MERN)
+# BookMyStay
 
 Full Stack MERN BookMyStay
 
