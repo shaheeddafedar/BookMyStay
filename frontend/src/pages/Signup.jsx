@@ -1,6 +1,8 @@
-import { React, useState } from 'react'
-import Navbar from "../components/Navbar"
+//external 
+import React,{ useContext, useState } from 'react'
 import { Link } from "react-router-dom";
+import axios from 'axios';
+
 
 //react icons
 import { FaUser } from "react-icons/fa";
@@ -9,10 +11,39 @@ import { FaLock } from "react-icons/fa6";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoMdEye } from "react-icons/io";
 
+//internal
+import Navbar from "../components/Navbar"
+import  {authDataContext} from "../context/Authcontext"
 
 
 const Signup = () => {
   let [show, setshow] = useState(false)
+  let {serverUrl} = useContext(authDataContext)
+    let [name,setName] = useState("");
+    let [email,setEmail] = useState("");
+    let [password,setPassword] = useState("");
+
+  const handleSignup = async (e)=> {
+    try{
+      e.preventDefault()
+    let result =  await axios.post(serverUrl+"/api/auth/signup",{
+       name,
+       email,
+       password
+       
+    },{withCredentials:true})
+    console.log(result.data);
+    
+    setName("");
+    setEmail("");
+    setPassword("");
+
+    } catch (error){
+     console.log(error);
+     
+    }
+  }
+
   return (
     <>
       <Navbar />
@@ -38,7 +69,7 @@ const Signup = () => {
                 <p className="mt-2 text-gray-500">Join us and start your journey</p>
               </div>
 
-              <form className="space-y-5">
+              <form className="space-y-5" onSubmit={(e) => handleSignup(e)} method='POST'>
                 <div className="space-y-2">
                   <label className="block text-sm font-semibold text-gray-700">
                     Username
@@ -49,6 +80,10 @@ const Signup = () => {
                       type="text"
                       placeholder="Enter your name"
                       className="w-full py-3 pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                      required
+                      onChange={(e)=>setName(e.target.value)}
+                      value={name}
+                      
                     />
                   </div>
                 </div>
@@ -63,6 +98,9 @@ const Signup = () => {
                       type="email"
                       placeholder="Enter your email"
                       className="w-full py-3 pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                      required
+                      onChange={(e)=>setEmail(e.target.value)}
+                      value={email}
                     />
                   </div>
                 </div>
@@ -78,6 +116,9 @@ const Signup = () => {
                       placeholder="Create a password"
                       minLength={6}
                       className="w-full py-3 pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                      required
+                      onChange={(e)=>setPassword(e.target.value)}
+                      value={password}
                     />
                     {! show && < IoMdEyeOff className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 cursor-pointer right-3 top-1/2 hover:text-gray-600" onClick={() => setshow(prev => !prev)} />}
                     {show && < IoMdEye className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 cursor-pointer right-3 top-1/2 hover:text-gray-600" onClick={() => setshow(prev => !prev)} />}

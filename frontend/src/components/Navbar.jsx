@@ -1,17 +1,18 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  let navigate = useNavigate();
   return (
     <>
       <div className="relative flex items-center justify-center h-32 gap-4 py-4 px-7 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700">
         <div className="absolute inset-0 opacity-10 bg-gradient-to-r from-white to-transparent"></div>
         <img
+            onClick={() => navigate("/")}
           src="/logo.png"
           alt="logo"
           className="relative w-16 h-16 transition-all duration-500 rounded-full shadow-lg hover:scale-110 hover:rotate-3"
         />
-
-        <h1 className="relative text-5xl font-black text-white">
+        <h1 className="relative text-5xl font-black text-white"  onClick={() => navigate("/")} >
           BookMyStay
         </h1>
       </div>
