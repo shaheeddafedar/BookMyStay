@@ -17,9 +17,11 @@ import  {authDataContext} from "../context/Authcontext"
 
 
 const Signup = () => {
-  let [show, setshow] = useState(false)
   let {serverUrl} = useContext(authDataContext)
-    let [name,setName] = useState("");
+
+      //react hook
+  let [show, setshow] = useState(false)
+  let [name,setName] = useState("");
     let [email,setEmail] = useState("");
     let [password,setPassword] = useState("");
 
@@ -69,7 +71,7 @@ const Signup = () => {
                 <p className="mt-2 text-gray-500">Join us and start your journey</p>
               </div>
 
-              <form className="space-y-5" onSubmit={(e) => handleSignup(e)} method='POST'>
+              <form className="space-y-5" onSubmit={ handleSignup} method='POST'>
                 <div className="space-y-2">
                   <label className="block text-sm font-semibold text-gray-700">
                     Username

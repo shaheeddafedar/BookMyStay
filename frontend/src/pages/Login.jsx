@@ -1,6 +1,10 @@
-import { React, useState } from 'react'
+import { React, useState,useContext} from 'react'
+import { Link,useNavigate } from "react-router-dom";
+import axios from "axios";
+
 import Navbar from "../components/Navbar"
-import { Link } from "react-router-dom";
+import  {authDataContext} from "../context/Authcontext"
+
 
 //react icons
 import { FaUser } from "react-icons/fa";
@@ -10,7 +14,29 @@ import { IoMdEyeOff } from "react-icons/io";
 import { IoMdEye } from "react-icons/io";
 
 function Login() {
-   let [show, setshow] = useState(false)
+    let { serverUrl } = useContext(authDataContext);
+     const navigate = useNavigate();
+     
+    //react hook
+   let [show, setshow] = useState(false);
+   let [email, setEmail] = useState("");
+   let [password, setPassword] = useState("");
+
+   
+  const handleLogin = async (e)=> {
+    try{
+      e.preventDefault()
+    let result =  await axios.post(serverUrl+"/api/auth/login",{
+       email,
+       password
+    },{withCredentials:true})
+    navigate("/");
+    console.log(result.data);
+    } catch (error){
+     console.log(error);
+     
+    }
+  }
   return (
     <>
       <Navbar />
@@ -34,7 +60,7 @@ function Login() {
                 <h2 className="text-3xl font-bold text-gray-800">Login to Your Account</h2>
               </div>
 
-              <form className="space-y-5">
+              <form className="space-y-5"  onSubmit={ handleLogin}>
                 <div className="space-y-2">
                   <label className="block text-sm font-semibold text-gray-700">
                     Email Address
@@ -45,6 +71,9 @@ function Login() {
                       type="email"
                       placeholder="Enter your email"
                       className="w-full py-3 pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                      required
+                      onChange={(e)=>setEmail(e.target.value)}
+                      value={email}
                     />
                   </div>
                 </div>
@@ -60,6 +89,9 @@ function Login() {
                       placeholder="Create a password"
                       minLength={6}
                       className="w-full py-3 pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                       required
+                      onChange={(e)=>setPassword(e.target.value)}
+                      value={password}
                     />
                     {! show && < IoMdEyeOff className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 cursor-pointer right-3 top-1/2 hover:text-gray-600" onClick={() => setshow(prev => !prev)} />}
                     {show && < IoMdEye className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 cursor-pointer right-3 top-1/2 hover:text-gray-600" onClick={() => setshow(prev => !prev)} />}
