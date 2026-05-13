@@ -1,17 +1,33 @@
 import { NavLink, useNavigate } from "react-router-dom";
+
+// react icon
+// React Icons Imports
+import { MdWhatshot, MdPool, MdApartment } from "react-icons/md";
+import { CiMenuBurger } from "react-icons/ci";
+import { CgProfile } from "react-icons/cg";
+
+import {
+  FaHotel,
+  FaHome,
+  FaBuilding,
+  FaStore,
+  FaCampground,
+} from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
+
+import { GiWoodCabin } from "react-icons/gi";
 
 const Navbar = () => {
   let navigate = useNavigate();
-  
+
   return (
     <>
-      {/* Header Section */}
       <div className="relative flex items-center justify-between h-32 gap-4 py-4 px-7 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700">
         <div className="absolute inset-0 opacity-10 bg-gradient-to-r from-white to-transparent"></div>
-        
-        {/* Logo Section */}
-        <div className="flex items-center gap-4 cursor-pointer group" onClick={() => navigate("/")}>
+        <div
+          className="flex items-center gap-4 cursor-pointer group"
+          onClick={() => navigate("/")}
+        >
           <img
             src="/logo.png"
             alt="logo"
@@ -26,48 +42,108 @@ const Navbar = () => {
           <div className="relative w-full">
             <input
               type="text"
-              placeholder="Search destinations, hotels..."
+              placeholder="Any Where | Any Location | Any City "
               className="w-full px-5 py-3 pr-12 text-gray-700 transition-all duration-300 bg-white rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            <FaSearch className="absolute text-gray-400 transition-colors duration-300 transform -translate-y-1/2 cursor-pointer right-4 top-1/2 hover:text-blue-600" />
+            />{" "}
+            <button>
+              <FaSearch className="absolute text-gray-400 transition-colors duration-300 transform -translate-y-1/2 cursor-pointer right-4 top-1/3 hover:text-blue-600" />
+            </button>
           </div>
         </div>
 
-        <div className="w-32"></div>
+        <div className="flex items-center justify-center gap-3">
+          <span className="relative inline-block px-2 py-1 text-2xl text-white transition-all duration-300 rounded-full cursor-pointer md:text-2xl hover:text-blue-200">
+            List your Home
+          </span>
+          <button className=" relative px-[20px] bg-white py-[10px] flex items-center justify-center gap-1 border-[1px] border-gray-700 hover:shadow-lg rounded-[50px] ">
+            <span>
+              <CiMenuBurger className="w-[30px] h-[20px]" />
+            </span>
+            <span>
+              <CgProfile className="w-[30px] h-[20px]" />
+            </span>
+          </button>
+        </div>
       </div>
+
+      <div className="flex items-center justify-center w-[100vw] h-20 gap-6 bg-white cursor-pointer">
+        <div className="flex flex-col items-center justify-center text-[13px] hover:border-b-[3px]">
+          <MdWhatshot className="w-[30px] h-[30px]" />
+          <h3>Trending</h3>
+        </div>
+
+        <div className="flex flex-col items-center justify-center text-[13px] hover:border-b-[3px]">
+          <FaHotel className="w-[30px] h-[30px]" />
+          <h3>Villa</h3>
+        </div>
+
+        <div className="flex flex-col items-center justify-center text-[13px] hover:border-b-[3px]">
+          <FaHome className="w-[30px] h-[30px]" />
+          <h3>Farm House</h3>
+        </div>
+
+        <div className="flex flex-col items-center justify-center text-[13px] hover:border-b-[3px]">
+          <MdPool className="w-[30px] h-[30px]" />
+          <h3>Pool House</h3>
+        </div>
+
+        <div className="flex flex-col items-center justify-center text-[13px] hover:border-b-[3px]">
+          <FaBuilding className="w-[30px] h-[30px]" />
+          <h3>Rooms</h3>
+        </div>
+
+        <div className="flex flex-col items-center justify-center text-[13px] hover:border-b-[3px]">
+          <MdApartment className="w-[30px] h-[30px]" />
+          <h3>Flat</h3>
+        </div>
+
+        <div className="flex flex-col items-center justify-center text-[13px] hover:border-b-[3px]">
+          <FaBuilding className="w-[30px] h-[30px]" />
+          <h3>PG</h3>
+        </div>
+
+        <div className="flex flex-col items-center justify-center text-[13px] hover:border-b-[3px]">
+          <GiWoodCabin className="w-[30px] h-[30px]" />
+          <h3>Cabins</h3>
+        </div>
+
+        <div className="flex flex-col items-center justify-center text-[13px] hover:border-b-[3px]">
+          <FaStore className="w-[30px] h-[30px]" />
+          <h3>Shops</h3>
+        </div>
+      </div>
+
       <nav className="relative bg-white border-b-2 border-gray-200 shadow-md rounded-b-xl">
         <div className="flex items-center justify-center gap-12 py-3 text-base font-semibold">
-          
           <NavLink
             to="/"
-            className={({ isActive }) => `relative px-3 py-2 transition-all duration-300 group
-            ${isActive ? "text-blue-700" : "text-gray-700 hover:text-blue-700"}`}
+            className={({
+              isActive,
+            }) => `relative px-3 py-2 transition-all duration-300 group
+            ${isActive ? "border-b-2 border-blue-500 text-blue-700" : "text-gray-700 hover:text-blue-700"}`}
           >
             Home
-            <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transition-transform duration-300 `}></span>
           </NavLink>
 
           <NavLink
             to="/login"
-            className={({ isActive }) => `relative px-3 py-2 transition-all duration-300 group 
-            ${isActive ? "text-blue-700" : "text-gray-700 hover:text-blue-700"}`}
+            className={({
+              isActive,
+            }) => `relative px-3 py-2 transition-all duration-300 group 
+            ${isActive ? "border-b-2 border-blue-500 text-blue-700" : "text-gray-700 hover:text-blue-700"}`}
           >
             Login
-            <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transition-transform duration-300 
-              }`}></span>
           </NavLink>
 
           <NavLink
             to="/signup"
-            className={({ isActive }) => `relative px-6 py-2 transition-all duration-300 transform
-            ${isActive 
-              ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md" 
-              : "text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-700"} 
-            rounded-full`}
+            className={({
+              isActive,
+            }) => `relative px-3 py-2 transition-all duration-300 group
+            ${isActive ? "border-b-2 border-blue-500 text-blue-700" : "text-gray-700 hover:text-blue-700"}`}
           >
             Signup
           </NavLink>
-
         </div>
       </nav>
 
