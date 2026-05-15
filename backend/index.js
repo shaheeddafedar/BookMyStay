@@ -7,7 +7,7 @@ import cors from "cors";
 //localmoduel
 import connectDb from "./config/db.js";
 import authRouter from "./routes/authroute.js";
-import userRouter from "./routes/userrouter.js";
+import userRouter from "./routes/userroute.js";
 import cookieParser from "cookie-parser";
 
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
