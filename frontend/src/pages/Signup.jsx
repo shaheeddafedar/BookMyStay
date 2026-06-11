@@ -17,7 +17,7 @@ import { userDateContext } from "../context/UserContext";
 
 const Signup = () => {
   const { serverUrl } = useContext(authDataContext);
-  const { userData, setUserdata } = useContext(userDateContext);
+  let { UserData, setUserData } = useContext(userDateContext);
 
   const navigate = useNavigate();
 
@@ -38,15 +38,11 @@ const Signup = () => {
           email,
           password,
         },
-        {
-          withCredentials: true,
-        },
+        { withCredentials: true },
       );
 
-      console.log(result.data);
-
-      setUserdata(result.data);
-
+      setUserData(result.data);
+      navigate("/");
       setName("");
       setEmail("");
       setPassword("");

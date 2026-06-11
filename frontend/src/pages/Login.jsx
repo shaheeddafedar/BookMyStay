@@ -15,7 +15,7 @@ import { userDateContext } from "../context/UserContext";
 
 function Login() {
   let { serverUrl } = useContext(authDataContext);
-  let { userData, setUserData } = useContext(userDateContext);
+  let { UserData, setUserData } = useContext(userDateContext);
   const navigate = useNavigate();
 
   //react hook

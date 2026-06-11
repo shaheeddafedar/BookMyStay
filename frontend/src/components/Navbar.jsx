@@ -34,7 +34,7 @@ import { userDateContext } from "../context/UserContext";
 
 const Navbar = () => {
   let { serverUrl } = useContext(authDataContext);
-  let { userData, setUserData } = useContext(userDateContext);
+  let { UserData, setUserData } = useContext(userDateContext);
 
   let [showpopup, setshowpopup] = useState(false);
   let navigate = useNavigate();
@@ -100,15 +100,15 @@ const Navbar = () => {
           >
             <CiMenuBurger className="w-4 h-4 text-gray-700 transition-colors md:w-5 md:h-5 group-hover:text-blue-600" />
             <div className="w-px h-5 bg-gray-300"></div>
-            {userData == null && (
+            {UserData == null && (
               <span>
                 {" "}
                 <CgProfile className="w-5 h-5 text-gray-700 transition-colors md:w-6 md:h-6 group-hover:text-blue-600" />
               </span>
             )}
-            {userData != null && (
-              <span className="w-[30px] h-[30px] bg-black text-white rounded-full flex items-center justify-center">
-                {userData?.name.slixe(0, 1)}
+            {UserData != null && (
+              <span className="w-[35px] h-[35px] bg-black text-white rounded-full text-3xl text-start  flex items-center justify-center">
+                {UserData?.name.slice(0, 1)}
               </span>
             )}
           </button>
@@ -196,16 +196,6 @@ const Navbar = () => {
                     <span className="text-xs text-gray-400">📅</span>
                   </li>
                 </ul>
-
-                {/* Footer Section */}
-                <div className="px-4 py-3 border-t border-gray-100 bg-gray-50">
-                  <p className="text-xs text-center text-gray-500">
-                    Need help?{" "}
-                    <span className="text-blue-600 cursor-pointer hover:underline">
-                      Contact support
-                    </span>
-                  </p>
-                </div>
               </div>
             </>
           )}
