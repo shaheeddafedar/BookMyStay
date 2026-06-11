@@ -30,9 +30,11 @@ import {
 } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { GiWoodCabin } from "react-icons/gi";
+import { userDateContext } from "../context/UserContext";
 
 const Navbar = () => {
   let { serverUrl } = useContext(authDataContext);
+  let { userData, setUserData } = useContext(userDateContext);
 
   let [showpopup, setshowpopup] = useState(false);
   let navigate = useNavigate();
@@ -43,6 +45,7 @@ const Navbar = () => {
         serverUrl + "/api/auth/logout",
         {},
         { withCredentials: true },
+        setUserData(null),
       );
       navigate("/");
       setshowpopup(false);
@@ -97,7 +100,17 @@ const Navbar = () => {
           >
             <CiMenuBurger className="w-4 h-4 text-gray-700 transition-colors md:w-5 md:h-5 group-hover:text-blue-600" />
             <div className="w-px h-5 bg-gray-300"></div>
-            <CgProfile className="w-5 h-5 text-gray-700 transition-colors md:w-6 md:h-6 group-hover:text-blue-600" />
+            {userData == null && (
+              <span>
+                {" "}
+                <CgProfile className="w-5 h-5 text-gray-700 transition-colors md:w-6 md:h-6 group-hover:text-blue-600" />
+              </span>
+            )}
+            {userData != null && (
+              <span className="w-[30px] h-[30px] bg-black text-white rounded-full flex items-center justify-center">
+                {userData?.name.slixe(0, 1)}
+              </span>
+            )}
           </button>
 
           {showpopup && (

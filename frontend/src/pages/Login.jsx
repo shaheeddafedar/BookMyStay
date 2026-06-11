@@ -1,10 +1,9 @@
-import { React, useState,useContext} from 'react'
-import { Link,useNavigate } from "react-router-dom";
+import { React, useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import Navbar from "../components/Navbar"
-import  {authDataContext} from "../context/Authcontext"
-
+import Navbar from "../components/Navbar";
+import { authDataContext } from "../context/Authcontext";
 
 //react icons
 import { FaUser } from "react-icons/fa";
@@ -12,42 +11,47 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { FaLock } from "react-icons/fa6";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoMdEye } from "react-icons/io";
+import { userDateContext } from "../context/UserContext";
 
 function Login() {
-    let { serverUrl } = useContext(authDataContext);
-     const navigate = useNavigate();
-     
-    //react hook
-   let [show, setshow] = useState(false);
-   let [email, setEmail] = useState("");
-   let [password, setPassword] = useState("");
+  let { serverUrl } = useContext(authDataContext);
+  let { userData, setUserData } = useContext(userDateContext);
+  const navigate = useNavigate();
 
-   
-  const handleLogin = async (e)=> {
-    try{
-      e.preventDefault()
-    let result =  await axios.post(serverUrl+"/api/auth/login",{
-       email,
-       password
-    },{withCredentials:true})
-    navigate("/");
-    console.log(result.data);
-    } catch (error){
-     console.log(error);
-     
+  //react hook
+  let [show, setshow] = useState(false);
+  let [email, setEmail] = useState("");
+  let [password, setPassword] = useState("");
+
+  const handleLogin = async (e) => {
+    try {
+      e.preventDefault();
+      let result = await axios.post(
+        serverUrl + "/api/auth/login",
+        {
+          email,
+          password,
+        },
+        { withCredentials: true },
+      );
+      (setUserData(result.data), navigate("/"));
+      console.log(result.data);
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
   return (
     <>
       <Navbar />
       <div className="flex items-center justify-center min-h-screen gap-1 p-4 bg-gradient-to-br from-blue-50 to-indigo-100">
-
         <div className="flex w-full overflow-hidden bg-white shadow-2xl max-w-7xl rounded-2xl">
           <div className="relative hidden md:block md:w-1/2">
             <div className="absolute inset-0 bg-[url('/bg1.jpg')] bg-cover bg-center"></div>
             <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-black/30">
               <div className="flex flex-col items-center justify-center h-full p-8 text-center">
-                <h1 className="mb-4 text-4xl font-bold text-white">Welcome Back to BookMyStay</h1>
+                <h1 className="mb-4 text-4xl font-bold text-white">
+                  Welcome Back to BookMyStay
+                </h1>
               </div>
             </div>
           </div>
@@ -57,10 +61,12 @@ function Login() {
 
             <div className="p-8 md:p-10">
               <div className="mb-8 text-center">
-                <h2 className="text-3xl font-bold text-gray-800">Login to Your Account</h2>
+                <h2 className="text-3xl font-bold text-gray-800">
+                  Login to Your Account
+                </h2>
               </div>
 
-              <form className="space-y-5"  onSubmit={ handleLogin}>
+              <form className="space-y-5" onSubmit={handleLogin}>
                 <div className="space-y-2">
                   <label className="block text-sm font-semibold text-gray-700">
                     Email Address
@@ -72,7 +78,7 @@ function Login() {
                       placeholder="Enter your email"
                       className="w-full py-3 pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                       required
-                      onChange={(e)=>setEmail(e.target.value)}
+                      onChange={(e) => setEmail(e.target.value)}
                       value={email}
                     />
                   </div>
@@ -89,13 +95,22 @@ function Login() {
                       placeholder="Create a password"
                       minLength={6}
                       className="w-full py-3 pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                       required
-                      onChange={(e)=>setPassword(e.target.value)}
+                      required
+                      onChange={(e) => setPassword(e.target.value)}
                       value={password}
                     />
-                    {! show && < IoMdEyeOff className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 cursor-pointer right-3 top-1/2 hover:text-gray-600" onClick={() => setshow(prev => !prev)} />}
-                    {show && < IoMdEye className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 cursor-pointer right-3 top-1/2 hover:text-gray-600" onClick={() => setshow(prev => !prev)} />}
-
+                    {!show && (
+                      <IoMdEyeOff
+                        className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 cursor-pointer right-3 top-1/2 hover:text-gray-600"
+                        onClick={() => setshow((prev) => !prev)}
+                      />
+                    )}
+                    {show && (
+                      <IoMdEye
+                        className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 cursor-pointer right-3 top-1/2 hover:text-gray-600"
+                        onClick={() => setshow((prev) => !prev)}
+                      />
+                    )}
                   </div>
                   <p className="text-xs text-gray-500">
                     Password must be at least 6 characters
@@ -116,7 +131,7 @@ function Login() {
                       to="/Signup"
                       className="font-semibold text-blue-600 transition-colors duration-300 hover:text-blue-700"
                     >
-                      Create  Account 
+                      Create Account
                     </Link>
                   </p>
                 </div>
@@ -129,4 +144,4 @@ function Login() {
   );
 }
 
-export default Login
+export default Login;

@@ -1,13 +1,17 @@
-import User from "../model/user.model.js";
-
 export const getcurrentUser = async (req, res) => {
   try {
-    let user = await User.findById(req.userId).select(-password);
+    let user = await User.findById(req.userId).select("-password");
+
     if (!user) {
-      res.status(400).json({ message: "user doent found" });
+      return res.status(400).json({
+        message: "user not found",
+      });
     }
-    res.status(200).json(user);
+
+    return res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ message: `getcurrentuser ${error}` });
+    return res.status(500).json({
+      message: `getcurrentuser ${error}`,
+    });
   }
 };

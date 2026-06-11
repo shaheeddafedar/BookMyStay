@@ -1,34 +1,36 @@
 import axios from "axios";
 import react, { useContext, Children, createContext, useState } from "react";
 import { useEffect } from "react";
+import { authDataContext } from "./Authcontext";
 
 export const userDateContext = createContext();
 
-function UserContext({ Children }) {
+function UserContext({ children }) {
   let { serverUrl } = useContext(authDataContext);
-  let [userData, setUserdata] = useState(null);
+  let [UserData, setUserData] = useState(null);
 
   const getcurrentUser = async () => {
     try {
       let result = await axios.get(serverUrl + "/api/user/currentuser", {
         withCredentials: true,
       });
-      setUserdata(result.data);
+      setUserData(result.data);
     } catch (error) {
-      setUserdata(null).console.log(error);
+      setUserData(null);
+      console.log(error.response?.data);
     }
   };
   useEffect(() => {
     getcurrentUser();
-  });
+  }, []);
   let value = {
-    userData,
-    setUserdata,
+    UserData,
+    setUserData,
   };
   return (
     <div>
       <userDateContext.Provider value={value}>
-        {Children}
+        {children}
       </userDateContext.Provider>
     </div>
   );

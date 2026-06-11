@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
 import Authcontext from "./context/Authcontext.jsx";
-import UserContext from "./context/UserContext.js";
+import UserContext from "./context/UserContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>

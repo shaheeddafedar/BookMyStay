@@ -1,8 +1,7 @@
-//external 
-import React,{ useContext, useState } from 'react'
-import { Link } from "react-router-dom";
-import axios from 'axios';
-
+//external
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 //react icons
 import { FaUser } from "react-icons/fa";
@@ -12,52 +11,67 @@ import { IoMdEyeOff } from "react-icons/io";
 import { IoMdEye } from "react-icons/io";
 
 //internal
-import Navbar from "../components/Navbar"
-import  {authDataContext} from "../context/Authcontext"
-
+import Navbar from "../components/Navbar";
+import { authDataContext } from "../context/Authcontext";
+import { userDateContext } from "../context/UserContext";
 
 const Signup = () => {
-  let {serverUrl} = useContext(authDataContext)
+  const { serverUrl } = useContext(authDataContext);
+  const { userData, setUserdata } = useContext(userDateContext);
 
-      //react hook
-  let [show, setshow] = useState(false)
-  let [name,setName] = useState("");
-    let [email,setEmail] = useState("");
-    let [password,setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleSignup = async (e)=> {
-    try{
-      e.preventDefault()
-    let result =  await axios.post(serverUrl+"/api/auth/signup",{
-       name,
-       email,
-       password
-       
-    },{withCredentials:true})
-    console.log(result.data);
-    
-    setName("");
-    setEmail("");
-    setPassword("");
+  // React hooks
+  const [show, setshow] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    } catch (error){
-     console.log(error);
-     
+  const handleSignup = async (e) => {
+    try {
+      e.preventDefault();
+
+      const result = await axios.post(
+        serverUrl + "/api/auth/signup",
+        {
+          name,
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+
+      console.log(result.data);
+
+      setUserdata(result.data);
+
+      setName("");
+      setEmail("");
+      setPassword("");
+
+      navigate("/");
+    } catch (error) {
+      console.log(error.response?.data || error);
     }
-  }
+  };
 
   return (
     <>
       <Navbar />
       <div className="flex items-center justify-center min-h-screen gap-1 p-4 bg-gradient-to-br from-blue-50 to-indigo-100">
-
         <div className="flex w-full overflow-hidden bg-white shadow-2xl max-w-7xl rounded-2xl">
           <div className="relative hidden md:block md:w-1/2">
             <div className="absolute inset-0 bg-[url('/bg1.jpg')] bg-cover bg-center"></div>
             <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-black/30">
               <div className="flex flex-col items-center justify-center h-full p-8 text-center">
-                <h1 className="mb-4 text-4xl font-bold text-white">Welcome to BookMyStay</h1>
-                <p className="text-lg text-white/90">Find your perfect stay with us</p>
+                <h1 className="mb-4 text-4xl font-bold text-white">
+                  Welcome to BookMyStay
+                </h1>
+                <p className="text-lg text-white/90">
+                  Find your perfect stay with us
+                </p>
               </div>
             </div>
           </div>
@@ -67,11 +81,15 @@ const Signup = () => {
 
             <div className="p-8 md:p-10">
               <div className="mb-8 text-center">
-                <h2 className="text-3xl font-bold text-gray-800">Create Account</h2>
-                <p className="mt-2 text-gray-500">Join us and start your journey</p>
+                <h2 className="text-3xl font-bold text-gray-800">
+                  Create Account
+                </h2>
+                <p className="mt-2 text-gray-500">
+                  Join us and start your journey
+                </p>
               </div>
 
-              <form className="space-y-5" onSubmit={ handleSignup} method='POST'>
+              <form className="space-y-5" onSubmit={handleSignup} method="POST">
                 <div className="space-y-2">
                   <label className="block text-sm font-semibold text-gray-700">
                     Username
@@ -83,9 +101,8 @@ const Signup = () => {
                       placeholder="Enter your name"
                       className="w-full py-3 pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                       required
-                      onChange={(e)=>setName(e.target.value)}
+                      onChange={(e) => setName(e.target.value)}
                       value={name}
-                      
                     />
                   </div>
                 </div>
@@ -101,7 +118,7 @@ const Signup = () => {
                       placeholder="Enter your email"
                       className="w-full py-3 pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                       required
-                      onChange={(e)=>setEmail(e.target.value)}
+                      onChange={(e) => setEmail(e.target.value)}
                       value={email}
                     />
                   </div>
@@ -119,12 +136,21 @@ const Signup = () => {
                       minLength={6}
                       className="w-full py-3 pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                       required
-                      onChange={(e)=>setPassword(e.target.value)}
+                      onChange={(e) => setPassword(e.target.value)}
                       value={password}
                     />
-                    {! show && < IoMdEyeOff className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 cursor-pointer right-3 top-1/2 hover:text-gray-600" onClick={() => setshow(prev => !prev)} />}
-                    {show && < IoMdEye className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 cursor-pointer right-3 top-1/2 hover:text-gray-600" onClick={() => setshow(prev => !prev)} />}
-
+                    {!show && (
+                      <IoMdEyeOff
+                        className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 cursor-pointer right-3 top-1/2 hover:text-gray-600"
+                        onClick={() => setshow((prev) => !prev)}
+                      />
+                    )}
+                    {show && (
+                      <IoMdEye
+                        className="absolute w-5 h-5 text-gray-400 transform -translate-y-1/2 cursor-pointer right-3 top-1/2 hover:text-gray-600"
+                        onClick={() => setshow((prev) => !prev)}
+                      />
+                    )}
                   </div>
                   <p className="text-xs text-gray-500">
                     Password must be at least 6 characters
