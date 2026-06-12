@@ -3,12 +3,13 @@ import { useContext } from 'react'
 import { useState } from 'react'
 import { Children } from 'react'
 import { createContext } from 'react'
+import axios from "axios";
 import { authDataContext } from './Authcontext'
 
 export const listingDataContext = createContext()
 
 
-export default function listingContext({Children}) {
+export default function ListingContext({children }) {
 let {serverUrl} = useContext(authDataContext)
 
 
@@ -77,9 +78,9 @@ backendimage3, backendsetImage3
 
   return (
     <div>
-      <listingDataContext value={value}>
-        {Children}
-      </listingDataContext>
+      <listingDataContext.Provider value={value}>
+        {children}
+      </listingDataContext.Provider>
     </div>
   )
 }
