@@ -32,10 +32,6 @@ const listingSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    CSSStartingStyleRule: {
-      type: String,
-      required: true,
-    },
     landMark: {
       type: String,
       required: true,

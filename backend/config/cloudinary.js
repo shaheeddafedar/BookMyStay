@@ -20,3 +20,5 @@ const uploadOnCloudinary = async (filepath) => {
     console.log(error);
   }
 };
+
+export default uploadOnCloudinary;

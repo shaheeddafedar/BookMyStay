@@ -3,12 +3,14 @@ import express from "express";
 import dotenv from "dotenv";
 import dns from "dns";
 import cors from "cors";
+import cookieParser from "cookie-parser";
+
 
 //localmoduel
 import connectDb from "./config/db.js";
 import authRouter from "./routes/authroute.js";
 import userRouter from "./routes/userroute.js";
-import cookieParser from "cookie-parser";
+import listingRouter from "./routes/listingroute.js";
 
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
@@ -29,6 +31,7 @@ app.use(
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use("/api/listing", listingRouter);
 
 app.listen(port, () => {
   connectDb();
