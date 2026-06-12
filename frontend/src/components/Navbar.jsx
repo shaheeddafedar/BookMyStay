@@ -107,8 +107,8 @@ const Navbar = () => {
               </span>
             )}
             {UserData != null && (
-              <span className="w-[35px] h-[35px] bg-black text-white rounded-full text-3xl text-start  flex items-center justify-center">
-                {UserData?.name.slice(0, 1)}
+              <span className="w-[35px] h-[35px] bg-black text-white rounded-full flex items-center justify-center text-lg font-semibold">
+                {UserData?.name?.slice(0, 1).toUpperCase()}
               </span>
             )}
           </button>
