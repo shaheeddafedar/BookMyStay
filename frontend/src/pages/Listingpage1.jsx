@@ -159,7 +159,6 @@ const Listingpage1 = () => {
                             alt="Main property"
                             className="object-cover w-full h-48 shadow-md rounded-xl"
                           />
-
                         </div>
                     </div>
                   </div>
