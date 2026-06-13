@@ -22,7 +22,7 @@ const Listingpage1 = () => {
             <h1 className="mb-4 text-6xl font-bold text-gray-800 md:text-5xl">
               List Your Property
             </h1>
-            <p className="text-lg text-gray-600">
+            <p className="text-3xl text-gray-600">
               ✨ Share your space with travelers and start earning
             </p>
           </div>
@@ -31,7 +31,7 @@ const Listingpage1 = () => {
           <div className="overflow-hidden bg-white shadow-2xl rounded-3xl">
             <div className="h-2 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"></div>
             
-            <form onSubmit={handleSubmit} className="p-6 md:p-10">
+            <form action="" className="p-6 md:p-10">
               
               {/* Basic Information Section */}
               <div className="mb-10">
@@ -51,8 +51,6 @@ const Listingpage1 = () => {
                       <input
                         type="text"
                         name="title"
-                        value={formData.title}
-                        onChange={handleChange}
                         required
                         placeholder="e.g., Luxury Villa with Pool, Cozy Apartment in City Center"
                         className="w-full py-3 pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
@@ -69,8 +67,6 @@ const Listingpage1 = () => {
                       <MdDescription className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-5" />
                       <textarea
                         name="description"
-                        value={formData.description}
-                        onChange={handleChange}
                         required
                         rows="4"
                         placeholder="Describe your property - amenities, nearby attractions, unique features..."
@@ -85,14 +81,12 @@ const Listingpage1 = () => {
                       Rent per Month (₹) *
                     </label>
                     <div className="relative">
-                      <FaHome className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
-                      <input
+ <FaRupeeSign className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />                      <input
                         type="text"
                         name="title"
-                        value={formData.title}
-                        onChange={handleChange}
+
                         required
-                        placeholder="e.g., Luxury Villa with Pool, Cozy Apartment in City Center"
+                        placeholder="e.g., 25000"
                         className="w-full py-3 pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                       />
                     </div>
@@ -104,14 +98,12 @@ const Listingpage1 = () => {
                      City *
                     </label>
                     <div className="relative">
-                      <FaHome className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
+                      <FaCity className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
                       <input
                         type="text"
                         name="title"
-                        value={formData.title}
-                        onChange={handleChange}
                         required
-                        placeholder="e.g., Luxury Villa with Pool, Cozy Apartment in City Center"
+                        placeholder="e.g., Mumbai, Delhi, Bangalore"
                         className="w-full py-3 pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                       />
                     </div>
@@ -123,14 +115,12 @@ const Listingpage1 = () => {
                     Landmark *
                     </label>
                     <div className="relative">
-                      <FaHome className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
+                      <FaMapMarkerAlt className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
                       <input
                         type="text"
                         name="title"
-                        value={formData.title}
-                        onChange={handleChange}
                         required
-                        placeholder="e.g., Luxury Villa with Pool, Cozy Apartment in City Center"
+                        placeholder="Near Metro Station, Main Market etc."
                         className="w-full py-3 pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                       />
                     </div>
@@ -152,7 +142,6 @@ const Listingpage1 = () => {
                       Main Image *
                     </label>
                     <div className="relative">
-                      {!imagePreviews.image1 ? (
                         <label className="flex flex-col items-center justify-center w-full h-48 transition-all duration-300 border-2 border-gray-300 border-dashed cursor-pointer rounded-xl hover:border-blue-500 bg-gray-50 hover:bg-blue-50">
                           <div className="flex flex-col items-center justify-center pt-5 pb-6">
                             <MdUpload className="w-10 h-10 mb-2 text-gray-400" />
@@ -162,27 +151,16 @@ const Listingpage1 = () => {
                           <input
                             type="file"
                             accept="image/*"
-                            onChange={(e) => handleImageChange(e, 'image1')}
                             className="hidden"
-                            required={!images.image1}
                           />
                         </label>
-                      ) : (
                         <div className="relative group">
                           <img
-                            src={imagePreviews.image1}
                             alt="Main property"
                             className="object-cover w-full h-48 shadow-md rounded-xl"
                           />
-                          <button
-                            type="button"
-                            onClick={() => removeImage('image1')}
-                            className="absolute p-2 text-white transition-all duration-300 bg-red-500 rounded-full opacity-0 top-2 right-2 group-hover:opacity-100 hover:bg-red-600"
-                          >
-                            <FaTrash className="w-4 h-4" />
-                          </button>
+
                         </div>
-                      )}
                     </div>
                   </div>
 
@@ -192,7 +170,6 @@ const Listingpage1 = () => {
                       Image 2
                     </label>
                     <div className="relative">
-                      {!imagePreviews.image2 ? (
                         <label className="flex flex-col items-center justify-center w-full h-48 transition-all duration-300 border-2 border-gray-300 border-dashed cursor-pointer rounded-xl hover:border-blue-500 bg-gray-50 hover:bg-blue-50">
                           <div className="flex flex-col items-center justify-center pt-5 pb-6">
                             <MdUpload className="w-10 h-10 mb-2 text-gray-400" />
@@ -202,26 +179,17 @@ const Listingpage1 = () => {
                           <input
                             type="file"
                             accept="image/*"
-                            onChange={(e) => handleImageChange(e, 'image2')}
+                            
                             className="hidden"
                           />
                         </label>
-                      ) : (
                         <div className="relative group">
                           <img
-                            src={imagePreviews.image2}
                             alt="Property image 2"
                             className="object-cover w-full h-48 shadow-md rounded-xl"
                           />
-                          <button
-                            type="button"
-                            onClick={() => removeImage('image2')}
-                            className="absolute p-2 text-white transition-all duration-300 bg-red-500 rounded-full opacity-0 top-2 right-2 group-hover:opacity-100 hover:bg-red-600"
-                          >
-                            <FaTrash className="w-4 h-4" />
-                          </button>
+
                         </div>
-                      )}
                     </div>
                   </div>
 
@@ -231,7 +199,6 @@ const Listingpage1 = () => {
                       Image 3
                     </label>
                     <div className="relative">
-                      {!imagePreviews.image3 ? (
                         <label className="flex flex-col items-center justify-center w-full h-48 transition-all duration-300 border-2 border-gray-300 border-dashed cursor-pointer rounded-xl hover:border-blue-500 bg-gray-50 hover:bg-blue-50">
                           <div className="flex flex-col items-center justify-center pt-5 pb-6">
                             <MdUpload className="w-10 h-10 mb-2 text-gray-400" />
@@ -241,26 +208,16 @@ const Listingpage1 = () => {
                           <input
                             type="file"
                             accept="image/*"
-                            onChange={(e) => handleImageChange(e, 'image3')}
                             className="hidden"
                           />
                         </label>
-                      ) : (
                         <div className="relative group">
                           <img
-                            src={imagePreviews.image3}
                             alt="Property image 3"
                             className="object-cover w-full h-48 shadow-md rounded-xl"
                           />
-                          <button
-                            type="button"
-                            onClick={() => removeImage('image3')}
-                            className="absolute p-2 text-white transition-all duration-300 bg-red-500 rounded-full opacity-0 top-2 right-2 group-hover:opacity-100 hover:bg-red-600"
-                          >
-                            <FaTrash className="w-4 h-4" />
-                          </button>
+                         
                         </div>
-                      )}
                     </div>
                   </div>
                 </div>
@@ -273,17 +230,8 @@ const Listingpage1 = () => {
               <div className="flex gap-4">
                 <button
                   type="submit"
-                  disabled={loading}
                   className="flex-1 py-4 px-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {loading ? (
-                    <div className="flex items-center justify-center gap-2">
-                      <div className="w-5 h-5 border-2 border-white rounded-full border-t-transparent animate-spin"></div>
-                      Listing Property...
-                    </div>
-                  ) : (
-                    "✨ List Your Property"
-                  )}
                 </button>
                 
                 <button
