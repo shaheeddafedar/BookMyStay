@@ -126,7 +126,17 @@ const Navbar = () => {
                 <div className="px-4 py-4 bg-gradient-to-br from-blue-50 to-indigo-50">
                   <div className="flex items-center gap-3">
                     <div className="flex items-center justify-center w-12 h-12 rounded-full shadow-md bg-gradient-to-br from-blue-500 to-blue-700">
-                      <CgProfile className="w-6 h-6 text-white" />
+                      {UserData == null && (
+                        <span>
+                          {" "}
+                          <CgProfile className="w-5 h-5 text-gray-700 transition-colors md:w-6 md:h-6 group-hover:text-blue-600" />
+                        </span>
+                      )}
+                      {UserData != null && (
+                        <span className="w-[35px] h-[35px] bg-black text-white rounded-full flex items-center justify-center text-lg font-semibold">
+                          {UserData?.name?.slice(0, 1).toUpperCase()}
+                        </span>
+                      )}
                     </div>
                     <div>
                       <h4 className="font-bold text-gray-800">Guest User</h4>
@@ -165,8 +175,10 @@ const Navbar = () => {
 
                   <li
                     className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
-                    onClick={() => setshowpopup(false)}
-                  >
+                    onClick={() => {
+                      navigate("/listingpage1");
+                      setshowpopup(false);
+                    }}                  >
                     <FaHome className="w-4 h-4 text-green-600 transition-transform group-hover:scale-110" />
                     <span className="flex-1 text-sm font-medium text-gray-700 group-hover:text-green-600">
                       List your home

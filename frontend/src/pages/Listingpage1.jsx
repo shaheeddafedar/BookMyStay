@@ -9,116 +9,6 @@ import { MdDescription, MdCategory, MdUpload } from "react-icons/md";
 import { GiPayMoney, GiHouse } from "react-icons/gi";
 
 const Listingpage1 = () => {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  
-  // Form state
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    rent: "",
-    city: "",
-    landmark: "",
-    category: "",
-  });
-  
-  // Image state
-  const [images, setImages] = useState({
-    image1: null,
-    image2: null,
-    image3: null
-  });
-  
-  // Image preview URLs
-  const [imagePreviews, setImagePreviews] = useState({
-    image1: null,
-    image2: null,
-    image3: null
-  });
-
-  // Handle text input changes
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  // Handle image upload
-  const handleImageChange = (e, imageKey) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImages({
-        ...images,
-        [imageKey]: file
-      });
-      
-      // Create preview URL
-      const previewUrl = URL.createObjectURL(file);
-      setImagePreviews({
-        ...imagePreviews,
-        [imageKey]: previewUrl
-      });
-    }
-  };
-
-  // Remove image
-  const removeImage = (imageKey) => {
-    setImages({
-      ...images,
-      [imageKey]: null
-    });
-    
-    if (imagePreviews[imageKey]) {
-      URL.revokeObjectURL(imagePreviews[imageKey]);
-    }
-    
-    setImagePreviews({
-      ...imagePreviews,
-      [imageKey]: null
-    });
-  };
-
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    
-    try {
-      const formDataToSend = new FormData();
-      formDataToSend.append("title", formData.title);
-      formDataToSend.append("description", formData.description);
-      formDataToSend.append("rent", formData.rent);
-      formDataToSend.append("city", formData.city);
-      formDataToSend.append("landmark", formData.landmark);
-      formDataToSend.append("category", formData.category);
-      
-      if (images.image1) formDataToSend.append("image1", images.image1);
-      if (images.image2) formDataToSend.append("image2", images.image2);
-      if (images.image3) formDataToSend.append("image3", images.image3);
-      
-      // Replace with your API endpoint
-      // const response = await axios.post("/api/listings", formDataToSend, {
-      //   withCredentials: true,
-      //   headers: { "Content-Type": "multipart/form-data" }
-      // });
-      
-      console.log("Form Data:", formData);
-      console.log("Images:", images);
-      
-      // Simulate API call
-      setTimeout(() => {
-        alert("Property listed successfully!");
-        navigate("/");
-      }, 1500);
-      
-    } catch (error) {
-      console.error("Error listing property:", error);
-      alert("Failed to list property. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <>
@@ -129,7 +19,7 @@ const Listingpage1 = () => {
           
           {/* Header Section */}
           <div className="mb-8 text-center">
-            <h1 className="mb-4 text-4xl font-bold text-gray-800 md:text-5xl">
+            <h1 className="mb-4 text-6xl font-bold text-gray-800 md:text-5xl">
               List Your Property
             </h1>
             <p className="text-lg text-gray-600">
