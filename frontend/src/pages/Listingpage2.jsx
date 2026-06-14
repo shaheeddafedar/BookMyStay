@@ -1,5 +1,7 @@
 import React from 'react';
 import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
+
 import {
   MdPool,
   MdApartment,
@@ -20,7 +22,10 @@ import {
   FaUserPlus,
   FaSignInAlt,
 } from "react-icons/fa";
+import { Navigate } from 'react-router-dom';
 const ListingPage2 = () => {
+      const navigate = useNavigate();
+    
   return (
     <>
       <Navbar />
@@ -149,7 +154,8 @@ const ListingPage2 = () => {
 
               {/* Navigation Buttons */}
               <div className="flex gap-4 mt-10">
-                <button className="flex items-center gap-2 px-8 py-3 font-semibold text-gray-700 transition-all duration-300 bg-gray-200 rounded-xl hover:bg-gray-300">
+                <button className="flex items-center gap-2 px-8 py-3 font-semibold text-gray-700 transition-all duration-300 bg-gray-200 rounded-xl hover:bg-gray-300"
+                 onClick={()=>navigate("/listingpage1")}>
                   <FaArrowLeft /> Back
                 </button>
                 
