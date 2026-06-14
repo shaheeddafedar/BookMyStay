@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from "react-router-dom";
+
 import Navbar from "../components/Navbar";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 
 // React Icons
 import { FaHome, FaRupeeSign, FaCity, FaMapMarkerAlt, FaTags, FaImage, FaPlus, FaTrash } from "react-icons/fa";
@@ -9,6 +9,7 @@ import { MdDescription, MdCategory, MdUpload } from "react-icons/md";
 import { GiPayMoney, GiHouse } from "react-icons/gi";
 
 const Listingpage1 = () => {
+    const navigate = useNavigate();
 
   return (
     <>
@@ -76,14 +77,14 @@ const Listingpage1 = () => {
                   </div>
 
                   {/* Rent */}
-                  <div >
+                  <div className="md:col-span-2">
                     <label className="block mb-2 text-sm font-semibold text-gray-700">
                       Rent per Month (₹) *
                     </label>
                     <div className="relative">
  <FaRupeeSign className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />                      <input
-                        type="text"
-                        name="title"
+                        type="number"
+                        name="rent"
 
                         required
                         placeholder="e.g., 25000"
@@ -101,7 +102,7 @@ const Listingpage1 = () => {
                       <FaCity className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
                       <input
                         type="text"
-                        name="title"
+                        name="city"
                         required
                         placeholder="e.g., Mumbai, Delhi, Bangalore"
                         className="w-full py-3 pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
@@ -118,7 +119,7 @@ const Listingpage1 = () => {
                       <FaMapMarkerAlt className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
                       <input
                         type="text"
-                        name="title"
+                        name="landmark"
                         required
                         placeholder="Near Metro Station, Main Market etc."
                         className="w-full py-3 pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
@@ -154,12 +155,6 @@ const Listingpage1 = () => {
                             className="hidden"
                           />
                         </label>
-                        <div className="relative group">
-                          <img
-                            alt="Main property"
-                            className="object-cover w-full h-48 shadow-md rounded-xl"
-                          />
-                        </div>
                     </div>
                   </div>
 
@@ -182,13 +177,7 @@ const Listingpage1 = () => {
                             className="hidden"
                           />
                         </label>
-                        <div className="relative group">
-                          <img
-                            alt="Property image 2"
-                            className="object-cover w-full h-48 shadow-md rounded-xl"
-                          />
 
-                        </div>
                     </div>
                   </div>
 
@@ -210,13 +199,7 @@ const Listingpage1 = () => {
                             className="hidden"
                           />
                         </label>
-                        <div className="relative group">
-                          <img
-                            alt="Property image 3"
-                            className="object-cover w-full h-48 shadow-md rounded-xl"
-                          />
-                         
-                        </div>
+
                     </div>
                   </div>
                 </div>
@@ -229,8 +212,9 @@ const Listingpage1 = () => {
               <div className="flex gap-4">
                 <button
                   type="submit"
+                  onClick={() => navigate("/Listingpage2")}
                   className="flex-1 py-4 px-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
+                > Next
                 </button>
                 
                 <button
