@@ -29,6 +29,7 @@ export default function ListingContext({ children }) {
   let [backendimage3, setbackendImage3] = useState(null);
 
   const handleaddListing = async () => {
+  console.log("handleaddListing called");
     try {
       const formData = new FormData();
 
@@ -85,6 +86,7 @@ export default function ListingContext({ children }) {
     setbackendImage2,
     backendimage3,
     setbackendImage3,
+    handleaddListing
   };
 
   return (

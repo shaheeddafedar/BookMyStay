@@ -111,7 +111,7 @@ const Listingpage1 = () => {
 
   return (
     <>
-      <Navbar />
+      
 
       <div className="min-h-screen px-4 py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
         <div className="max-w-5xl mx-auto">
