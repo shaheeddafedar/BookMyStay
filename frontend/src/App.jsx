@@ -1,5 +1,5 @@
 //external import
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 //local import
@@ -12,30 +12,28 @@ import Listingpage3 from "./pages/Listingpage3";
 import { userDateContext } from "./context/UserContext";
 // import './App.css'
 function App() {
-  let {userData} = useContext(userDateContext);
+  let { UserData } = useContext(userDateContext);
+  console.log("UserData =", UserData);
   return (
     <>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/signup" element={<Singup></Singup>}></Route>
-        <Route path="/login" element={<Login></Login>}></Route>
+        <Route
+          path="/login"
+          element={!UserData ? <Login /> : <Navigate to="/" />}
+        />
         <Route
           path="/listingpage1"
-          element={
-            userData != null ? <Listingpage1 /> : <Navigate to={"/login"} />
-          }
+          element={UserData ? <Listingpage1 /> : <Navigate to="/login" />}
         ></Route>
         <Route
           path="/listingpage2"
-          element={
-            userData != null ? <Listingpage2 /> : <Navigate to={"/login"} />
-          }
+          element={UserData ? <Listingpage2 /> : <Navigate to="/login" />}
         ></Route>
         <Route
           path="/listingpage3"
-          element={
-            userData != null ? <Listingpage3 /> : <Navigate to={"/login"} />
-          }
+          element={UserData ? <Listingpage3 /> : <Navigate to="/login" />}
         ></Route>
       </Routes>
     </>

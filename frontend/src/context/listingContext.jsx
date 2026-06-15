@@ -9,6 +9,8 @@ import { authDataContext } from "./Authcontext";
 export const ListingDataContext = createContext();
 
 export default function ListingContext({ children }) {
+
+  
   let { serverUrl } = useContext(authDataContext);
 
   let [title, setTitle] = useState("");
@@ -18,7 +20,7 @@ export default function ListingContext({ children }) {
   let [landMark, setLandMark] = useState("");
   let [category, setCategory] = useState("");
 
-  let [frontendimage1, setfrontendtImage1] = useState(null);
+  let [frontendimage1, setfrontendImage1] = useState(null);
   let [frontendimage2, setfrontendImage2] = useState(null);
   let [frontendimage3, setfrontendImage3] = useState(null);
 
@@ -71,7 +73,7 @@ export default function ListingContext({ children }) {
     category,
     setCategory,
     frontendimage1,
-    setfrontendtImage1,
+    setfrontendImage1,
     frontendimage2,
     setfrontendImage2,
     frontendimage3,
