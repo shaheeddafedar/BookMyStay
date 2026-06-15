@@ -146,7 +146,7 @@ const Navbar = () => {
                 </div>
 
                 <ul className="py-2">
-                  <li
+                 { !UserData && <li
                     className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
                     onClick={() => {
                       navigate("/login");
@@ -159,8 +159,8 @@ const Navbar = () => {
                     </span>
                     <span className="text-xs text-gray-400">→</span>
                   </li>
-
-                  <li
+}
+                  {UserData && <li
                     className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
                     onClick={handleLogout}
                   >
@@ -170,10 +170,10 @@ const Navbar = () => {
                     </span>
                     <span className="text-xs text-gray-400">→</span>
                   </li>
-
+}
                   <div className="my-2 border-t border-gray-100"></div>
 
-                  <li
+{              UserData &&    <li
                     className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
                     onClick={() => {
                       navigate("/listingpage1");
@@ -184,9 +184,9 @@ const Navbar = () => {
                       List your home
                     </span>
                     <span className="text-xs text-gray-400">✨</span>
-                  </li>
+                  </li>}
 
-                  <li
+                  {UserData && <li
                     className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
                     onClick={() => setshowpopup(false)}
                   >
@@ -195,9 +195,9 @@ const Navbar = () => {
                       My listing
                     </span>
                     <span className="text-xs text-gray-400">📋</span>
-                  </li>
+                  </li>}
 
-                  <li
+                  { UserData && <li
                     className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
                     onClick={() => setshowpopup(false)}
                   >
@@ -206,7 +206,7 @@ const Navbar = () => {
                       Check Booking
                     </span>
                     <span className="text-xs text-gray-400">📅</span>
-                  </li>
+                  </li>}
                 </ul>
               </div>
             </>

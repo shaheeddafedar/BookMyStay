@@ -304,8 +304,9 @@ const ListingPage2 = () => {
                 <button 
                   onClick={() => navigate("/listingpage3")}
                   className="flex-1 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2"
+                  disabled={!category}
                 >
-                  Continue to Photos <FaArrowRight />
+                  Next <FaArrowRight />
                 </button>
               </div>
             </div>
