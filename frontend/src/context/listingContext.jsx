@@ -5,12 +5,13 @@ import { Children } from "react";
 import { createContext } from "react";
 import axios from "axios";
 import { authDataContext } from "./Authcontext";
+import { useNavigate } from "react-router-dom";
 
 export const ListingDataContext = createContext();
 
 export default function ListingContext({ children }) {
+      let navigate = useNavigate();
 
-  
   let { serverUrl } = useContext(authDataContext);
 
   let [title, setTitle] = useState("");
@@ -29,7 +30,6 @@ export default function ListingContext({ children }) {
   let [backendimage3, setbackendImage3] = useState(null);
 
   const handleaddListing = async () => {
-  console.log("handleaddListing called");
     try {
       const formData = new FormData();
 
@@ -50,6 +50,23 @@ export default function ListingContext({ children }) {
         { withCredentials: true },
       );
       console.log(result);
+
+      navigate("/");
+      setTitle("");
+      setDescription("");
+      setRent("");
+      setCity("");
+      setCategory("");
+      setLandMark("");
+      setCategory("");
+
+      setfrontendImage1(null);
+      setfrontendImage2(null);
+      setfrontendImage3(null);
+
+      setbackendImage1(null);
+      setbackendImage2(null);
+      setbackendImage3(null);
     } catch (error) {
       console.log(error);
     }
@@ -86,7 +103,7 @@ export default function ListingContext({ children }) {
     setbackendImage2,
     backendimage3,
     setbackendImage3,
-    handleaddListing
+    handleaddListing,
   };
 
   return (

@@ -28,7 +28,6 @@ export default function Listingpage3() {
     frontendimage3,
     handleaddListing
   } = useContext(ListingDataContext);
-              console.log(handleaddListing);
 
   return (
     <>
@@ -77,18 +76,17 @@ export default function Listingpage3() {
   {/* Side Images */}
   <div className="flex flex-col gap-4">
 
-    <div className="overflow-hidden shadow-lg rounded-2xl">
-      <img
-        src={
-          frontendimage2 ||
-          "https://via.placeholder.com/300x200?text=Image+2"
-        }
-        alt="Property Image 2"
-        className="object-cover w-full h-[192px] transition-transform duration-500 hover:scale-105"
-      />
-    </div>
+{frontendimage2 && (
+  <div className="overflow-hidden shadow-lg rounded-2xl">
+    <img
+      src={frontendimage2}
+      alt="Property Image 2"
+      className="object-cover w-full h-[192px] transition-transform duration-500 hover:scale-105"
+    />
+  </div>
+)}
 
-    <div className="overflow-hidden shadow-lg rounded-2xl">
+    {frontendimage3 && (<div className="overflow-hidden shadow-lg rounded-2xl">
       <img
         src={
           frontendimage3 ||
@@ -98,7 +96,7 @@ export default function Listingpage3() {
         className="object-cover w-full h-[192px] transition-transform duration-500 hover:scale-105"
       />
     </div>
-
+    )}
   </div>
 </div>
 <br />
@@ -182,9 +180,7 @@ export default function Listingpage3() {
                 <FaArrowLeft /> Back to Edit
               </button>
 
-              <button className="flex-1 py-3 font-bold text-white transition-all duration-300 transform bg-gradient-to-r from-green-600 to-green-700 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] flex items-center justify-center gap-2" onClick={ ()=>{
-                    console.log("Button clicked");
-                    handleaddListing();}}>
+              <button className="flex-1 py-3 font-bold text-white transition-all duration-300 transform bg-gradient-to-r from-green-600 to-green-700 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] flex items-center justify-center gap-2" onClick={handleaddListing()}>
                 <FaCheckCircle />Add Listing
               </button>
             </div>
