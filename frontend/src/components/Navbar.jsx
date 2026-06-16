@@ -30,11 +30,11 @@ import {
 } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { GiWoodCabin } from "react-icons/gi";
-import { userDateContext } from "../context/UserContext";
+import { userDataContext } from "../context/UserContext";
 
 const Navbar = () => {
   let { serverUrl } = useContext(authDataContext);
-  let { UserData, setUserData } = useContext(userDateContext);
+  let { UserData, setUserData } = useContext(userDataContext);
 
   let [showpopup, setshowpopup] = useState(false);
   let navigate = useNavigate();

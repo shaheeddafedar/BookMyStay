@@ -13,15 +13,15 @@ import { IoMdEye } from "react-icons/io";
 //internal
 import Navbar from "../components/Navbar";
 import { authDataContext } from "../context/Authcontext";
-import { userDateContext } from "../context/UserContext";
+import { userDataContext } from "../context/UserContext";
 
 const Signup = () => {
-  const { serverUrl } = useContext(authDataContext);
+  const { serverUrl,    loading, setloading
+} = useContext(authDataContext);
   let { 
     
     UserData, setUserData,
-    loading, setloading
-   } = useContext(userDateContext);
+   } = useContext(userDataContext);
 
   const navigate = useNavigate();
 
@@ -32,10 +32,10 @@ const Signup = () => {
   const [password, setPassword] = useState("");
 
   const handleSignup = async (e) => {
+          e.preventDefault();
+
     setloading(true)
     try {
-      e.preventDefault();
-
       const result = await axios.post(
         serverUrl + "/api/auth/signup",
         {
@@ -93,7 +93,7 @@ const Signup = () => {
                 </p>
               </div>
 
-              <form className="space-y-5" onSubmit={handleSignup} method="POST">
+              <form className="space-y-5" onSubmit={handleSignup} >
                 <div className="space-y-2">
                   <label className="block text-sm font-semibold text-gray-700">
                     Username

@@ -9,10 +9,10 @@ import Login from "./pages/Login";
 import Listingpage1 from "./pages/listingpage1";
 import Listingpage2 from "./pages/Listingpage2";
 import Listingpage3 from "./pages/Listingpage3";
-import { userDateContext } from "./context/UserContext";
+import { userDataContext } from "./context/UserContext";
 // import './App.css'
 function App() {
-  let { UserData } = useContext(userDateContext);
+  let { UserData } = useContext(userDataContext);
   console.log("UserData =", UserData);
   return (
     <>

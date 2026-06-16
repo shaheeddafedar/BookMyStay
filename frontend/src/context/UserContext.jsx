@@ -3,7 +3,7 @@ import react, { useContext, Children, createContext, useState } from "react";
 import { useEffect } from "react";
 import { authDataContext } from "./Authcontext";
 
-export const userDateContext = createContext();
+export const userDataContext = createContext();
 
 function UserContext({ children }) {
   let { serverUrl } = useContext(authDataContext);
@@ -29,9 +29,9 @@ function UserContext({ children }) {
   };
   return (
     <div>
-      <userDateContext.Provider value={value}>
+      <userDataContext.Provider value={value}>
         {children}
-      </userDateContext.Provider>
+      </userDataContext.Provider>
     </div>
   );
 }

@@ -11,15 +11,14 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { FaLock } from "react-icons/fa6";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoMdEye } from "react-icons/io";
-import { userDateContext } from "../context/UserContext";
+import { userDataContext } from "../context/UserContext";
 
 function Login() {
-  let {
-    serverUrl,
-     UserData, setUserData,
-    loading, setloading
-    } = useContext(userDateContext);
-    
+const { serverUrl, loading, setloading } =
+  useContext(authDataContext);
+
+const { UserData, setUserData } =
+  useContext(userDataContext);
   const navigate = useNavigate();
 
   //react hook
@@ -38,8 +37,9 @@ function Login() {
           password,
         },
         { withCredentials: true },
-        setloading(false)
       );
+       setloading(false)
+
       (setUserData(result.data), navigate("/"));
       console.log(result.data);
     } catch (error) {
@@ -135,7 +135,7 @@ function Login() {
                   <p className="text-sm text-gray-600">
                     Dont have an account?{" "}
                     <Link
-                      to="/Signup"
+                      to="/signup"
                       className="font-semibold text-blue-600 transition-colors duration-300 hover:text-blue-700"
                     >
                       Create Account
