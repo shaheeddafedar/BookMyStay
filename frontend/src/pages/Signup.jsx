@@ -17,7 +17,11 @@ import { userDateContext } from "../context/UserContext";
 
 const Signup = () => {
   const { serverUrl } = useContext(authDataContext);
-  let { UserData, setUserData } = useContext(userDateContext);
+  let { 
+    
+    UserData, setUserData,
+    loading, setloading
+   } = useContext(userDateContext);
 
   const navigate = useNavigate();
 
@@ -28,6 +32,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
 
   const handleSignup = async (e) => {
+    setloading(true)
     try {
       e.preventDefault();
 
@@ -40,7 +45,9 @@ const Signup = () => {
         },
         { withCredentials: true },
       );
-
+      
+      setloading(false)
+       
       setUserData(result.data);
       navigate("/");
       setName("");
@@ -49,6 +56,7 @@ const Signup = () => {
 
       navigate("/");
     } catch (error) {
+      setloading(false)
       console.log(error.response?.data || error);
     }
   };
@@ -157,7 +165,7 @@ const Signup = () => {
                   type="submit"
                   className="w-full py-3 font-bold text-white transition-all duration-300 transform rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 hover:scale-[1.02] hover:shadow-lg"
                 >
-                  Sign Up
+                 {loading? "Loading...": "Sign Up"}
                 </button>
 
                 <div className="pt-4 text-center">

@@ -6,17 +6,21 @@ export const addListing = async (req, res) => {
   try {
     let host = req.userId;
     let { title, description, rent, city, landMark, category } = req.body;
-    let image1 = req.files?.image1?.[0]
-      ? await uploadOnCloudinary(req.files.image1[0].path)
-      : null;
+   let image1 = "";
+let image2 = "";
+let image3 = "";
 
-    let image2 = req.files?.image2?.[0]
-      ? await uploadOnCloudinary(req.files.image2[0].path)
-      : null;
+if (req.files?.image1) {
+  image1 = await uploadOnCloudinary(req.files.image1[0].path);
+}
 
-    let image3 = req.files?.image3?.[0]
-      ? await uploadOnCloudinary(req.files.image3[0].path)
-      : null;
+if (req.files?.image2) {
+  image2 = await uploadOnCloudinary(req.files.image2[0].path);
+}
+
+if (req.files?.image3) {
+  image3 = await uploadOnCloudinary(req.files.image3[0].path);
+}
     let listing = await Listing.create({
       title,
       description,

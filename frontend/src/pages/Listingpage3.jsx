@@ -26,7 +26,8 @@ export default function Listingpage3() {
     frontendimage1,
     frontendimage2,
     frontendimage3,
-    handleaddListing
+    handleaddListing,
+     adding,setadding
   } = useContext(ListingDataContext);
 
   return (
@@ -180,8 +181,8 @@ export default function Listingpage3() {
                 <FaArrowLeft /> Back to Edit
               </button>
 
-              <button className="flex-1 py-3 font-bold text-white transition-all duration-300 transform bg-gradient-to-r from-green-600 to-green-700 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] flex items-center justify-center gap-2" onClick={handleaddListing()}>
-                <FaCheckCircle />Add Listing
+              <button className="flex-1 py-3 font-bold text-white transition-all duration-300 transform bg-gradient-to-r from-green-600 to-green-700 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] flex items-center justify-center gap-2" onClick={handleaddListing}  disabled={adding}>
+                <FaCheckCircle />{adding?"adding...":"Add listing"}
               </button>
             </div>
           </div>

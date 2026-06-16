@@ -29,8 +29,11 @@ export default function ListingContext({ children }) {
   let [backendimage2, setbackendImage2] = useState(null);
   let [backendimage3, setbackendImage3] = useState(null);
 
+  let [adding, setadding] = useState(false);
+
   const handleaddListing = async () => {
     try {
+      setadding(true)
       const formData = new FormData();
 
       formData.append("title", title);
@@ -49,8 +52,9 @@ export default function ListingContext({ children }) {
         formData,
         { withCredentials: true },
       );
+      setadding(false)
       console.log(result);
-
+      
       navigate("/");
       setTitle("");
       setDescription("");
@@ -68,6 +72,7 @@ export default function ListingContext({ children }) {
       setbackendImage2(null);
       setbackendImage3(null);
     } catch (error) {
+     setadding(false)
       console.log(error);
     }
   };
@@ -104,6 +109,7 @@ export default function ListingContext({ children }) {
     backendimage3,
     setbackendImage3,
     handleaddListing,
+    adding,setadding
   };
 
   return (

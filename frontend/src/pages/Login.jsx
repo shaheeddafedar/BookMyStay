@@ -14,8 +14,12 @@ import { IoMdEye } from "react-icons/io";
 import { userDateContext } from "../context/UserContext";
 
 function Login() {
-  let { serverUrl } = useContext(authDataContext);
-  let { UserData, setUserData } = useContext(userDateContext);
+  let {
+    serverUrl,
+     UserData, setUserData,
+    loading, setloading
+    } = useContext(userDateContext);
+    
   const navigate = useNavigate();
 
   //react hook
@@ -24,6 +28,7 @@ function Login() {
   let [password, setPassword] = useState("");
 
   const handleLogin = async (e) => {
+    setloading(true)
     try {
       e.preventDefault();
       let result = await axios.post(
@@ -33,10 +38,12 @@ function Login() {
           password,
         },
         { withCredentials: true },
+        setloading(false)
       );
       (setUserData(result.data), navigate("/"));
       console.log(result.data);
     } catch (error) {
+      setloading(false)
       console.log(error);
     }
   };
@@ -121,7 +128,7 @@ function Login() {
                   type="submit"
                   className="w-full py-3 font-bold text-white transition-all duration-300 transform rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 hover:scale-[1.02] hover:shadow-lg"
                 >
-                  Login
+                  {loading?"Loading..":"Login"}
                 </button>
 
                 <div className="pt-4 text-center">
