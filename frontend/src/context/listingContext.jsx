@@ -30,6 +30,7 @@ export default function ListingContext({ children }) {
   let [backendimage3, setbackendImage3] = useState(null);
 
   let [adding, setadding] = useState(false);
+  let [listingdata, setlistingdata] = useState([]);
 
   const handleaddListing = async () => {
     try {
@@ -77,6 +78,17 @@ export default function ListingContext({ children }) {
     }
   };
 
+
+const getListing = async () => {
+  try {
+    let result = await axios.get(serverUrl+"/api/listing/get",{withCredentials:true})
+    setlistingdata(result.data)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
   let value = {
     title,
     setTitle,
@@ -108,8 +120,12 @@ export default function ListingContext({ children }) {
     setbackendImage2,
     backendimage3,
     setbackendImage3,
+
     handleaddListing,
-    adding,setadding
+
+    adding,setadding,
+
+    listingdata,setlistingdata
   };
 
   return (
