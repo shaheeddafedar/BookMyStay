@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useContext } from "react";
 import { useState } from "react";
 import { Children } from "react";
@@ -88,9 +88,9 @@ const getListing = async () => {
   }
 }
 
-useContext(()=>{
+useEffect(()=>{
  getListing()
-},[])
+},[adding])
 
 
   let value = {

@@ -228,11 +228,11 @@ const Listingpage1 = () => {
                       <FaMapMarkerAlt className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
                       <input
                         type="text"
-                        name="landmark"
+                        name="landMark"
                         required
                         placeholder="Near Metro Station, Main Market etc."
                         className="w-full py-3 pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                        id="landmark"
+                        id="landMark"
                         onChange={(e) => setLandMark(e.target.value)}
                         value={landMark}
                       />
