@@ -88,6 +88,10 @@ const getListing = async () => {
   }
 }
 
+useContext(()=>{
+ getListing()
+},[])
+
 
   let value = {
     title,
@@ -123,7 +127,7 @@ const getListing = async () => {
 
     handleaddListing,
 
-    adding,setadding,
+    adding,setadding, 
 
     listingdata,setlistingdata
   };

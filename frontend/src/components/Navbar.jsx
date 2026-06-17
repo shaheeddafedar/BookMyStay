@@ -56,9 +56,11 @@ const Navbar = () => {
   };
 
   return (
-    <>
-      <div className="relative flex flex-col items-center justify-between gap-4 px-4 py-4 shadow-xl md:flex-row md:gap-0 md:px-7 md:py-4 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700">
-        <div className="absolute inset-0 opacity-10 bg-gradient-to-r from-white to-transparent"></div>
+      <div className="fixed top-0 left-0 right-0 z-50">
+
+    
+      <div className="relative top-0 flex flex-col items-center justify-between gap-4 px-4 py-4 shadow-xl md:flex-row md:gap-0 md:px-7 md:py-4 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700">
+        <div className="absolute inset-0 opacity-10 bg-gradient-to-r from-white to-transparent "></div>
         <div
           className="z-10 flex items-center justify-center gap-3 cursor-pointer group"
           onClick={() => navigate("/")}
@@ -300,7 +302,7 @@ const Navbar = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
