@@ -139,8 +139,8 @@ const Navbar = () => {
                       )}
                     </div>
                     <div>
-                      <h4 className="font-bold text-gray-800">Guest User</h4>
-                      <p className="text-xs text-gray-500">Welcome back! 👋</p>
+                      <h4 className="font-bold text-gray-800">{UserData? UserData.name:"Guest User"}</h4>
+                      <p className="text-[15px] font-medium text-gray-600 mt-[3px]">{UserData ? "Welcome back!👋" : "Please login" }</p>
                     </div>
                   </div>
                 </div>

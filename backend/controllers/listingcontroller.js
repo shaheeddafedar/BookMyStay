@@ -48,3 +48,13 @@ if (req.files?.image3) {
     res.status(500).json({ message: `Adlisting error ${error}` });
   }
 };
+
+
+export const getListing = async (req,res) => {
+  try {
+    let listing = await Listing.find().sort({createdAt:-1})
+    res.status(200).json(listing)
+  } catch (error) {
+    res.status(500).json({message:`getListing error ${error}`})
+  }
+}

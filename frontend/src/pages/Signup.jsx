@@ -19,7 +19,7 @@ const Signup = () => {
   const { serverUrl,    loading, setloading
 } = useContext(authDataContext);
   let { 
-    
+     
     UserData, setUserData,
    } = useContext(userDataContext);
 
