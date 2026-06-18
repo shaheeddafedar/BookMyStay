@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { FaHeart, FaRegHeart, FaStar, FaMapMarkerAlt, FaRupeeSign, FaBed, FaBath } from 'react-icons/fa';
 
 export default function Card({ title, landMark, image1, image2, image3, rent, city, id }) {
+
   const [isLiked, setIsLiked] = useState(false);
+
   const [currentImage, setCurrentImage] = useState(0);
   const images = [image1, image2, image3].filter(img => img);
 
@@ -32,7 +34,7 @@ export default function Card({ title, landMark, image1, image2, image3, rent, ci
         )}
         
         {/* Navigation Arrows */}
-        {images.length > 1 && (
+        {images.length > 1 && ( 
           <>
             <button 
               onClick={(e) => { e.stopPropagation(); prevImage(); }}
@@ -51,7 +53,7 @@ export default function Card({ title, landMark, image1, image2, image3, rent, ci
         
         {/* Like Button */}
         <button
-          onClick={(e) => { e.stopPropagation(); setIsLiked(!isLiked); }}
+          onClick={(e) => { e.stopPropagation(); setIsLiked((prev) => !prev); }}
           className='absolute p-2 transition-transform duration-200 bg-white rounded-full shadow-md top-3 right-3 hover:scale-110'
         >
           {isLiked ? (
@@ -84,7 +86,7 @@ export default function Card({ title, landMark, image1, image2, image3, rent, ci
           <div className='flex items-baseline gap-1'>
             <FaRupeeSign className='w-3 h-3 text-gray-600' />
             <span className='text-lg font-bold text-gray-800'>
-              {rent?.toLocaleString() || '0'}
+              {rent|| '0'}
             </span>
             <span className='text-xs text-gray-500'>/month</span>
           </div>
