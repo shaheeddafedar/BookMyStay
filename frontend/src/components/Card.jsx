@@ -81,7 +81,7 @@ export default function Card({ title, landMark, image1, image2, image3, rent, ci
         </div>
         
         {/* Bottom Section */}
-        <div className='flex items-center justify-between mt-2'>
+        <div className='flex items-center justify-between mt-1'>
           {/* Price */}
           <div className='flex items-baseline gap-1'>
             <FaRupeeSign className='w-3 h-3 text-gray-600' />
