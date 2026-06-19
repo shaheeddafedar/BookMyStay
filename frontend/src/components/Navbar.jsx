@@ -62,7 +62,11 @@ const Navbar = () => {
 
   const handleCategory = (category) => {
     setcategory(category);
+    if (category == "trending") {
+      setnewlistingdata(listingdata);
+    } else{
     setnewlistingdata(listingdata.filter((list) => list.category === category));
+    }
   };
 
   return (
@@ -245,13 +249,14 @@ const Navbar = () => {
 
       <div className="relative bg-white border-b border-gray-200 shadow-md">
         <div className="flex items-center gap-4 px-4 py-3 overflow-x-auto md:gap-6 scrollbar-hide md:justify-center">
-          <div
-            className={
-              "flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2"
-            }
-          >
-            <MdWhatshot className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-orange-500 transition-all duration-300 group-hover:scale-110" />
-            <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-orange-500">
+          <div  className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] 
+            cursor-pointer transition-all duration-300 pb-2`}
+            onClick={() => {handleCategory("trending"); setcategory("")}}>
+            <MdWhatshot className={`
+          w-6 h-6 md:w-[30px] md:h-[30px] transition-all duration-300 
+           ${category === "trending" ? "text-orange-500 scale-110": "text-gray-700 group-hover:text-orange-500 group-hover:scale-110"}`}/>
+            <h3 className={` mt-1 font-medium transition-colors duration-300
+      ${ category === "trending" ? "text-orange-500" : "text-gray-600 group-hover:text-orange-500" }`} >
               Trending
             </h3>
           </div>
