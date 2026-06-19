@@ -28,19 +28,19 @@ function App() {
         />
         <Route
           path="/listingpage1"
-          element={UserData ? <Listingpage1 /> : <Navigate to="/login" />}
+          element={UserData ? <Listingpage1 /> : <Navigate to="/" />}
         ></Route>
         <Route
           path="/listingpage2"
-          element={UserData ? <Listingpage2 /> : <Navigate to="/login" />}
+          element={UserData ? <Listingpage2 /> : <Navigate to="/" />}
         ></Route>
         <Route
           path="/listingpage3"
-          element={UserData ? <Listingpage3 /> : <Navigate to="/login" />}
+          element={UserData ? <Listingpage3 /> : <Navigate to="/" />}
         ></Route>
         <Route
           path="/Mylisting"
-          element={UserData ? <Mylisting /> : <Navigate to="/login" />}
+          element={UserData ? <Mylisting /> : <Navigate to="/" />}
         ></Route>
       </Routes>
     </>
