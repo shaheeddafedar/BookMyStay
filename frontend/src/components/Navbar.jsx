@@ -60,13 +60,14 @@ const Navbar = () => {
     }
   };
 
-  const handleCategory = (category) => {
-    setcategory(category);
-    if (category == "trending") {
+  const handleCategory = (selectedCategory) => {
+    setcategory(selectedCategory);
+    if (selectedCategory == "trending") {
       setnewlistingdata(listingdata);
-    } else{
-    setnewlistingdata(listingdata.filter((list) => list.category === category));
-    }
+      return
+    } 
+    setnewlistingdata(listingdata.filter((list) => list.category === selectedCategory));
+    
   };
 
   return (
@@ -251,7 +252,7 @@ const Navbar = () => {
         <div className="flex items-center gap-4 px-4 py-3 overflow-x-auto md:gap-6 scrollbar-hide md:justify-center">
           <div  className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] 
             cursor-pointer transition-all duration-300 pb-2`}
-            onClick={() => {handleCategory("trending"); setcategory("")}}>
+            onClick={() => {handleCategory("trending")}}>
             <MdWhatshot className={`
           w-6 h-6 md:w-[30px] md:h-[30px] transition-all duration-300 
            ${category === "trending" ? "text-orange-500 scale-110": "text-gray-700 group-hover:text-orange-500 group-hover:scale-110"}`}/>
