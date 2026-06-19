@@ -9,6 +9,9 @@ import Login from "./pages/Login";
 import Listingpage1 from "./pages/listingpage1";
 import Listingpage2 from "./pages/Listingpage2";
 import Listingpage3 from "./pages/Listingpage3";
+import Mylisting from "./pages/Mylisting";
+
+
 import { userDataContext } from "./context/UserContext";
 // import './App.css'
 function App() {
@@ -34,6 +37,10 @@ function App() {
         <Route
           path="/listingpage3"
           element={UserData ? <Listingpage3 /> : <Navigate to="/login" />}
+        ></Route>
+        <Route
+          path="/Mylisting"
+          element={UserData ? <Mylisting /> : <Navigate to="/login" />}
         ></Route>
       </Routes>
     </>
