@@ -16,12 +16,8 @@ import { authDataContext } from "../context/Authcontext";
 import { userDataContext } from "../context/UserContext";
 
 const Signup = () => {
-  const { serverUrl,    loading, setloading
-} = useContext(authDataContext);
-  let { 
-     
-    UserData, setUserData,
-   } = useContext(userDataContext);
+  const { serverUrl, loading, setloading } = useContext(authDataContext);
+  let { UserData, setUserData } = useContext(userDataContext);
 
   const navigate = useNavigate();
 
@@ -32,9 +28,9 @@ const Signup = () => {
   const [password, setPassword] = useState("");
 
   const handleSignup = async (e) => {
-          e.preventDefault();
+    e.preventDefault();
 
-    setloading(true)
+    setloading(true);
     try {
       const result = await axios.post(
         serverUrl + "/api/auth/signup",
@@ -45,9 +41,9 @@ const Signup = () => {
         },
         { withCredentials: true },
       );
-      
-      setloading(false)
-       
+
+      setloading(false);
+
       setUserData(result.data);
       navigate("/");
       setName("");
@@ -56,7 +52,7 @@ const Signup = () => {
 
       navigate("/");
     } catch (error) {
-      setloading(false)
+      setloading(false);
       console.log(error.response?.data || error);
     }
   };
@@ -64,14 +60,13 @@ const Signup = () => {
   return (
     <>
       <Navbar />
-      <div className="flex items-center justify-center min-h-screen gap-1 p-4 bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="flex items-center justify-center min-h-screen gap-1 p-4 bg-gradient-to-br from-blue-50 to-indigo-100 mt-[150px] md:mt-[180px]">
         <div className="flex w-full overflow-hidden bg-white shadow-2xl max-w-7xl rounded-2xl">
           <div className="relative hidden md:block md:w-1/2">
             <div className="absolute inset-0 bg-[url('/bg1.jpg')] bg-cover bg-center"></div>
             <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-black/30">
               <div className="flex flex-col items-center justify-center h-full p-8 text-center">
-                <h1 className="mb-4 text-4xl font-bold text-white">
-                  Welcome to BookMyStay
+<h1 className="mb-4 text-3xl font-bold text-white lg:text-4xl">                  Welcome to BookMyStay
                 </h1>
                 <p className="text-lg text-white/90">
                   Find your perfect stay with us
@@ -83,9 +78,10 @@ const Signup = () => {
           <div className="w-full md:w-1/2">
             <div className="h-2 bg-gradient-to-r from-blue-600 to-blue-800"></div>
 
-            <div className="p-8 md:p-10">
+            <div className="p-5 sm:p-8 md:p-10">
               <div className="mb-8 text-center">
-                <h2 className="text-3xl font-bold text-gray-800">
+                <h2 className="text-2xl font-bold text-gray-800 sm:text-3xl">
+                  {" "}
                   Create Account
                 </h2>
                 <p className="mt-2 text-gray-500">
@@ -93,7 +89,7 @@ const Signup = () => {
                 </p>
               </div>
 
-              <form className="space-y-5" onSubmit={handleSignup} >
+              <form className="space-y-5" onSubmit={handleSignup}>
                 <div className="space-y-2">
                   <label className="block text-sm font-semibold text-gray-700">
                     Username
@@ -165,7 +161,7 @@ const Signup = () => {
                   type="submit"
                   className="w-full py-3 font-bold text-white transition-all duration-300 transform rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 hover:scale-[1.02] hover:shadow-lg"
                 >
-                 {loading? "Loading...": "Sign Up"}
+                  {loading ? "Loading..." : "Sign Up"}
                 </button>
 
                 <div className="pt-4 text-center">
