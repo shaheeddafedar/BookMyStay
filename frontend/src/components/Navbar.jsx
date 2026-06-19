@@ -36,13 +36,13 @@ import { ListingDataContext } from "../context/ListingContext";
 const Navbar = () => {
   let navigate = useNavigate();
 
-  let {listingdata, setlistingdata} = useContext(ListingDataContext)
-  let {newlistingdata, setnewlistingdata} = useContext(ListingDataContext)
+  let { listingdata, setlistingdata } = useContext(ListingDataContext);
+  let { newlistingdata, setnewlistingdata } = useContext(ListingDataContext);
   let { serverUrl } = useContext(authDataContext);
   let { UserData, setUserData } = useContext(userDataContext);
 
   let [showpopup, setshowpopup] = useState(false);
-  let [category,setcategory] = useState()
+  let [category, setcategory] = useState();
 
   const handleLogout = async () => {
     try {
@@ -60,15 +60,13 @@ const Navbar = () => {
     }
   };
 
-  const handleCategory = (category)=>{
-   setcategory(category)
-  setnewlistingdata(listingdata.filter((list)=> list.category===category))
-  }
+  const handleCategory = (category) => {
+    setcategory(category);
+    setnewlistingdata(listingdata.filter((list) => list.category === category));
+  };
 
   return (
-      <div className="fixed top-0 left-0 right-0 z-50">
-
-    
+    <div className="fixed top-0 left-0 right-0 z-50">
       <div className="relative top-0 flex flex-col items-center justify-between gap-4 px-4 py-4 shadow-xl md:flex-row md:gap-0 md:px-7 md:py-4 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700">
         <div className="absolute inset-0 opacity-10 bg-gradient-to-r from-white to-transparent "></div>
         <div
@@ -151,74 +149,87 @@ const Navbar = () => {
                       )}
                     </div>
                     <div>
-                      <h4 className="font-bold text-gray-800">{UserData? UserData.name:"Guest User"}</h4>
-                      <p className="text-[15px] font-medium text-gray-600 mt-[3px]">{UserData ? "Welcome back!👋" : "Please login" }</p>
+                      <h4 className="font-bold text-gray-800">
+                        {UserData ? UserData.name : "Guest User"}
+                      </h4>
+                      <p className="text-[15px] font-medium text-gray-600 mt-[3px]">
+                        {UserData ? "Welcome back!👋" : "Please login"}
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 <ul className="py-2">
-                 { !UserData && <li
-                    className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
-                    onClick={() => {
-                      navigate("/login");
-                      setshowpopup(false);
-                    }}
-                  >
-                    <FaSignInAlt className="w-4 h-4 text-blue-600 transition-transform group-hover:scale-110" />
-                    <span className="flex-1 text-sm font-medium text-gray-700 group-hover:text-blue-600">
-                      Login
-                    </span>
-                    <span className="text-xs text-gray-400">→</span>
-                  </li>
-}
-                  {UserData && <li
-                    className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
-                    onClick={handleLogout}
-                  >
-                    <MdLogout className="w-4 h-4 text-red-600 transition-transform group-hover:scale-110" />
-                    <span className="flex-1 text-sm font-medium text-gray-700 group-hover:text-red-600">
-                      Logout
-                    </span>
-                    <span className="text-xs text-gray-400">→</span>
-                  </li>
-                   }
+                  {!UserData && (
+                    <li
+                      className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
+                      onClick={() => {
+                        navigate("/login");
+                        setshowpopup(false);
+                      }}
+                    >
+                      <FaSignInAlt className="w-4 h-4 text-blue-600 transition-transform group-hover:scale-110" />
+                      <span className="flex-1 text-sm font-medium text-gray-700 group-hover:text-blue-600">
+                        Login
+                      </span>
+                      <span className="text-xs text-gray-400">→</span>
+                    </li>
+                  )}
+                  {UserData && (
+                    <li
+                      className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
+                      onClick={handleLogout}
+                    >
+                      <MdLogout className="w-4 h-4 text-red-600 transition-transform group-hover:scale-110" />
+                      <span className="flex-1 text-sm font-medium text-gray-700 group-hover:text-red-600">
+                        Logout
+                      </span>
+                      <span className="text-xs text-gray-400">→</span>
+                    </li>
+                  )}
                   <div className="my-2 border-t border-gray-100"></div>
 
-                { UserData &&<li
-                    className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
-                    onClick={() => {
-                      navigate("/listingpage1");
-                      setshowpopup(false);
-                    }}                  >
-                    <FaHome className="w-4 h-4 text-green-600 transition-transform group-hover:scale-110" />
-                    <span className="flex-1 text-sm font-medium text-gray-700 group-hover:text-green-600">
-                      List your home
-                    </span>
-                    <span className="text-xs text-gray-400">✨</span>
-                  </li>}
+                  {UserData && (
+                    <li
+                      className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
+                      onClick={() => {
+                        navigate("/listingpage1");
+                        setshowpopup(false);
+                      }}
+                    >
+                      <FaHome className="w-4 h-4 text-green-600 transition-transform group-hover:scale-110" />
+                      <span className="flex-1 text-sm font-medium text-gray-700 group-hover:text-green-600">
+                        List your home
+                      </span>
+                      <span className="text-xs text-gray-400">✨</span>
+                    </li>
+                  )}
 
-                  {UserData && <li
-                    className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
-                    onClick={() => setshowpopup(false)}
-                  >
-                    <MdListAlt className="w-4 h-4 text-purple-600 transition-transform group-hover:scale-110" />
-                    <span className="flex-1 text-sm font-medium text-gray-700 group-hover:text-purple-600">
-                      My listing
-                    </span>
-                    <span className="text-xs text-gray-400">📋</span>
-                  </li>}
+                  {UserData && (
+                    <li
+                      className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
+                      onClick={() => setshowpopup(false)}
+                    >
+                      <MdListAlt className="w-4 h-4 text-purple-600 transition-transform group-hover:scale-110" />
+                      <span className="flex-1 text-sm font-medium text-gray-700 group-hover:text-purple-600">
+                        My listing
+                      </span>
+                      <span className="text-xs text-gray-400">📋</span>
+                    </li>
+                  )}
 
-                  { UserData && <li
-                    className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
-                    onClick={() => setshowpopup(false)}
-                  >
-                    <MdBookOnline className="w-4 h-4 text-orange-600 transition-transform group-hover:scale-110" />
-                    <span className="flex-1 text-sm font-medium text-gray-700 group-hover:text-orange-600">
-                      Check Booking
-                    </span>
-                    <span className="text-xs text-gray-400">📅</span>
-                  </li>}
+                  {UserData && (
+                    <li
+                      className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
+                      onClick={() => setshowpopup(false)}
+                    >
+                      <MdBookOnline className="w-4 h-4 text-orange-600 transition-transform group-hover:scale-110" />
+                      <span className="flex-1 text-sm font-medium text-gray-700 group-hover:text-orange-600">
+                        Check Booking
+                      </span>
+                      <span className="text-xs text-gray-400">📅</span>
+                    </li>
+                  )}
                 </ul>
               </div>
             </>
@@ -234,78 +245,125 @@ const Navbar = () => {
 
       <div className="relative bg-white border-b border-gray-200 shadow-md">
         <div className="flex items-center gap-4 px-4 py-3 overflow-x-auto md:gap-6 scrollbar-hide md:justify-center">
-          <div className={"flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2"}>
+          <div
+            className={
+              "flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2"
+            }
+          >
             <MdWhatshot className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-orange-500 transition-all duration-300 group-hover:scale-110" />
             <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-orange-500">
               Trending
             </h3>
           </div>
 
-          <div className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2 ${category==="villa"? "border-b-2 border-gray-600": "" }`}
-             onClick={()=>handleCategory("villa")}
+          <div
+            className="flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] cursor-pointer transition-all duration-300 pb-2 border-b-2 border-transparent hover:border-blue-500"
+            onClick={() => handleCategory("villa")}
           >
-            <FaHotel className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-blue-600 transition-all duration-300 group-hover:scale-110" />
-            <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-blue-600">
+            <FaHotel
+              className={`w-6 h-6 md:w-[30px] md:h-[30px] transition-all duration-300 ${category === "villa" ? "text-blue-600 scale-110 border-b-2 " : "text-gray-700 group-hover:text-blue-600 group-hover:scale-110"}`}
+            />
+            <h3
+              className={`mt-1 font-medium transition-colors duration-300 ${category === "villa" ? "text-blue-600" : "text-gray-600 group-hover:text-blue-600"}`}
+            >
               Villa
             </h3>
           </div>
 
-          <div className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2 ${category==="farmHouse"? "border-b-2 border-gray-600": "" }`}
-          onClick={()=>handleCategory("farmHouse")}
+          <div
+            className="flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] cursor-pointer transition-all duration-300 pb-2 border-b-2 border-transparent hover:border-green-500"
+            onClick={() => handleCategory("farmHouse")}
           >
-            <FaHome className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-green-600 transition-all duration-300 group-hover:scale-110" />
-            <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-green-600">
+            <FaHome
+              className={`w-6 h-6 md:w-[30px] md:h-[30px] transition-all duration-300 ${category === "farmHouse" ? "text-green-600 scale-110" : "text-gray-700 group-hover:text-green-600 group-hover:scale-110"}`}
+            />
+            <h3
+              className={`mt-1 font-medium transition-colors duration-300 ${category === "farmHouse" ? "text-green-600" : "text-gray-600 group-hover:text-green-600"}`}
+            >
               Farm House
             </h3>
           </div>
 
-          <div className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2 ${category==="poolHouse"? "border-b-2 border-gray-600": "" }`}
-          onClick={()=>handleCategory("poolHouse")}
+          <div
+            className="flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] cursor-pointer transition-all duration-300 pb-2 border-b-2 border-transparent hover:border-cyan-500"
+            onClick={() => handleCategory("poolHouse")}
           >
-            <MdPool className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-cyan-600 transition-all duration-300 group-hover:scale-110" />
-            <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-cyan-600">
+            <MdPool
+              className={`w-6 h-6 md:w-[30px] md:h-[30px] transition-all duration-300 ${category === "poolHouse" ? "text-cyan-600 scale-110" : "text-gray-700 group-hover:text-cyan-600 group-hover:scale-110"}`}
+            />
+            <h3
+              className={`mt-1 font-medium transition-colors duration-300 ${category === "poolHouse" ? "text-cyan-600" : "text-gray-600 group-hover:text-cyan-600"}`}
+            >
               Pool House
             </h3>
           </div>
 
-          <div className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2 ${category==="rooms"? "border-b-2 border-gray-600": "" }`}
-          onClick={()=>handleCategory("rooms")}
+          <div
+            className="flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] cursor-pointer transition-all duration-300 pb-2 border-b-2 border-transparent hover:border-purple-500"
+            onClick={() => handleCategory("rooms")}
           >
-            <FaBuilding className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-purple-600 transition-all duration-300 group-hover:scale-110" />
-            <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-purple-600">
+            <FaBuilding
+              className={`w-6 h-6 md:w-[30px] md:h-[30px] transition-all duration-300 ${category === "rooms" ? "text-purple-600 scale-110" : "text-gray-700 group-hover:text-purple-600 group-hover:scale-110"}`}
+            />
+            <h3
+              className={`mt-1 font-medium transition-colors duration-300 ${category === "rooms" ? "text-purple-600" : "text-gray-600 group-hover:text-purple-600"}`}
+            >
               Rooms
             </h3>
           </div>
 
-          <div className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2 ${category==="Flat"? "border-b-2 border-gray-600": "" }`}
-          onClick={()=>handleCategory("apartment")}
+          <div
+            className="flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] cursor-pointer transition-all duration-300 pb-2 border-b-2 border-transparent hover:border-indigo-500"
+            onClick={() => handleCategory("apartment")}
           >
-            <MdApartment className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-indigo-600 transition-all duration-300 group-hover:scale-110" />
-            <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-indigo-600">
+            <MdApartment
+              className={`w-6 h-6 md:w-[30px] md:h-[30px] transition-all duration-300 ${category === "apartment" ? "text-indigo-600 scale-110" : "text-gray-700 group-hover:text-indigo-600 group-hover:scale-110"}`}
+            />
+            <h3
+              className={`mt-1 font-medium transition-colors duration-300 ${category === "apartment" ? "text-indigo-600" : "text-gray-600 group-hover:text-indigo-600"}`}
+            >
               Apartment
             </h3>
           </div>
 
-          <div className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2 ${category==="pg"? "border-b-2 border-gray-600": "" }`}
-          onClick={()=>handleCategory("pg")}>
-            <FaBuilding className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-pink-600 transition-all duration-300 group-hover:scale-110" />
-            <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-pink-600">
+          <div
+            className="flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] cursor-pointer transition-all duration-300 pb-2 border-b-2 border-transparent hover:border-pink-500"
+            onClick={() => handleCategory("pg")}
+          >
+            <FaBuilding
+              className={`w-6 h-6 md:w-[30px] md:h-[30px] transition-all duration-300 ${category === "pg" ? "text-pink-600 scale-110" : "text-gray-700 group-hover:text-pink-600 group-hover:scale-110"}`}
+            />
+            <h3
+              className={`mt-1 font-medium transition-colors duration-300 ${category === "pg" ? "text-pink-600" : "text-gray-600 group-hover:text-pink-600"}`}
+            >
               PG
             </h3>
           </div>
 
-          <div className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2 ${category==="cabin"? "border-b-2 border-gray-600": "" }`}
-          onClick={()=>handleCategory("cabin")}>
-            <GiWoodCabin className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-amber-600 transition-all duration-300 group-hover:scale-110" />
-            <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-amber-600">
+          <div
+            className="flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] cursor-pointer transition-all duration-300 pb-2 border-b-2 border-transparent hover:border-amber-500"
+            onClick={() => handleCategory("cabin")}
+          >
+            <GiWoodCabin
+              className={`w-6 h-6 md:w-[30px] md:h-[30px] transition-all duration-300 ${category === "cabin" ? "text-amber-600 scale-110" : "text-gray-700 group-hover:text-amber-600 group-hover:scale-110"}`}
+            />
+            <h3
+              className={`mt-1 font-medium transition-colors duration-300 ${category === "cabin" ? "text-amber-600" : "text-gray-600 group-hover:text-amber-600"}`}
+            >
               Cabins
             </h3>
           </div>
 
-          <div className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2 ${category==="shop"? "border-b-2 border-gray-600": "" }`}
-          onClick={()=>handleCategory("shop")}>
-            <FaStore className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-red-600 transition-all duration-300 group-hover:scale-110" />
-            <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-red-600">
+          <div
+            className="flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] cursor-pointer transition-all duration-300 pb-2 border-b-2 border-transparent hover:border-red-500"
+            onClick={() => handleCategory("shop")}
+          >
+            <FaStore
+              className={`w-6 h-6 md:w-[30px] md:h-[30px] transition-all duration-300 ${category === "shop" ? "text-red-600 scale-110" : "text-gray-700 group-hover:text-red-600 group-hover:scale-110"}`}
+            />
+            <h3
+              className={`mt-1 font-medium transition-colors duration-300 ${category === "shop" ? "text-red-600" : "text-gray-600 group-hover:text-red-600"}`}
+            >
               Shops
             </h3>
           </div>
