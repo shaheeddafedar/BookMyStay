@@ -31,13 +31,17 @@ import {
 import { FaSearch } from "react-icons/fa";
 import { GiWoodCabin } from "react-icons/gi";
 import { userDataContext } from "../context/UserContext";
+import { ListingDataContext } from "../context/ListingContext";
 
 const Navbar = () => {
+  let navigate = useNavigate();
+
+  let {listingdata, setlistingdata} = useContext(ListingDataContext)
   let { serverUrl } = useContext(authDataContext);
   let { UserData, setUserData } = useContext(userDataContext);
 
   let [showpopup, setshowpopup] = useState(false);
-  let navigate = useNavigate();
+  let [category,setcategory] = useState()
 
   const handleLogout = async () => {
     try {
@@ -54,6 +58,11 @@ const Navbar = () => {
       console.log(error);
     }
   };
+
+  const handleCategory = (category)=>{
+setcategory(category)
+ listingdata.filter((list)=> list.category===category)
+  }
 
   return (
       <div className="fixed top-0 left-0 right-0 z-50">
@@ -224,7 +233,7 @@ const Navbar = () => {
 
       <div className="relative bg-white border-b border-gray-200 shadow-md">
         <div className="flex items-center gap-4 px-4 py-3 overflow-x-auto md:gap-6 scrollbar-hide md:justify-center">
-          <div className="flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2">
+          <div className={"flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2"}>
             <MdWhatshot className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-orange-500 transition-all duration-300 group-hover:scale-110" />
             <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-orange-500">
               Trending
