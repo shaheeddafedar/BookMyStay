@@ -31,6 +31,7 @@ export default function ListingContext({ children }) {
 
   let [adding, setadding] = useState(false);
   let [listingdata, setlistingdata] = useState([]);
+  let [newlistingdata, setnewlistingdata] = useState([]);
 
   const handleaddListing = async () => {
     try {
@@ -83,6 +84,8 @@ const getListing = async () => {
   try {
     let result = await axios.get(serverUrl+"/api/listing/get",{withCredentials:true})
     setlistingdata(result.data)
+    setnewlistingdata(result.data)
+      
   } catch (error) {
     console.log(error)
   }
@@ -129,7 +132,8 @@ useEffect(()=>{
 
     adding,setadding, 
 
-    listingdata,setlistingdata
+    listingdata,setlistingdata,
+    newlistingdata, setnewlistingdata
   };
 
   return (

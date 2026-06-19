@@ -37,6 +37,7 @@ const Navbar = () => {
   let navigate = useNavigate();
 
   let {listingdata, setlistingdata} = useContext(ListingDataContext)
+  let {newlistingdata, setnewlistingdata} = useContext(ListingDataContext)
   let { serverUrl } = useContext(authDataContext);
   let { UserData, setUserData } = useContext(userDataContext);
 
@@ -60,8 +61,8 @@ const Navbar = () => {
   };
 
   const handleCategory = (category)=>{
-setcategory(category)
- listingdata.filter((list)=> list.category===category)
+   setcategory(category)
+  setnewlistingdata(listingdata.filter((list)=> list.category===category))
   }
 
   return (
@@ -181,10 +182,10 @@ setcategory(category)
                     </span>
                     <span className="text-xs text-gray-400">→</span>
                   </li>
-}
+                   }
                   <div className="my-2 border-t border-gray-100"></div>
 
-{              UserData &&    <li
+                { UserData &&<li
                     className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
                     onClick={() => {
                       navigate("/listingpage1");
@@ -240,56 +241,69 @@ setcategory(category)
             </h3>
           </div>
 
-          <div className="flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2">
+          <div className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2 ${category==="villa"? "border-b-2 border-gray-600": "" }`}
+             onClick={()=>handleCategory("villa")}
+          >
             <FaHotel className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-blue-600 transition-all duration-300 group-hover:scale-110" />
             <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-blue-600">
               Villa
             </h3>
           </div>
 
-          <div className="flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2">
+          <div className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2 ${category==="farmHouse"? "border-b-2 border-gray-600": "" }`}
+          onClick={()=>handleCategory("farmHouse")}
+          >
             <FaHome className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-green-600 transition-all duration-300 group-hover:scale-110" />
             <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-green-600">
               Farm House
             </h3>
           </div>
 
-          <div className="flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2">
+          <div className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2 ${category==="poolHouse"? "border-b-2 border-gray-600": "" }`}
+          onClick={()=>handleCategory("poolHouse")}
+          >
             <MdPool className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-cyan-600 transition-all duration-300 group-hover:scale-110" />
             <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-cyan-600">
               Pool House
             </h3>
           </div>
 
-          <div className="flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2">
+          <div className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2 ${category==="rooms"? "border-b-2 border-gray-600": "" }`}
+          onClick={()=>handleCategory("rooms")}
+          >
             <FaBuilding className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-purple-600 transition-all duration-300 group-hover:scale-110" />
             <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-purple-600">
               Rooms
             </h3>
           </div>
 
-          <div className="flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2">
+          <div className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2 ${category==="Flat"? "border-b-2 border-gray-600": "" }`}
+          onClick={()=>handleCategory("apartment")}
+          >
             <MdApartment className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-indigo-600 transition-all duration-300 group-hover:scale-110" />
             <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-indigo-600">
-              Flat
+              Apartment
             </h3>
           </div>
 
-          <div className="flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2">
+          <div className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2 ${category==="pg"? "border-b-2 border-gray-600": "" }`}
+          onClick={()=>handleCategory("pg")}>
             <FaBuilding className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-pink-600 transition-all duration-300 group-hover:scale-110" />
             <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-pink-600">
               PG
             </h3>
           </div>
 
-          <div className="flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2">
+          <div className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2 ${category==="cabin"? "border-b-2 border-gray-600": "" }`}
+          onClick={()=>handleCategory("cabin")}>
             <GiWoodCabin className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-amber-600 transition-all duration-300 group-hover:scale-110" />
             <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-amber-600">
               Cabins
             </h3>
           </div>
 
-          <div className="flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2">
+          <div className={`flex flex-col items-center justify-center min-w-fit text-[11px] md:text-[13px] group cursor-pointer transition-all duration-300 hover:border-b-2 hover:border-blue-500 pb-2 ${category==="shop"? "border-b-2 border-gray-600": "" }`}
+          onClick={()=>handleCategory("shop")}>
             <FaStore className="w-6 h-6 md:w-[30px] md:h-[30px] text-gray-700 group-hover:text-red-600 transition-all duration-300 group-hover:scale-110" />
             <h3 className="mt-1 font-medium text-gray-600 transition-colors duration-300 group-hover:text-red-600">
               Shops

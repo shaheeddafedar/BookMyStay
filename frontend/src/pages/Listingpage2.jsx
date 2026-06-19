@@ -111,21 +111,21 @@ const ListingPage2 = () => {
                 {/* Farm House */}
                 <div
                   className={`relative p-6 transition-all duration-300 bg-white border-2 border-gray-200 cursor-pointer rounded-2xl ${
-                    category === "farmhouse"
+                    category === "farmHouse"
                       ? "border-blue-500 shadow-lg bg-gradient-to-br from-blue-50 to-indigo-50 scale-105"
                       : "border-2 border-gray-200 bg-white hover:border-blue-400 hover:shadow-md hover:scale-102"
                   }`}>
-                  <div className="text-center" onClick={() => setCategory("farmhouse")}>
+                  <div className="text-center" onClick={() => setCategory("farmHouse")}>
                     <FaHome
                       className={`
                         w-12 h-12 mx-auto mb-3 transition-all duration-300
-                        ${category === "farmhouse" ? "text-blue-600 scale-110" : "text-gray-500"}
+                        ${category === "farmHouse" ? "text-blue-600 scale-110" : "text-gray-500"}
                       `}
                     />
                     <h3
                       className={`
                         text-lg font-semibold transition-all duration-300
-                        ${category === "farmhouse" ? "text-blue-700" : "text-gray-700"}
+                        ${category === "farmHouse" ? "text-blue-700" : "text-gray-700"}
                       `}
                     >
                       Farm House
@@ -137,21 +137,21 @@ const ListingPage2 = () => {
                 {/* Pool House */}
                 <div
                   className={`relative p-6 transition-all duration-300 bg-white border-2 border-gray-200 cursor-pointer rounded-2xl ${
-                    category === "poolhouse"
+                    category === "poolHouse"
                       ? "border-blue-500 shadow-lg bg-gradient-to-br from-blue-50 to-indigo-50 scale-105"
                       : "border-2 border-gray-200 bg-white hover:border-blue-400 hover:shadow-md hover:scale-102"
                   }`}>
-                  <div className="text-center" onClick={() => setCategory("poolhouse")}>
+                  <div className="text-center" onClick={() => setCategory("poolHouse")}>
                     <MdPool
                       className={`
                         w-12 h-12 mx-auto mb-3 transition-all duration-300
-                        ${category === "poolhouse" ? "text-blue-600 scale-110" : "text-gray-500"}
+                        ${category === "poolHouse" ? "text-blue-600 scale-110" : "text-gray-500"}
                       `}
                     />
                     <h3
                       className={`
                         text-lg font-semibold transition-all duration-300
-                        ${category === "poolhouse" ? "text-blue-700" : "text-gray-700"}
+                        ${category === "poolHouse" ? "text-blue-700" : "text-gray-700"}
                       `}
                     >
                       Pool House
