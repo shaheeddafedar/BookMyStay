@@ -24,6 +24,12 @@ const ListingPage2 = () => {
     <>
     
       <div className="min-h-screen px-4 py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div
+          className="absolute top-[10%] left-[30px] w-[50px] h-[50px] bg-blue-600 cursor-pointer rounded-full flex items-center justify-center hover:bg-blue-700 transition-all duration-300 hover:scale-110 shadow-lg"
+          onClick={() => navigate("/")}
+        >
+          <FaArrowLeftLong className="w-[25px] h-[25px] text-white" />
+        </div>
         <div className="max-w-5xl mx-auto">
           {/* Header Section */}
           <div className="mb-8 text-center">

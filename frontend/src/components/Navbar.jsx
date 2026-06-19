@@ -82,6 +82,7 @@ const Navbar = () => {
             src="/logo.png"
             alt="logo"
             className="relative w-12 h-12 transition-all duration-500 rounded-full shadow-lg md:w-16 md:h-16 group-hover:scale-110 group-hover:rotate-3"
+            onClick={() => navigate("/")}
           />
           <h1 className="relative text-2xl font-black text-white transition-all duration-300 md:text-4xl group-hover:text-blue-200">
             BookMyStay
