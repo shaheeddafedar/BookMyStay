@@ -15,6 +15,8 @@ import {
   FaBuilding,
   FaStore,
 } from "react-icons/fa";
+import { FaArrowLeftLong } from "react-icons/fa6";
+
 
 const ListingPage2 = () => {
   const navigate = useNavigate();
