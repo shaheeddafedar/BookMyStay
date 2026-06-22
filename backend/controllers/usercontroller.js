@@ -16,4 +16,5 @@ export const getcurrentUser = async (req, res) => {
       message: `getcurrentuser ${error}`,
     });
   }
+  
 };
