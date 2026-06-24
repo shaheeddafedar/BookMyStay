@@ -8,6 +8,7 @@ export const getcurrentUser = async (req, res) => {
       return res.status(400).json({
         message: "user not found",
       });
+      
     }
 
     return res.status(200).json(user);
