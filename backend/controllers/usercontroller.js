@@ -6,10 +6,8 @@ export const getcurrentUser = async (req, res) => {
 
     if (!user) {
       return res.status(400).json({
-        message: "user not found",
-        
+        message: "user not found"
       });
-
     }
 
     return res.status(200).json(user);
