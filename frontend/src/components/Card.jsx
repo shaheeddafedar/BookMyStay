@@ -1,9 +1,16 @@
 import React, { useContext, useState } from 'react'
-import { FaHeart, FaRegHeart, FaStar, FaMapMarkerAlt, FaRupeeSign, FaBed, FaBath } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+
 import { userDataContext } from '../context/UserContext';
-import { ListingDataContext } from '../context/ListingContext';
+import { ListingDataContext } from '../context/ListingContex';
+
+import { FaHeart, FaRegHeart, FaStar, FaMapMarkerAlt, 
+  FaRupeeSign, FaBed, FaBath } from 'react-icons/fa';
+
+
 
 export default function Card({ title, landMark, image1, image2, image3, rent, city, id }) {
+let navigate = useNavigate()
  
 let {userData} = useContext(userDataContext)
 let {handleViewCard} = useContext(ListingDataContext)
@@ -11,6 +18,8 @@ let {handleViewCard} = useContext(ListingDataContext)
 const handleClick = () =>{
   if (userData) {
     handleViewCard(id)
+  } else {
+      navigate("/login")
   }
 }
 
