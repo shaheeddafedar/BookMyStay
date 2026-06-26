@@ -32,6 +32,7 @@ export default function ListingContext({ children }) {
   let [adding, setadding] = useState(false);
   let [listingdata, setlistingdata] = useState([]);
   let [newlistingdata, setnewlistingdata] = useState([]);
+  let [cardDetails,setCarDdetails] = useState(null)
 
   const handleaddListing = async () => {
     try {
@@ -82,7 +83,9 @@ export default function ListingContext({ children }) {
   const handleViewCard = async (id) => {
     try {
       let result = await axios.get(serverUrl + `/api/listing/findlistingByid${id}`,{withCredentials:true})
-      console.log(result)
+      console.log(result.data);
+      setCarDdetails(result.data)
+      navigate("/ViewCrad")
     } catch (error) {
      console.log(error) 
     }
@@ -143,7 +146,8 @@ useEffect(()=>{
 
     listingdata,setlistingdata,
     newlistingdata, setnewlistingdata,
-    handleViewCard
+    handleViewCard,
+    cardDetails,setCarDdetails
   };
 
   return (

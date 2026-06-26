@@ -42,6 +42,10 @@ function App() {
           path="/Mylisting"
           element={UserData ? <Mylisting /> : <Navigate to="/" />}
         ></Route>
+        <Route
+          path="/ViewCard"
+          element={UserData ? <Mylisting /> : <Navigate to="/" />}
+        ></Route>
       </Routes>
     </>
   );

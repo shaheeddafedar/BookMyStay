@@ -38,7 +38,7 @@ const handleClick = () =>{
   };
 
   return (
-<div className='group w-full max-w-[350px] h-[420px] bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer hover:scale-[1.02]'>      
+<div className='group w-full max-w-[350px] h-[420px] bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer hover:scale-[1.02]' onClick={handleClick}>      
       {/* Image Container */}
       <div className='relative w-full h-[65%] bg-gray-200 overflow-hidden'>
         <img
