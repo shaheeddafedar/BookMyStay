@@ -1,12 +1,24 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FaHeart, FaRegHeart, FaStar, FaMapMarkerAlt, FaRupeeSign, FaBed, FaBath } from 'react-icons/fa';
+import { userDataContext } from '../context/UserContext';
+import { ListingDataContext } from '../context/ListingContext';
 
 export default function Card({ title, landMark, image1, image2, image3, rent, city, id }) {
+ 
+let {userData} = useContext(userDataContext)
+let {handleViewCard} = useContext(ListingDataContext)
+
+const handleClick = () =>{
+  if (userData) {
+    handleViewCard(id)
+  }
+}
 
   const [isLiked, setIsLiked] = useState(false);
-
   const [currentImage, setCurrentImage] = useState(0);
+
   const images = [image1, image2, image3].filter(img => img);
+
 
   const nextImage = () => {
     setCurrentImage((prev) => (prev + 1) % images.length);
