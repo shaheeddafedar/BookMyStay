@@ -79,6 +79,15 @@ export default function ListingContext({ children }) {
     }
   };
 
+  const handleViewCard = async (id) => {
+    try {
+      let result = await axios.get(serverUrl + `/api/listing/findlistingByid${id}`,{withCredentials:true})
+      console.log(result)
+    } catch (error) {
+     console.log(error) 
+    }
+  }
+
 
 const getListing = async () => {
   try {
@@ -133,7 +142,8 @@ useEffect(()=>{
     adding,setadding, 
 
     listingdata,setlistingdata,
-    newlistingdata, setnewlistingdata
+    newlistingdata, setnewlistingdata,
+    handleViewCard
   };
 
   return (

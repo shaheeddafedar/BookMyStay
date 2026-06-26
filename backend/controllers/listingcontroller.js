@@ -6,21 +6,21 @@ export const addListing = async (req, res) => {
   try {
     let host = req.userId;
     let { title, description, rent, city, landMark, category } = req.body;
-   let image1 = "";
-let image2 = "";
-let image3 = "";
+    let image1 = "";
+    let image2 = "";
+    let image3 = "";
 
-if (req.files?.image1) {
-  image1 = await uploadOnCloudinary(req.files.image1[0].path);
-}
+    if (req.files?.image1) {
+      image1 = await uploadOnCloudinary(req.files.image1[0].path);
+    }
 
-if (req.files?.image2) {
-  image2 = await uploadOnCloudinary(req.files.image2[0].path);
-}
+    if (req.files?.image2) {
+      image2 = await uploadOnCloudinary(req.files.image2[0].path);
+    }
 
-if (req.files?.image3) {
-  image3 = await uploadOnCloudinary(req.files.image3[0].path);
-}
+    if (req.files?.image3) {
+      image3 = await uploadOnCloudinary(req.files.image3[0].path);
+    }
     let listing = await Listing.create({
       title,
       description,
@@ -49,12 +49,24 @@ if (req.files?.image3) {
   }
 };
 
-
-export const getListing = async (req,res) => {
+export const getListing = async (req, res) => {
   try {
-    let listing = await Listing.find().sort({createdAt:-1})
-    res.status(200).json(listing)
+    let listing = await Listing.find().sort({ createdAt: -1 });
+    res.status(200).json(listing);
   } catch (error) {
-    res.status(500).json({message:`getListing error ${error}`})
+    res.status(500).json({ message: `getListing error ${error}` });
   }
-}
+};
+
+export const findListing = async (req, res) => {
+  try {
+    let { id } = req.params;
+    let lsiting = await listing.findByid(id);
+    if (!listing) {
+      res.status(404).json({ message: "listing not found" });
+    }
+    res.status(200).json(listing);
+  } catch (error) {
+    res.status(500).json({ message: `FindingListing error ${error} `});
+  }
+};
