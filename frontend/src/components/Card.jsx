@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 import { userDataContext } from '../context/UserContext';
-import { ListingDataContext } from '../context/ListingContex';
+import { ListingDataContext } from "../context/ListingContext";
+
 
 import { FaHeart, FaRegHeart, FaStar, FaMapMarkerAlt, 
   FaRupeeSign, FaBed, FaBath } from 'react-icons/fa';
