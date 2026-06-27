@@ -1,6 +1,39 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom';
+
+
+
+import { FaArrowLeftLong } from "react-icons/fa6";
+import {
+  FaMapMarkerAlt,
+  FaHome,
+  FaRupeeSign,
+  FaImage,
+  FaBed,
+  FaCity,
+  FaTag,
+} from "react-icons/fa";
+
+import { ListingDataContext } from '../context/ListingContext';
 
 export default function ViewCard() {
+
+   const navigate = useNavigate();
+    let {cardDetails} =useContext(ListingDataContext)
+
+  let {
+    title,
+    description,
+    rent,
+    city,
+    landMark,
+    category,
+    frontendimage1,
+    frontendimage2,
+    frontendimage3,
+    handleaddListing,
+     adding,setadding
+  } = useContext(ListingDataContext);
   return (
     <>
     <div className="min-h-screen px-4 py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -31,9 +64,9 @@ export default function ViewCard() {
               <div className="flex items-center gap-2 px-4 py-2 border border-blue-200 rounded-full bg-blue-50">
                 <FaMapMarkerAlt className="text-blue-600" />
                 <span className="font-semibold text-gray-700">
-                  {landMark && city
-                    ? `${landMark}, ${city}`
-                    : "Location not provided"}
+{cardDetails.landMark && cardDetails.city
+  ? `${cardDetails.landMark}, ${cardDetails.city}`
+  : "Location not provided"}
                 </span>
               </div>
             </div>
@@ -44,7 +77,7 @@ export default function ViewCard() {
   <div className="md:col-span-2">
     <div className="overflow-hidden shadow-lg rounded-2xl">
       <img
-        src={frontendimage1}
+        src={cardDetails.image1}
         alt="Main Property"
         className="object-cover w-full h-[400px] transition-transform duration-500 hover:scale-105"
       />
@@ -54,20 +87,20 @@ export default function ViewCard() {
   {/* Side Images */}
   <div className="flex flex-col gap-4">
 
-{frontendimage2 && (
+{cardDetails.image2 && (
   <div className="overflow-hidden shadow-lg rounded-2xl">
     <img
-      src={frontendimage2}
+      src={cardDetails.image2}
       alt="Property Image 2"
       className="object-cover w-full h-[192px] transition-transform duration-500 hover:scale-105"
     />
   </div>
 )}
 
-    {frontendimage3 && (<div className="overflow-hidden shadow-lg rounded-2xl">
+    {cardDetails.image3 && (<div className="overflow-hidden shadow-lg rounded-2xl">
       <img
         src={
-          frontendimage3 ||
+          cardDetails.image3 ||
           "https://via.placeholder.com/300x200?text=Image+3"
         }
         alt="Property Image 3"
@@ -89,7 +122,7 @@ export default function ViewCard() {
                     Property Title
                   </span>
                 </div>
-                <p className="text-lg font-semibold text-gray-800">{title}</p>
+                <p className="text-lg font-semibold text-gray-800">{cardDetails?.title}</p>
               </div>
 
               {/* Category Card */}
@@ -101,8 +134,8 @@ export default function ViewCard() {
                   </span>
                 </div>
                 <p className="text-lg font-semibold text-gray-800">
-                  {category
-                    ? category.charAt(0).toUpperCase() + category.slice(1)
+                  {cardDetails.category
+                    ? cardDetails.category.charAt(0).toUpperCase() + cardDetails.category.slice(1)
                     : "Not selected"}
                 </p>
               </div>
@@ -115,8 +148,8 @@ export default function ViewCard() {
                     Location
                   </span>
                 </div>
-                <p className="text-lg font-semibold text-gray-800">{city}</p>
-                <p className="text-sm text-gray-500">{landMark}</p>
+                <p className="text-lg font-semibold text-gray-800">{cardDetails?.city}</p>
+                <p className="text-sm text-gray-500">{cardDetails?.landMark}</p>
               </div>
 
               {/* Rent Card */}
@@ -128,7 +161,7 @@ export default function ViewCard() {
                   </span>
                 </div>
                 <p className="text-2xl font-bold text-gray-800">
-                  ₹{rent}{" "}
+                  ₹{cardDetails?.rent}{" "}
                   <span className="text-sm font-normal text-gray-500">
                     /month
                   </span>
@@ -144,28 +177,18 @@ export default function ViewCard() {
                       Description
                     </span>
                   </div>
-                  <p className="text-gray-700">{description}</p>
+                  <p className="text-gray-700">{cardDetails?.description}</p>
                 </div>
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-col gap-3 mt-8 sm:flex-row">
-              <button
-                onClick={() => navigate("/listingpage2")}
-                className="flex items-center justify-center gap-2 px-6 py-3 font-semibold text-gray-700 transition-all duration-300 bg-gray-200 rounded-xl hover:bg-gray-300"
-              >
-                <FaArrowLeft /> Back to Edit
-              </button>
-
-              <button className="flex-1 py-3 font-bold text-white transition-all duration-300 transform bg-gradient-to-r from-green-600 to-green-700 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] flex items-center justify-center gap-2" >
-                <FaCheckCircle /> Edit
+              <button className="h-[50px] w-[75px] bg-green-700 pt-5 mt-3 items-center justify-center text-center text-white font-medium rounded-lg" >
+                Edit
               </button>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 }

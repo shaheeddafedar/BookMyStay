@@ -32,7 +32,7 @@ export default function ListingContext({ children }) {
   let [adding, setadding] = useState(false);
   let [listingdata, setlistingdata] = useState([]);
   let [newlistingdata, setnewlistingdata] = useState([]);
-  let [cardDetails, setCarDdetails] = useState(null);
+  let [cardDetails, setCardDetails] = useState(null);
 
   const handleaddListing = async () => {
     try {
@@ -87,7 +87,7 @@ export default function ListingContext({ children }) {
         { withCredentials: true },
       );
       console.log(result.data);
-      setCarDdetails(result.data);
+      setCardDetails(result.data);
       navigate("/ViewCard");
     } catch (error) {
       console.log(error);
@@ -153,7 +153,7 @@ export default function ListingContext({ children }) {
     setnewlistingdata,
     handleViewCard,
     cardDetails,
-    setCarDdetails,
+    setCardDetails,
   };
 
   return (
