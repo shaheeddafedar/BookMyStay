@@ -13,11 +13,11 @@ import { FaHeart, FaRegHeart, FaStar, FaMapMarkerAlt,
 export default function Card({ title, landMark, image1, image2, image3, rent, city, id }) {
 let navigate = useNavigate()
  
-let {userData} = useContext(userDataContext)
+let {UserData} = useContext(userDataContext)
 let {handleViewCard} = useContext(ListingDataContext)
 
 const handleClick = () =>{
-  if (userData) {
+  if (UserData) {
     handleViewCard(id)
   } else {
       navigate("/login")

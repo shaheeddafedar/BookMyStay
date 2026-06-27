@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 export const ListingDataContext = createContext();
 
 export default function ListingContext({ children }) {
-      let navigate = useNavigate();
+  let navigate = useNavigate();
 
   let { serverUrl } = useContext(authDataContext);
 
@@ -32,11 +32,11 @@ export default function ListingContext({ children }) {
   let [adding, setadding] = useState(false);
   let [listingdata, setlistingdata] = useState([]);
   let [newlistingdata, setnewlistingdata] = useState([]);
-  let [cardDetails,setCarDdetails] = useState(null)
+  let [cardDetails, setCarDdetails] = useState(null);
 
   const handleaddListing = async () => {
     try {
-      setadding(true)
+      setadding(true);
       const formData = new FormData();
 
       formData.append("title", title);
@@ -55,9 +55,9 @@ export default function ListingContext({ children }) {
         formData,
         { withCredentials: true },
       );
-      setadding(false)
+      setadding(false);
       console.log(result);
-      
+
       navigate("/");
       setTitle("");
       setDescription("");
@@ -75,38 +75,40 @@ export default function ListingContext({ children }) {
       setbackendImage2(null);
       setbackendImage3(null);
     } catch (error) {
-     setadding(false)
+      setadding(false);
       console.log(error);
     }
   };
 
   const handleViewCard = async (id) => {
     try {
-      let result = await axios.get(serverUrl + `/api/listing/findlistingByid${id}`,{withCredentials:true})
+      let result = await axios.get(
+        `${serverUrl}/api/listing/findlistingbyid/${id}`,
+        { withCredentials: true },
+      );
       console.log(result.data);
-      setCarDdetails(result.data)
-      navigate("/ViewCrad")
+      setCarDdetails(result.data);
+      navigate("/ViewCrad");
     } catch (error) {
-     console.log(error) 
+      console.log(error);
     }
-  }
+  };
 
+  const getListing = async () => {
+    try {
+      let result = await axios.get(serverUrl + "/api/listing/get", {
+        withCredentials: true,
+      });
+      setlistingdata(result.data);
+      setnewlistingdata(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-const getListing = async () => {
-  try {
-    let result = await axios.get(serverUrl+"/api/listing/get",{withCredentials:true})
-    setlistingdata(result.data)
-    setnewlistingdata(result.data)
-      
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-useEffect(()=>{
- getListing()
-},[adding])
-
+  useEffect(() => {
+    getListing();
+  }, [adding]);
 
   let value = {
     title,
@@ -142,12 +144,16 @@ useEffect(()=>{
 
     handleaddListing,
 
-    adding,setadding, 
+    adding,
+    setadding,
 
-    listingdata,setlistingdata,
-    newlistingdata, setnewlistingdata,
+    listingdata,
+    setlistingdata,
+    newlistingdata,
+    setnewlistingdata,
     handleViewCard,
-    cardDetails,setCarDdetails
+    cardDetails,
+    setCarDdetails,
   };
 
   return (
