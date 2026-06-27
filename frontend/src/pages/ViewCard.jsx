@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ViewsCard() {
+export default function ViewCard() {
   return (
     <>
     <div className="min-h-screen px-4 py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">

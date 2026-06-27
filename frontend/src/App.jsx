@@ -10,6 +10,8 @@ import Listingpage1 from "./pages/listingpage1";
 import Listingpage2 from "./pages/Listingpage2";
 import Listingpage3 from "./pages/Listingpage3";
 import Mylisting from "./pages/Mylisting";
+import ViewCard from "./pages/ViewCard";
+
 
 
 import { userDataContext } from "./context/UserContext";
@@ -44,7 +46,7 @@ function App() {
         ></Route>
         <Route
           path="/ViewCard"
-          element={UserData ? <Mylisting /> : <Navigate to="/" />}
+          element={UserData ? <ViewCard /> : <Navigate to="/" />}
         ></Route>
       </Routes>
     </>

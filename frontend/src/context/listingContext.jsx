@@ -88,7 +88,7 @@ export default function ListingContext({ children }) {
       );
       console.log(result.data);
       setCarDdetails(result.data);
-      navigate("/ViewCrad");
+      navigate("/ViewCard");
     } catch (error) {
       console.log(error);
     }
