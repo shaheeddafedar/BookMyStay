@@ -345,7 +345,7 @@ const Listingpage1 = () => {
                   <div>
                     <label className="block mb-2 text-sm font-semibold text-gray-700">
                       Image 3
-=                    </label>
+                    </label>
                     <div className="relative">
                       {!frontendimage3 ? (
                         <label className="flex flex-col items-center justify-center w-full h-48 transition-all duration-300 border-2 border-gray-300 border-dashed cursor-pointer rounded-xl hover:border-blue-500 bg-gray-50 hover:bg-blue-50">
