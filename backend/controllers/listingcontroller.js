@@ -115,6 +115,6 @@ export const updateListing = async (req,res) => {
     }
     return res.status(201).json(listing);
   } catch (error) {
-    return res.status(500).json({ message: `Adlisting error ${error}` });
+    return res.status(500).json({ message: `updatingListing error ${error}` });
   }
 }
