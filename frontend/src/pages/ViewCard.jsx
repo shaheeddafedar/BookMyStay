@@ -11,6 +11,7 @@ import {
   FaBed,
   FaCity,
   FaTag,
+  FaCheckCircle,
 } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx"
 import { GiHouse } from "react-icons/gi";
@@ -231,46 +232,42 @@ export default function ViewCard() {
         {/* update listing page    */}
 
 {updatePopup && (
-  <div className="fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-[100] p-4 overflow-y-auto">
-    <div className="relative w-full max-w-4xl my-8">
+  <div className="fixed inset-0 flex items-start justify-center bg-black/60 backdrop-blur-sm z-[100] p-4 overflow-y-auto">
+    <div className="relative w-full max-w-4xl my-4 md:my-8">
       {/* Close Button */}
       <button
-        className="absolute z-50 flex items-center justify-center w-12 h-12 transition-all duration-300 shadow-lg cursor-pointer -top-4 -right-4 bg-gradient-to-r from-red-500 to-red-600 rounded-2xl hover:shadow-2xl hover:scale-110 group"
+        className="absolute z-50 flex items-center justify-center w-10 h-10 transition-all duration-300 shadow-lg cursor-pointer md:w-12 md:h-12 -top-3 -right-3 md:-top-4 md:-right-4 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl hover:shadow-2xl hover:scale-110 group"
         onClick={() => setUpdatePop(false)}
       >
-        <RxCross1 className="w-6 h-6 text-white transition-transform duration-300 group-hover:rotate-90" />
+        <RxCross1 className="w-5 h-5 text-white transition-transform duration-300 md:w-6 md:h-6 group-hover:rotate-90" />
       </button>
 
-      <div className="overflow-hidden border shadow-2xl bg-white/95 backdrop-blur-sm rounded-3xl border-white/50">
-        <div className="h-1.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+      {/* Main Form Card */}
+      <div className="overflow-hidden bg-white shadow-2xl rounded-2xl md:rounded-3xl">
+        <div className="h-2 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"></div>
 
-        <form className="p-6 md:p-10" onSubmit={handleaddListing}>
+        <form className="p-4 sm:p-6 md:p-8 lg:p-10" onSubmit={handleaddListing}>
           {/* Basic Information Section */}
-          <div className="mb-10">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 shadow-lg bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl">
-                <GiHouse className="w-6 h-6 text-blue-600" />
-              </div>
-              <h2 className="text-2xl font-bold text-transparent bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text">
-                Basic Information
-              </h2>
-              <div className="flex-1 h-px bg-gradient-to-r from-blue-200 to-transparent"></div>
-            </div>
+          <div className="mb-6 md:mb-10">
+            <h2 className="flex items-center gap-3 mb-4 text-xl font-bold text-gray-800 md:mb-6 md:text-2xl">
+              <GiHouse className="text-lg text-blue-600 md:text-2xl" />
+              Basic Information
+            </h2>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 md:gap-6 lg:gap-8 md:grid-cols-2">
               {/* Title */}
               <div className="md:col-span-2">
-                <label className="block mb-2 text-sm font-semibold text-gray-700">
-                  Property Title <span className="text-red-500">*</span>
+                <label className="block mb-1.5 md:mb-2 text-xs md:text-sm font-semibold text-gray-700">
+                  Property Title *
                 </label>
-                <div className="relative group">
-                  <FaHome className="absolute text-gray-400 transition-colors duration-300 -translate-y-1/2 left-4 top-1/2 group-focus-within:text-blue-500" />
+                <div className="relative">
+                  <FaHome className="absolute text-sm text-gray-400 transform -translate-y-1/2 left-3 top-1/2 md:text-base" />
                   <input
                     type="text"
                     name="title"
                     required
                     placeholder="e.g., Luxury Villa with Pool, Cozy Apartment in City Center"
-                    className="w-full py-3.5 pl-12 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 group-hover:border-gray-300 placeholder:text-gray-400"
+                    className="w-full py-2.5 md:py-3 pl-9 md:pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-sm md:text-base"
                     id="title"
                     onChange={(e) => setTitle(e.target.value)}
                     value={title}
@@ -280,17 +277,17 @@ export default function ViewCard() {
 
               {/* Description */}
               <div className="md:col-span-2">
-                <label className="block mb-2 text-sm font-semibold text-gray-700">
-                  Description <span className="text-red-500">*</span>
+                <label className="block mb-1.5 md:mb-2 text-xs md:text-sm font-semibold text-gray-700">
+                  Description *
                 </label>
-                <div className="relative group">
-                  <MdDescription className="absolute text-gray-400 transition-colors duration-300 left-4 top-5 group-focus-within:text-blue-500" />
+                <div className="relative">
+                  <MdDescription className="absolute text-sm text-gray-400 transform -translate-y-1/2 left-3 top-5 md:text-base" />
                   <textarea
                     name="description"
                     required
                     rows="4"
                     placeholder="Describe your property - amenities, nearby attractions, unique features..."
-                    className="w-full py-3.5 pl-12 pr-4 transition-all duration-300 border-2 border-gray-200 resize-none rounded-2xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 group-hover:border-gray-300 placeholder:text-gray-400"
+                    className="w-full py-2.5 md:py-3 pl-9 md:pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 resize-none rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-sm md:text-base"
                     id="description"
                     onChange={(e) => setDescription(e.target.value)}
                     value={description}
@@ -300,17 +297,17 @@ export default function ViewCard() {
 
               {/* Rent */}
               <div>
-                <label className="block mb-2 text-sm font-semibold text-gray-700">
-                  Rent per Month (₹) <span className="text-red-500">*</span>
+                <label className="block mb-1.5 md:mb-2 text-xs md:text-sm font-semibold text-gray-700">
+                  Rent per Month (₹) *
                 </label>
-                <div className="relative group">
-                  <FaRupeeSign className="absolute text-gray-400 transition-colors duration-300 -translate-y-1/2 left-4 top-1/2 group-focus-within:text-blue-500" />
+                <div className="relative">
+                  <FaRupeeSign className="absolute text-sm text-gray-400 transform -translate-y-1/2 left-3 top-1/2 md:text-base" />
                   <input
                     type="number"
                     name="rent"
                     required
                     placeholder="e.g., 25000"
-                    className="w-full py-3.5 pl-12 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 group-hover:border-gray-300 placeholder:text-gray-400"
+                    className="w-full py-2.5 md:py-3 pl-9 md:pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-sm md:text-base"
                     min={0}
                     id="rent"
                     onChange={(e) => setRent(e.target.value)}
@@ -321,17 +318,17 @@ export default function ViewCard() {
 
               {/* City */}
               <div>
-                <label className="block mb-2 text-sm font-semibold text-gray-700">
-                  City <span className="text-red-500">*</span>
+                <label className="block mb-1.5 md:mb-2 text-xs md:text-sm font-semibold text-gray-700">
+                  City *
                 </label>
-                <div className="relative group">
-                  <FaCity className="absolute text-gray-400 transition-colors duration-300 -translate-y-1/2 left-4 top-1/2 group-focus-within:text-blue-500" />
+                <div className="relative">
+                  <FaCity className="absolute text-sm text-gray-400 transform -translate-y-1/2 left-3 top-1/2 md:text-base" />
                   <input
                     type="text"
                     name="city"
                     required
                     placeholder="e.g., Mumbai, Delhi, Bangalore"
-                    className="w-full py-3.5 pl-12 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 group-hover:border-gray-300 placeholder:text-gray-400"
+                    className="w-full py-2.5 md:py-3 pl-9 md:pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-sm md:text-base"
                     id="city"
                     onChange={(e) => setCity(e.target.value)}
                     value={city}
@@ -341,17 +338,17 @@ export default function ViewCard() {
 
               {/* Landmark */}
               <div className="md:col-span-2">
-                <label className="block mb-2 text-sm font-semibold text-gray-700">
-                  Landmark <span className="text-red-500">*</span>
+                <label className="block mb-1.5 md:mb-2 text-xs md:text-sm font-semibold text-gray-700">
+                  Landmark *
                 </label>
-                <div className="relative group">
-                  <FaMapMarkerAlt className="absolute text-gray-400 transition-colors duration-300 -translate-y-1/2 left-4 top-1/2 group-focus-within:text-blue-500" />
+                <div className="relative">
+                  <FaMapMarkerAlt className="absolute text-sm text-gray-400 transform -translate-y-1/2 left-3 top-1/2 md:text-base" />
                   <input
                     type="text"
                     name="landMark"
                     required
                     placeholder="Near Metro Station, Main Market etc."
-                    className="w-full py-3.5 pl-12 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 group-hover:border-gray-300 placeholder:text-gray-400"
+                    className="w-full py-2.5 md:py-3 pl-9 md:pl-10 pr-4 transition-all duration-300 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-sm md:text-base"
                     id="landMark"
                     onChange={(e) => setLandMark(e.target.value)}
                     value={landMark}
@@ -362,34 +359,25 @@ export default function ViewCard() {
           </div>
 
           {/* Images Section */}
-          <div className="mb-10">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 shadow-lg bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl">
-                <FaImage className="w-6 h-6 text-purple-600" />
-              </div>
-              <h2 className="text-2xl font-bold text-transparent bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text">
-                Property Images
-              </h2>
-              <div className="flex-1 h-px bg-gradient-to-r from-purple-200 to-transparent"></div>
-            </div>
+          <div className="mb-6 md:mb-10">
+            <h2 className="flex items-center gap-3 mb-4 text-xl font-bold text-gray-800 md:mb-6 md:text-2xl">
+              <FaImage className="text-lg text-purple-600 md:text-2xl" />
+              Property Images
+            </h2>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
               {/* Image 1 - Main Image */}
               <div>
-                <label className="block mb-2 text-sm font-semibold text-gray-700">
-                  Main Image <span className="text-red-500">*</span>
+                <label className="block mb-1.5 md:mb-2 text-xs md:text-sm font-semibold text-gray-700">
+                  Main Image *
                 </label>
                 <div className="relative">
                   {!frontendimage1 ? (
-                    <label className="flex flex-col items-center justify-center w-full h-48 transition-all duration-300 border-2 border-gray-300 border-dashed cursor-pointer rounded-2xl hover:border-blue-500 bg-gray-50 hover:bg-blue-50/50 group">
-                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                        <MdUpload className="w-12 h-12 mb-2 text-gray-400 transition-colors duration-300 group-hover:text-blue-500" />
-                        <p className="text-sm font-medium text-gray-500 transition-colors duration-300 group-hover:text-blue-600">
-                          Click to upload
-                        </p>
-                        <p className="text-xs text-gray-400">
-                          JPG, PNG, WEBP
-                        </p>
+                    <label className="flex flex-col items-center justify-center w-full h-40 transition-all duration-300 border-2 border-gray-300 border-dashed cursor-pointer sm:h-48 rounded-xl hover:border-blue-500 bg-gray-50 hover:bg-blue-50">
+                      <div className="flex flex-col items-center justify-center pt-4 pb-5 sm:pt-5 sm:pb-6">
+                        <MdUpload className="w-8 h-8 mb-2 text-gray-400 sm:w-10 sm:h-10" />
+                        <p className="px-2 text-xs text-center text-gray-500 sm:text-sm">Click to upload</p>
+                        <p className="text-[10px] sm:text-xs text-gray-400">JPG, PNG, WEBP</p>
                       </div>
                       <input
                         type="file"
@@ -409,11 +397,11 @@ export default function ViewCard() {
                       />
                     </label>
                   ) : (
-                    <div className="relative group">
+                    <div className="relative">
                       <img
                         src={frontendimage1}
                         alt="Preview"
-                        className="object-cover w-full h-48 shadow-lg rounded-2xl"
+                        className="object-cover w-full h-40 sm:h-48 rounded-xl"
                       />
                       <button
                         type="button"
@@ -421,13 +409,10 @@ export default function ViewCard() {
                           setfrontendImage1(null);
                           setbackendImage1(null);
                         }}
-                        className="absolute p-2.5 text-white bg-gradient-to-r from-red-500 to-red-600 rounded-xl top-2 right-2 hover:shadow-xl hover:scale-110 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100"
+                        className="absolute p-1.5 sm:p-2 text-white transition-all duration-300 bg-red-500 rounded-full top-2 right-2 hover:bg-red-600 hover:scale-110"
                       >
-                        <FaTrash className="w-4 h-4" />
+                        <FaTrash className="w-3 h-3 sm:w-4 sm:h-4" />
                       </button>
-                      <div className="absolute px-3 py-1 rounded-lg bottom-2 left-2 bg-black/60 backdrop-blur-sm">
-                        <span className="text-xs font-medium text-white">Main Image</span>
-                      </div>
                     </div>
                   )}
                 </div>
@@ -435,20 +420,16 @@ export default function ViewCard() {
 
               {/* Image 2 */}
               <div>
-                <label className="block mb-2 text-sm font-semibold text-gray-700">
+                <label className="block mb-1.5 md:mb-2 text-xs md:text-sm font-semibold text-gray-700">
                   Image 2
                 </label>
                 <div className="relative">
                   {!frontendimage2 ? (
-                    <label className="flex flex-col items-center justify-center w-full h-48 transition-all duration-300 border-2 border-gray-300 border-dashed cursor-pointer rounded-2xl hover:border-blue-500 bg-gray-50 hover:bg-blue-50/50 group">
-                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                        <MdUpload className="w-12 h-12 mb-2 text-gray-400 transition-colors duration-300 group-hover:text-blue-500" />
-                        <p className="text-sm font-medium text-gray-500 transition-colors duration-300 group-hover:text-blue-600">
-                          Click to upload
-                        </p>
-                        <p className="text-xs text-gray-400">
-                          Optional
-                        </p>
+                    <label className="flex flex-col items-center justify-center w-full h-40 transition-all duration-300 border-2 border-gray-300 border-dashed cursor-pointer sm:h-48 rounded-xl hover:border-blue-500 bg-gray-50 hover:bg-blue-50">
+                      <div className="flex flex-col items-center justify-center pt-4 pb-5 sm:pt-5 sm:pb-6">
+                        <MdUpload className="w-8 h-8 mb-2 text-gray-400 sm:w-10 sm:h-10" />
+                        <p className="px-2 text-xs text-center text-gray-500 sm:text-sm">Click to upload</p>
+                        <p className="text-[10px] sm:text-xs text-gray-400">Optional</p>
                       </div>
                       <input
                         type="file"
@@ -468,11 +449,11 @@ export default function ViewCard() {
                       />
                     </label>
                   ) : (
-                    <div className="relative group">
+                    <div className="relative">
                       <img
                         src={frontendimage2}
                         alt="Preview"
-                        className="object-cover w-full h-48 shadow-lg rounded-2xl"
+                        className="object-cover w-full h-40 sm:h-48 rounded-xl"
                       />
                       <button
                         type="button"
@@ -480,9 +461,9 @@ export default function ViewCard() {
                           setfrontendImage2(null);
                           setbackendImage2(null);
                         }}
-                        className="absolute p-2.5 text-white bg-gradient-to-r from-red-500 to-red-600 rounded-xl top-2 right-2 hover:shadow-xl hover:scale-110 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100"
+                        className="absolute p-1.5 sm:p-2 text-white transition-all duration-300 bg-red-500 rounded-full top-2 right-2 hover:bg-red-600 hover:scale-110"
                       >
-                        <FaTrash className="w-4 h-4" />
+                        <FaTrash className="w-3 h-3 sm:w-4 sm:h-4" />
                       </button>
                     </div>
                   )}
@@ -491,20 +472,16 @@ export default function ViewCard() {
 
               {/* Image 3 */}
               <div>
-                <label className="block mb-2 text-sm font-semibold text-gray-700">
+                <label className="block mb-1.5 md:mb-2 text-xs md:text-sm font-semibold text-gray-700">
                   Image 3
                 </label>
                 <div className="relative">
                   {!frontendimage3 ? (
-                    <label className="flex flex-col items-center justify-center w-full h-48 transition-all duration-300 border-2 border-gray-300 border-dashed cursor-pointer rounded-2xl hover:border-blue-500 bg-gray-50 hover:bg-blue-50/50 group">
-                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                        <MdUpload className="w-12 h-12 mb-2 text-gray-400 transition-colors duration-300 group-hover:text-blue-500" />
-                        <p className="text-sm font-medium text-gray-500 transition-colors duration-300 group-hover:text-blue-600">
-                          Click to upload
-                        </p>
-                        <p className="text-xs text-gray-400">
-                          Optional
-                        </p>
+                    <label className="flex flex-col items-center justify-center w-full h-40 transition-all duration-300 border-2 border-gray-300 border-dashed cursor-pointer sm:h-48 rounded-xl hover:border-blue-500 bg-gray-50 hover:bg-blue-50">
+                      <div className="flex flex-col items-center justify-center pt-4 pb-5 sm:pt-5 sm:pb-6">
+                        <MdUpload className="w-8 h-8 mb-2 text-gray-400 sm:w-10 sm:h-10" />
+                        <p className="px-2 text-xs text-center text-gray-500 sm:text-sm">Click to upload</p>
+                        <p className="text-[10px] sm:text-xs text-gray-400">Optional</p>
                       </div>
                       <input
                         type="file"
@@ -524,11 +501,11 @@ export default function ViewCard() {
                       />
                     </label>
                   ) : (
-                    <div className="relative group">
+                    <div className="relative">
                       <img
                         src={frontendimage3}
                         alt="Preview"
-                        className="object-cover w-full h-48 shadow-lg rounded-2xl"
+                        className="object-cover w-full h-40 sm:h-48 rounded-xl"
                       />
                       <button
                         type="button"
@@ -536,34 +513,34 @@ export default function ViewCard() {
                           setfrontendImage3(null);
                           setbackendImage3(null);
                         }}
-                        className="absolute p-2.5 text-white bg-gradient-to-r from-red-500 to-red-600 rounded-xl top-2 right-2 hover:shadow-xl hover:scale-110 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100"
+                        className="absolute p-1.5 sm:p-2 text-white transition-all duration-300 bg-red-500 rounded-full top-2 right-2 hover:bg-red-600 hover:scale-110"
                       >
-                        <FaTrash className="w-4 h-4" />
+                        <FaTrash className="w-3 h-3 sm:w-4 sm:h-4" />
                       </button>
                     </div>
                   )}
                 </div>
               </div>
             </div>
-            <p className="mt-4 text-xs text-center text-gray-500">
-              <span className="text-red-500">*</span> Main image is required. Upload high-quality images to attract more guests
+            <p className="mt-3 text-[10px] sm:text-xs text-center text-gray-500">
+              * Main image is required. Upload high-quality images to attract more guests
             </p>
           </div>
 
           {/* Navigation Buttons */}
-          <div className="flex flex-col gap-4 pt-4 border-t-2 border-gray-100 sm:flex-row">
+          <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
             <button
               type="submit"
-              className="flex-1 py-4 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transform hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2 group"
+              className="flex-1 py-3 sm:py-4 px-4 sm:px-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base"
             >
-              <FaCheckCircle className="transition-transform duration-300 group-hover:scale-110" />
+              <FaCheckCircle className="text-xs sm:text-sm" />
               {adding ? "Publishing..." : "Update Listing"}
             </button>
 
             <button
               type="button"
               onClick={() => setUpdatePop(false)}
-              className="px-8 py-4 font-semibold text-gray-700 transition-all duration-300 bg-gray-200 rounded-2xl hover:bg-gray-300 hover:scale-[1.02] hover:shadow-lg"
+              className="px-6 py-3 text-sm font-semibold text-gray-700 transition-all duration-300 bg-gray-200 sm:px-8 sm:py-4 rounded-xl hover:bg-gray-300 sm:text-base"
             >
               Cancel
             </button>
