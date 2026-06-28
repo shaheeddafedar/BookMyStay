@@ -8,15 +8,14 @@ import Card from "../components/Card";
 export default function Mylisting() {
   let navigate = useNavigate();
   let { UserData } = useContext(userDataContext);
-  
+
   return (
     <div className="relative w-full min-h-screen pt-16 pb-8 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      
       <div
-        className="absolute top-6 left-4 md:left-8 w-[45px] h-[45px] md:w-[50px] md:h-[50px] bg-white cursor-pointer rounded-full flex items-center justify-center hover:bg-gray-100 transition-all duration-300 hover:scale-110 shadow-lg z-10 border border-gray-200"
+        className="absolute top-[10%] left-[30px] w-[50px] h-[50px] bg-blue-600 cursor-pointer rounded-full flex items-center justify-center hover:bg-blue-700 transition-all duration-300 hover:scale-110 shadow-lg"
         onClick={() => navigate("/")}
       >
-        <FaArrowLeftLong className="w-[20px] h-[20px] md:w-[25px] md:h-[25px] text-blue-600" />
+        <FaArrowLeftLong className="w-[25px] h-[25px] text-white" />
       </div>
 
       {/* Header */}
