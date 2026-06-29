@@ -12,6 +12,7 @@ import {
   FaCity,
   FaTag,
   FaCheckCircle,
+  FaTrash,
 } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx"
 import { GiHouse } from "react-icons/gi";
@@ -20,27 +21,111 @@ import { MdDescription, MdUpload } from "react-icons/md";
 
 import { ListingDataContext } from "../context/ListingContext";
 import { userDataContext } from "../context/UserContext";
+import axios from "axios";
+import { authDataContext } from "../context/Authcontext";
 
 export default function ViewCard() {
   const navigate = useNavigate();
+    let { serverUrl } = useContext(authDataContext);
+  
   let { cardDetails } = useContext(ListingDataContext);
   let { UserData } = useContext(userDataContext);
-  let [updatePopup, setUpdatePop] = useState(false);
 
-  let {
-    title,
-    description,
-    rent,
-    city,
-    landMark,
-    category,
-    frontendimage1,
-    frontendimage2,
-    frontendimage3,
-    handleaddListing,
-    adding,
-    setadding,
-  } = useContext(ListingDataContext);
+
+  let [updatePopup, setUpdatePop] = useState(false);
+  let [title, setTitle] = useState(cardDetails.title);
+  let [description, setDescription] = useState(cardDetails.description);
+  let [rent, setRent] = useState(cardDetails.rent);
+  let [city, setCity] = useState(cardDetails.city);
+  let [landMark, setLandMark] = useState(cardDetails.landMark);
+    let [adding, setadding] = useState(false);
+
+
+  let [backendimage1, setbackendImage1] = useState(null);
+  let [backendimage2, setbackendImage2] = useState(null);
+  let [backendimage3, setbackendImage3] = useState(null);
+  // let {
+  //   title,
+  //   description,
+  //   rent,
+  //   city,
+  //   landMark,
+  //   category,
+  //   frontendimage1,
+  //   frontendimage2,
+  //   frontendimage3,
+  //   handleaddListing,
+  //   adding,
+  //   setadding,
+  // } = useContext(ListingDataContext);
+
+  const handleUpdateListing = async (e) => {
+    e.preventDefault();
+      try {
+      setadding(true);
+      const formData = new FormData();
+
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("rent", rent);
+      formData.append("city", city);
+      formData.append("landMark", landMark);
+
+      formData.append("image1", backendimage1);
+      formData.append("image2", backendimage2);
+      formData.append("image3", backendimage3);
+
+      const result = await axios.put(
+        serverUrl + `/api/listing/update/${cardDetails._id}`,
+        formData,
+        { withCredentials: true },
+      );
+      setadding(false);
+
+      navigate("/");
+      setTitle("");
+      setDescription("");
+      setRent("");
+      setCity("");
+      setCategory("");
+      setLandMark("");
+      setCategory("");
+
+      setfrontendImage1(null);
+      setfrontendImage2(null);
+      setfrontendImage3(null);
+
+      setbackendImage1(null);
+      setbackendImage2(null);
+      setbackendImage3(null);
+    } catch (error) {
+      setadding(false);
+      console.log(error);
+    }
+  };
+  
+
+  const handleimag1 = (e) => {
+    let file = e.target.files[0];
+    if (file) {
+      setbackendImage1(file);
+    }
+  };
+
+  const handleimag2 = (e) => {
+    let file = e.target.files[0];
+    if (file) {
+      setbackendImage2(file);
+    }
+  };
+
+  const handleimag3 = (e) => {
+    let file = e.target.files[0];
+    if (file) {
+      setbackendImage3(file);
+    }
+  };
+
   return (
     <>
       <div className="min-h-screen px-4 py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -250,7 +335,7 @@ export default function ViewCard() {
       <div className="overflow-hidden bg-white shadow-2xl rounded-2xl md:rounded-3xl">
         <div className="h-2 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"></div>
 
-        <form className="p-4 sm:p-6 md:p-8 lg:p-10" onSubmit={handleaddListing}>
+        <form className="p-4 sm:p-6 md:p-8 lg:p-10">
           {/* Basic Information Section */}
           <div className="mb-6 md:mb-10">
             <h2 className="flex items-center gap-3 mb-4 text-xl font-bold text-gray-800 md:mb-6 md:text-2xl">
