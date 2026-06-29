@@ -2,11 +2,18 @@ import User from "../model/user.model.js";
 
 export const getcurrentUser = async (req, res) => {
   try {
-    let user = await User.findById(req.userId).select("-password").populate("listing","title image1 image2 image3 description rent category city landMark");
+    let user = await User.findById(req.userId)
+      .select("-password")
+      .populate({
+        path: "listing",
+        select:
+          "title image1 image2 image3 description rent category city landMark",
+        options: { sort: { createdAt: -1 } },
+      });
 
     if (!user) {
       return res.status(400).json({
-        message: "user not found"
+        message: "user not found",
       });
     }
 

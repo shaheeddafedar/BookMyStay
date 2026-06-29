@@ -61,7 +61,7 @@ export const getListing = async (req, res) => {
 export const findListing = async (req, res) => {
   try {
     let { id } = req.params;
-    let listing = await Listing.findById(id);
+    let listing = await Listing.findById(id)
     if (!listing) {
       res.status(404).json({ message: "listing not found" });
     }
