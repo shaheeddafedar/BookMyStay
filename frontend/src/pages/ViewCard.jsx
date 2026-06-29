@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { FaArrowLeftLong } from "react-icons/fa6";
@@ -33,12 +33,26 @@ export default function ViewCard() {
 
 
   let [updatePopup, setUpdatePop] = useState(false);
-  let [title, setTitle] = useState(cardDetails.title);
-  let [description, setDescription] = useState(cardDetails.description);
-  let [rent, setRent] = useState(cardDetails.rent);
-  let [city, setCity] = useState(cardDetails.city);
-  let [landMark, setLandMark] = useState(cardDetails.landMark);
+  let [title, setTitle] = useState("");
+  let [description, setDescription] = useState("");
+  let [rent, setRent] = useState("");
+  let [city, setCity] = useState("");
+  let [landMark, setLandMark] = useState("");
     let [adding, setadding] = useState(false);
+
+    useEffect(() => {
+  if (cardDetails && updatePopup) {
+    setTitle(cardDetails.title);
+    setDescription(cardDetails.description);
+    setRent(cardDetails.rent);
+    setCity(cardDetails.city);
+    setLandMark(cardDetails.landMark);
+  }
+}, [cardDetails, updatePopup]);
+
+let [frontendimage1, setfrontendImage1] = useState(null);
+  let [frontendimage2, setfrontendImage2] = useState(null);
+  let [frontendimage3, setfrontendImage3] = useState(null);
 
 
   let [backendimage1, setbackendImage1] = useState(null);
@@ -63,17 +77,23 @@ export default function ViewCard() {
     e.preventDefault();
       try {
       setadding(true);
+      
       const formData = new FormData();
 
-      formData.append("title", title);
-      formData.append("description", description);
-      formData.append("rent", rent);
-      formData.append("city", city);
-      formData.append("landMark", landMark);
+formData.append("title", title);
+formData.append("description", description);
+formData.append("rent", rent);
+formData.append("city", city);
+formData.append("landMark", landMark);
 
-      formData.append("image1", backendimage1);
-      formData.append("image2", backendimage2);
-      formData.append("image3", backendimage3);
+if (backendimage1)
+    formData.append("image1", backendimage1);
+
+if (backendimage2)
+    formData.append("image2", backendimage2);
+
+if (backendimage3)
+    formData.append("image3", backendimage3);
 
       const result = await axios.put(
         serverUrl + `/api/listing/update/${cardDetails._id}`,
@@ -81,15 +101,14 @@ export default function ViewCard() {
         { withCredentials: true },
       );
       setadding(false);
+      alert("✅ Listing updated successfully!");
 
-      navigate("/");
+setUpdatePop(false);
       setTitle("");
       setDescription("");
       setRent("");
       setCity("");
-      setCategory("");
       setLandMark("");
-      setCategory("");
 
       setfrontendImage1(null);
       setfrontendImage2(null);
@@ -105,26 +124,7 @@ export default function ViewCard() {
   };
   
 
-  const handleimag1 = (e) => {
-    let file = e.target.files[0];
-    if (file) {
-      setbackendImage1(file);
-    }
-  };
-
-  const handleimag2 = (e) => {
-    let file = e.target.files[0];
-    if (file) {
-      setbackendImage2(file);
-    }
-  };
-
-  const handleimag3 = (e) => {
-    let file = e.target.files[0];
-    if (file) {
-      setbackendImage3(file);
-    }
-  };
+  
 
   return (
     <>
@@ -335,7 +335,8 @@ export default function ViewCard() {
       <div className="overflow-hidden bg-white shadow-2xl rounded-2xl md:rounded-3xl">
         <div className="h-2 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"></div>
 
-        <form className="p-4 sm:p-6 md:p-8 lg:p-10">
+        <form className="p-4 sm:p-6 md:p-8 lg:p-10"
+            onSubmit={handleUpdateListing}>
           {/* Basic Information Section */}
           <div className="mb-6 md:mb-10">
             <h2 className="flex items-center gap-3 mb-4 text-xl font-bold text-gray-800 md:mb-6 md:text-2xl">
@@ -461,8 +462,7 @@ export default function ViewCard() {
                   Main Image *
                 </label>
                 <div className="relative">
-                  {!frontendimage1 ? (
-                    <label className="flex flex-col items-center justify-center w-full h-40 transition-all duration-300 border-2 border-gray-300 border-dashed cursor-pointer sm:h-48 rounded-xl hover:border-blue-500 bg-gray-50 hover:bg-blue-50">
+{!(frontendimage1 || cardDetails?.image1) ? (                    <label className="flex flex-col items-center justify-center w-full h-40 transition-all duration-300 border-2 border-gray-300 border-dashed cursor-pointer sm:h-48 rounded-xl hover:border-blue-500 bg-gray-50 hover:bg-blue-50">
                       <div className="flex flex-col items-center justify-center pt-4 pb-5 sm:pt-5 sm:pb-6">
                         <MdUpload className="w-8 h-8 mb-2 text-gray-400 sm:w-10 sm:h-10" />
                         <p className="px-2 text-xs text-center text-gray-500 sm:text-sm">Click to upload</p>
@@ -488,7 +488,7 @@ export default function ViewCard() {
                   ) : (
                     <div className="relative">
                       <img
-                        src={frontendimage1}
+    src={frontendimage1 || cardDetails.image1}
                         alt="Preview"
                         className="object-cover w-full h-40 sm:h-48 rounded-xl"
                       />
@@ -513,7 +513,7 @@ export default function ViewCard() {
                   Image 2
                 </label>
                 <div className="relative">
-                  {!frontendimage2 ? (
+                  {!(frontendimage2 || cardDetails?.image2) ? (
                     <label className="flex flex-col items-center justify-center w-full h-40 transition-all duration-300 border-2 border-gray-300 border-dashed cursor-pointer sm:h-48 rounded-xl hover:border-blue-500 bg-gray-50 hover:bg-blue-50">
                       <div className="flex flex-col items-center justify-center pt-4 pb-5 sm:pt-5 sm:pb-6">
                         <MdUpload className="w-8 h-8 mb-2 text-gray-400 sm:w-10 sm:h-10" />
@@ -540,7 +540,7 @@ export default function ViewCard() {
                   ) : (
                     <div className="relative">
                       <img
-                        src={frontendimage2}
+    src={frontendimage2 || cardDetails.image2}
                         alt="Preview"
                         className="object-cover w-full h-40 sm:h-48 rounded-xl"
                       />
@@ -565,7 +565,7 @@ export default function ViewCard() {
                   Image 3
                 </label>
                 <div className="relative">
-                  {!frontendimage3 ? (
+                 {!(frontendimage3 || cardDetails?.image3) ? (
                     <label className="flex flex-col items-center justify-center w-full h-40 transition-all duration-300 border-2 border-gray-300 border-dashed cursor-pointer sm:h-48 rounded-xl hover:border-blue-500 bg-gray-50 hover:bg-blue-50">
                       <div className="flex flex-col items-center justify-center pt-4 pb-5 sm:pt-5 sm:pb-6">
                         <MdUpload className="w-8 h-8 mb-2 text-gray-400 sm:w-10 sm:h-10" />
@@ -592,7 +592,7 @@ export default function ViewCard() {
                   ) : (
                     <div className="relative">
                       <img
-                        src={frontendimage3}
+    src={frontendimage3 || cardDetails.image3}
                         alt="Preview"
                         className="object-cover w-full h-40 sm:h-48 rounded-xl"
                       />
