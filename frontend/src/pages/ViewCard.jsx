@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import toast from "react-hot-toast";
+
 import { FaArrowLeftLong } from "react-icons/fa6";
 import {
   FaMapMarkerAlt,
@@ -20,19 +22,24 @@ import { MdDescription, MdUpload } from "react-icons/md";
 
 import { ListingDataContext } from "../context/ListingContext";
 import { userDataContext } from "../context/UserContext";
-import axios from "axios";
 import { authDataContext } from "../context/Authcontext";
 
 export default function ViewCard() {
   const navigate = useNavigate();
   let { serverUrl } = useContext(authDataContext);
 
-  const { cardDetails, setCardDetails, updating, setUpdating } =
-    useContext(ListingDataContext);
+  const {
+    cardDetails,
+    setCardDetails,
+    updating,
+    setUpdating,
+    deleting,
+    setDeleting,
+  } = useContext(ListingDataContext);
   let { UserData } = useContext(userDataContext);
-  
+
   let [updatePopup, setUpdatePop] = useState(false);
-  
+
   let [title, setTitle] = useState("");
   let [description, setDescription] = useState("");
   let [rent, setRent] = useState("");
@@ -58,19 +65,22 @@ export default function ViewCard() {
   let [backendimage3, setbackendImage3] = useState(null);
 
   const handleDeleteListing = async () => {
-    
+    setDeleting(true)
     try {
       const result = await axios.delete(
-        serverUrl + `/api/delete/${cardDetails._id}`,
+        serverUrl + `/api/listing/delete/${cardDetails._id}`,
         { withCredentials: true },
       );
       console.log(result.data);
-      
+          setDeleting(false)
+          navigate("/")
+          toast.success("Listing Deleted successfully");
     } catch (error) {
-            console.log(error);
+      console.log(error);
+       setDeleting(false)
 
     }
-  }
+  };
 
   const handleUpdateListing = async (e) => {
     e.preventDefault();
@@ -332,11 +342,9 @@ export default function ViewCard() {
                       Edit
                     </button>
 
-                    <button
-                      className="flex-1 sm:flex-none px-8 py-3.5 text-white font-semibold rounded-xl bg-red-600 hover:bg-red-700 hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
-                    >
+                    <button className="flex-1 sm:flex-none px-8 py-3.5 text-white font-semibold rounded-xl bg-red-600 hover:bg-red-700 hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2" onClick={handleDeleteListing} disabled={deleting}>
                       <FaTrash className="text-sm" />
-                      Delete
+                      {deleting? "Delete...": "Delete"}
                     </button>
                   </>
                 )}

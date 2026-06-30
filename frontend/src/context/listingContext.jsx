@@ -110,7 +110,7 @@ let[deleting,setDeleting]=useState(false);
 
   useEffect(() => {
     getListing();
-  }, [adding]);
+  }, [adding,deleting,updating]);
 
   let value = {
     title,
