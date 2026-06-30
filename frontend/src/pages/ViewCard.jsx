@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import toast from 'react-hot-toast';  
+import toast from "react-hot-toast";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import {
   FaMapMarkerAlt,
@@ -23,19 +23,12 @@ import { userDataContext } from "../context/UserContext";
 import axios from "axios";
 import { authDataContext } from "../context/Authcontext";
 
-
-
-
 export default function ViewCard() {
   const navigate = useNavigate();
   let { serverUrl } = useContext(authDataContext);
 
-const {
-    cardDetails,
-    setCardDetails,
-    updating,
-    setUpdating,
-} = useContext(ListingDataContext);
+  const { cardDetails, setCardDetails, updating, setUpdating } =
+    useContext(ListingDataContext);
   let { UserData } = useContext(userDataContext);
 
   let [updatePopup, setUpdatePop] = useState(false);
@@ -65,9 +58,8 @@ const {
 
   const handleUpdateListing = async (e) => {
     e.preventDefault();
-          setUpdating(true);
+    setUpdating(true);
     try {
-
       const formData = new FormData();
 
       formData.append("title", title);
@@ -88,8 +80,8 @@ const {
         { withCredentials: true },
       );
       setCardDetails(result.data);
-            setUpdating(false);
-toast.success("Listing updated successfully");
+      setUpdating(false);
+      toast.success("Listing updated successfully");
 
       setUpdatePop(false);
       setTitle("");
@@ -106,9 +98,39 @@ toast.success("Listing updated successfully");
       setbackendImage2(null);
       setbackendImage3(null);
     } catch (error) {
-            setUpdating(false);
+      setUpdating(false);
       console.log(error);
     }
+  };
+
+  const handleImageUpload = (e, setFrontend, setBackend) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const validTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
+    if (!validTypes.includes(file.type)) {
+      toast.error("Please upload JPG, PNG, or WEBP image");
+      e.target.value = "";
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("Image must be less than 5MB");
+      e.target.value = "";
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setFrontend(event.target.result);
+      setBackend(file);
+    };
+    reader.onerror = () => {
+      toast.error("Failed to read image file");
+    };
+    reader.readAsDataURL(file);
+
+    e.target.value = "";
   };
 
   return (
@@ -434,7 +456,6 @@ toast.success("Listing updated successfully");
                       </div>
                     </div>
                   </div>
-
                   {/* Images Section */}
                   <div className="mb-6 md:mb-10">
                     <h2 className="flex items-center gap-3 mb-4 text-xl font-bold text-gray-800 md:mb-6 md:text-2xl">
@@ -457,40 +478,45 @@ toast.success("Listing updated successfully");
                                   Click to upload
                                 </p>
                                 <p className="text-[10px] sm:text-xs text-gray-400">
-                                  JPG, PNG, WEBP
+                                  JPG, PNG, WEBP (Max 5MB)
                                 </p>
                               </div>
                               <input
                                 type="file"
-                                accept="image/*"
+                                accept="image/jpeg,image/png,image/webp"
                                 className="hidden"
-                                onChange={(e) => {
-                                  const file = e.target.files[0];
-                                  if (file) {
-                                    const reader = new FileReader();
-                                    reader.onloadend = () => {
-                                      setfrontendImage1(reader.result);
-                                      setbackendImage1(file);
-                                    };
-                                    reader.readAsDataURL(file);
-                                  }
-                                }}
+                                onChange={(e) =>
+                                  handleImageUpload(
+                                    e,
+                                    setfrontendImage1,
+                                    setbackendImage1,
+                                  )
+                                }
                               />
                             </label>
                           ) : (
                             <div className="relative">
                               <img
-                                src={frontendimage1 || cardDetails.image1}
-                                alt="Preview"
+                                src={frontendimage1 || cardDetails?.image1}
+                                alt="Main property preview"
                                 className="object-cover w-full h-40 sm:h-48 rounded-xl"
                               />
                               <button
                                 type="button"
                                 onClick={() => {
+                                  // Clear the image from state
                                   setfrontendImage1(null);
                                   setbackendImage1(null);
+                                  // Also clear the image URL from cardDetails to remove it completely
+                                  if (cardDetails?.image1) {
+                                    setCardDetails({
+                                      ...cardDetails,
+                                      image1: null,
+                                    });
+                                  }
                                 }}
                                 className="absolute p-1.5 sm:p-2 text-white transition-all duration-300 bg-red-500 rounded-full top-2 right-2 hover:bg-red-600 hover:scale-110"
+                                aria-label="Remove main image"
                               >
                                 <FaTrash className="w-3 h-3 sm:w-4 sm:h-4" />
                               </button>
@@ -513,31 +539,27 @@ toast.success("Listing updated successfully");
                                   Click to upload
                                 </p>
                                 <p className="text-[10px] sm:text-xs text-gray-400">
-                                  Optional
+                                  Optional (Max 5MB)
                                 </p>
                               </div>
                               <input
                                 type="file"
-                                accept="image/*"
+                                accept="image/jpeg,image/png,image/webp"
                                 className="hidden"
-                                onChange={(e) => {
-                                  const file = e.target.files[0];
-                                  if (file) {
-                                    const reader = new FileReader();
-                                    reader.onloadend = () => {
-                                      setfrontendImage2(reader.result);
-                                      setbackendImage2(file);
-                                    };
-                                    reader.readAsDataURL(file);
-                                  }
-                                }}
+                                onChange={(e) =>
+                                  handleImageUpload(
+                                    e,
+                                    setfrontendImage2,
+                                    setbackendImage2,
+                                  )
+                                }
                               />
                             </label>
                           ) : (
                             <div className="relative">
                               <img
-                                src={frontendimage2 || cardDetails.image2}
-                                alt="Preview"
+                                src={frontendimage2 || cardDetails?.image2}
+                                alt="Property image 2 preview"
                                 className="object-cover w-full h-40 sm:h-48 rounded-xl"
                               />
                               <button
@@ -545,8 +567,15 @@ toast.success("Listing updated successfully");
                                 onClick={() => {
                                   setfrontendImage2(null);
                                   setbackendImage2(null);
+                                  if (cardDetails?.image2) {
+                                    setCardDetails({
+                                      ...cardDetails,
+                                      image2: null,
+                                    });
+                                  }
                                 }}
                                 className="absolute p-1.5 sm:p-2 text-white transition-all duration-300 bg-red-500 rounded-full top-2 right-2 hover:bg-red-600 hover:scale-110"
+                                aria-label="Remove image 2"
                               >
                                 <FaTrash className="w-3 h-3 sm:w-4 sm:h-4" />
                               </button>
@@ -569,31 +598,27 @@ toast.success("Listing updated successfully");
                                   Click to upload
                                 </p>
                                 <p className="text-[10px] sm:text-xs text-gray-400">
-                                  Optional
+                                  Optional (Max 5MB)
                                 </p>
                               </div>
                               <input
                                 type="file"
-                                accept="image/*"
+                                accept="image/jpeg,image/png,image/webp"
                                 className="hidden"
-                                onChange={(e) => {
-                                  const file = e.target.files[0];
-                                  if (file) {
-                                    const reader = new FileReader();
-                                    reader.onloadend = () => {
-                                      setfrontendImage3(reader.result);
-                                      setbackendImage3(file);
-                                    };
-                                    reader.readAsDataURL(file);
-                                  }
-                                }}
+                                onChange={(e) =>
+                                  handleImageUpload(
+                                    e,
+                                    setfrontendImage3,
+                                    setbackendImage3,
+                                  )
+                                }
                               />
                             </label>
                           ) : (
                             <div className="relative">
                               <img
-                                src={frontendimage3 || cardDetails.image3}
-                                alt="Preview"
+                                src={frontendimage3 || cardDetails?.image3}
+                                alt="Property image 3 preview"
                                 className="object-cover w-full h-40 sm:h-48 rounded-xl"
                               />
                               <button
@@ -601,8 +626,15 @@ toast.success("Listing updated successfully");
                                 onClick={() => {
                                   setfrontendImage3(null);
                                   setbackendImage3(null);
+                                  if (cardDetails?.image3) {
+                                    setCardDetails({
+                                      ...cardDetails,
+                                      image3: null,
+                                    });
+                                  }
                                 }}
                                 className="absolute p-1.5 sm:p-2 text-white transition-all duration-300 bg-red-500 rounded-full top-2 right-2 hover:bg-red-600 hover:scale-110"
+                                aria-label="Remove image 3"
                               >
                                 <FaTrash className="w-3 h-3 sm:w-4 sm:h-4" />
                               </button>
