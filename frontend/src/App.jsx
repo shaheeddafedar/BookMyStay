@@ -1,6 +1,8 @@
 //external import
 import { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+
 
 //local import
 import Home from "./pages/Home";
@@ -21,6 +23,8 @@ function App() {
   console.log("UserData =", UserData);
   return (
     <>
+          <Toaster position="top-right" />
+
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/signup" element={<Singup></Singup>}></Route>

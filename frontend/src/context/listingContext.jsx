@@ -30,6 +30,7 @@ export default function ListingContext({ children }) {
   let [backendimage3, setbackendImage3] = useState(null);
 
   let [adding, setadding] = useState(false);
+  let [updating, setUpdating] = useState(false);
   let [listingdata, setlistingdata] = useState([]);
   let [newlistingdata, setnewlistingdata] = useState([]);
   let [cardDetails, setCardDetails] = useState(null);
@@ -154,6 +155,7 @@ export default function ListingContext({ children }) {
     handleViewCard,
     cardDetails,
     setCardDetails,
+    updating, setUpdating,
   };
 
   return (
