@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast";
+import toast from 'react-hot-toast';  
 import { FaArrowLeftLong } from "react-icons/fa6";
 import {
   FaMapMarkerAlt,
