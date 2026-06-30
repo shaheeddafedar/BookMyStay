@@ -31,6 +31,7 @@ export default function ListingContext({ children }) {
 
   let [adding, setadding] = useState(false);
   let [updating, setUpdating] = useState(false);
+let[deleting,setDeleting]=useState(false);
   let [listingdata, setlistingdata] = useState([]);
   let [newlistingdata, setnewlistingdata] = useState([]);
   let [cardDetails, setCardDetails] = useState(null);
@@ -156,6 +157,7 @@ export default function ListingContext({ children }) {
     cardDetails,
     setCardDetails,
     updating, setUpdating,
+    deleting,setDeleting,
   };
 
   return (

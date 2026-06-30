@@ -109,10 +109,27 @@ export const updateListing = async (req, res) => {
     return res.status(200).json(listing);
 
   } catch (error) {
-    console.error(error);
 
     return res.status(500).json({
-      message: error.message,
+      message: `updateListing error ${error}`,
     });
   }
 };
+
+export const deleListing = async (req,res) => {
+  try {
+    let {id} = req.params
+    let listing = await Listing.findByIdAndDelete(id)
+    let user = await User.findByIdAndUpdate(listing.host,{
+           $pull:{listing:listing._id}
+    },{new:true})
+   if (!user) {
+    return res.status(404).json({message :"user is not found"})
+   }
+   return res.status(201).json({message:"Listing deleted "})
+  } catch (error) {
+    return res.status(500).json({
+      message: `DeleteingListing error ${error}`,
+    });
+  }
+}

@@ -30,8 +30,9 @@ export default function ViewCard() {
   const { cardDetails, setCardDetails, updating, setUpdating } =
     useContext(ListingDataContext);
   let { UserData } = useContext(userDataContext);
-
+  
   let [updatePopup, setUpdatePop] = useState(false);
+  
   let [title, setTitle] = useState("");
   let [description, setDescription] = useState("");
   let [rent, setRent] = useState("");
@@ -55,6 +56,21 @@ export default function ViewCard() {
   let [backendimage1, setbackendImage1] = useState(null);
   let [backendimage2, setbackendImage2] = useState(null);
   let [backendimage3, setbackendImage3] = useState(null);
+
+  const handleDeleteListing = async () => {
+    
+    try {
+      const result = await axios.delete(
+        serverUrl + `/api/delete/${cardDetails._id}`,
+        { withCredentials: true },
+      );
+      console.log(result.data);
+      
+    } catch (error) {
+            console.log(error);
+
+    }
+  }
 
   const handleUpdateListing = async (e) => {
     e.preventDefault();
@@ -307,13 +323,22 @@ export default function ViewCard() {
 
               <div className="flex items-center w-full gap-4 mt-3 sm:w-auto">
                 {cardDetails.host === UserData._id && (
-                  <button
-                    className="flex-1 sm:flex-none px-8 py-3.5 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center  gap-2 bg-green-600"
-                    onClick={() => setUpdatePop((prev) => !prev)}
-                  >
-                    <FaPencilAlt className="text-sm" />
-                    Edit
-                  </button>
+                  <>
+                    <button
+                      className="flex-1 sm:flex-none px-8 py-3.5 text-white font-semibold rounded-xl bg-green-600 hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
+                      onClick={() => setUpdatePop((prev) => !prev)}
+                    >
+                      <FaPencilAlt className="text-sm" />
+                      Edit
+                    </button>
+
+                    <button
+                      className="flex-1 sm:flex-none px-8 py-3.5 text-white font-semibold rounded-xl bg-red-600 hover:bg-red-700 hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
+                    >
+                      <FaTrash className="text-sm" />
+                      Delete
+                    </button>
+                  </>
                 )}
                 {cardDetails.host !== UserData._id && (
                   <button className="flex-1 sm:flex-none px-8 py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-[10px]">
