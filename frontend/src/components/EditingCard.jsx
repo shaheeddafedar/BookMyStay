@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -23,24 +22,19 @@ import { MdDescription, MdUpload } from "react-icons/md";
 
 
 import { ListingDataContext } from "../context/ListingContext";
-import { userDataContext } from "../context/UserContext";
 import { authDataContext } from "../context/Authcontext";
 
 
 
 export default function EditingCard({updatePopup, setUpdatePop}) {
       let { serverUrl } = useContext(authDataContext);
-      const navigate = useNavigate();
 
   const {
     cardDetails,
     setCardDetails,
     updating,
     setUpdating,
-    deleting,
-    setDeleting,
   } = useContext(ListingDataContext);
-      let { UserData } = useContext(userDataContext);
 
 
 
@@ -68,22 +62,6 @@ export default function EditingCard({updatePopup, setUpdatePop}) {
   let [backendimage2, setbackendImage2] = useState(null);
   let [backendimage3, setbackendImage3] = useState(null);
 
-  const handleDeleteListing = async () => {
-    setDeleting(true);
-    try {
-      const result = await axios.delete(
-        serverUrl + `/api/listing/delete/${cardDetails._id}`,
-        { withCredentials: true },
-      );
-      console.log(result.data);
-      setDeleting(false);
-      navigate("/");
-      toast.success("Listing Deleted successfully");
-    } catch (error) {
-      console.log(error);
-      setDeleting(false);
-    }
-  };
 
   const handleUpdateListing = async (e) => {
     e.preventDefault();

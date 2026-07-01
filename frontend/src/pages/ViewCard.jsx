@@ -46,31 +46,6 @@ export default function ViewCard() {
   let [updatePopup, setUpdatePop] = useState(false);
   let [bookingPopup, setBookingPopup] = useState(false);
 
-
-  let [title, setTitle] = useState("");
-  let [description, setDescription] = useState("");
-  let [rent, setRent] = useState("");
-  let [city, setCity] = useState("");
-  let [landMark, setLandMark] = useState("");
-
-  useEffect(() => {
-    if (cardDetails && updatePopup) {
-      setTitle(cardDetails.title);
-      setDescription(cardDetails.description);
-      setRent(cardDetails.rent);
-      setCity(cardDetails.city);
-      setLandMark(cardDetails.landMark);
-    }
-  }, [cardDetails, updatePopup]);
-
-  let [frontendimage1, setfrontendImage1] = useState(null);
-  let [frontendimage2, setfrontendImage2] = useState(null);
-  let [frontendimage3, setfrontendImage3] = useState(null);
-
-  let [backendimage1, setbackendImage1] = useState(null);
-  let [backendimage2, setbackendImage2] = useState(null);
-  let [backendimage3, setbackendImage3] = useState(null);
-
   const handleDeleteListing = async () => {
     setDeleting(true);
     try {
