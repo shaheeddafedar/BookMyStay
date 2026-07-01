@@ -11,6 +11,7 @@ import connectDb from "./config/db.js";
 import authRouter from "./routes/authroute.js";
 import userRouter from "./routes/userroute.js";
 import listingRouter from "./routes/listingroute.js";
+import bookingRouter from "./routes/bookingroute.js";
 
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
@@ -32,6 +33,7 @@ app.use(
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/listing", listingRouter);
+app.use("/api/booking", bookingRouter);
 
 app.listen(port, () => {
   connectDb();

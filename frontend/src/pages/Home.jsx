@@ -36,6 +36,8 @@ function Home() {
                   image3={list.image3}
                   rent={list.rent}
                   id={list._id}
+                  ratings={list.ratings}
+                  like={list.like}
                 />
               ))
             ) : (

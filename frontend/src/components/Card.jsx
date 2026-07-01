@@ -10,7 +10,7 @@ import { FaHeart, FaRegHeart, FaStar, FaMapMarkerAlt,
 
 
 
-export default function Card({ title, landMark, image1, image2, image3, rent, city, id }) {
+export default function Card({ title, landMark, image1, image2, image3, rent, city, id,ratings,like }) {
 let navigate = useNavigate()
  
 let {UserData} = useContext(userDataContext)
@@ -116,7 +116,7 @@ const handleClick = () =>{
           {/* Rating (Placeholder) */}
           <div className='flex items-center gap-1 bg-green-50 px-2 py-0.5 rounded-full'>
             <FaStar className='w-3 h-3 text-green-600' />
-            <span className='text-xs font-semibold text-green-700'>4.8</span>
+            <span className='text-xs font-semibold text-green-700'>{ratings}</span>
           </div>
         </div>
       </div>

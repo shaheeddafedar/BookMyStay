@@ -52,13 +52,13 @@ const listingSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    rating:{
+    ratings:{
       type:Number,
       min:0,
       max:5,
       default:0
     },
-    liked:{
+    like:{
       type:Boolean,
       default:false 
     }
