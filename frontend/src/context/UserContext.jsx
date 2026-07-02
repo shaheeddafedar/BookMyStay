@@ -26,6 +26,7 @@ function UserContext({ children }) {
   let value = {
     UserData,
     setUserData,
+    getcurrentUser,
   };
   return (
     <div>

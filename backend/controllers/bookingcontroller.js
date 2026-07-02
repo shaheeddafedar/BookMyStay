@@ -25,7 +25,7 @@ export const createBooking = async (req,res) => {
         checkOut,
         totalRent,
         host:listing.host,
-        guest:res.userId,
+        guest:req.userId,
         listing:listing._id
        })
        let user = await User.findByIdAndUpdate(req.userId,{
@@ -34,7 +34,7 @@ export const createBooking = async (req,res) => {
        if (!user) {
         return res.status(404).json({message:"User is not found"})
        }
-       listing.guest=res.userId
+       listing.guest=req.userId
        listing.isBooked = true
        await listing.save()
        return res.status(201).json({booking})

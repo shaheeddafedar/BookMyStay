@@ -158,6 +158,7 @@ let[deleting,setDeleting]=useState(false);
     setCardDetails,
     updating, setUpdating,
     deleting,setDeleting,
+    getListing,
   };
 
   return (
