@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { RxCross1 } from "react-icons/rx";
 import { FaCheckCircle } from "react-icons/fa";
+import { ListingDataContext } from "../context/ListingContext";
 
 export default function Booking({ bookingPopup, setBookingPopup }) {
   let [miniDate, setMiniDate] = useState("");
+
+    const {
+      cardDetails,
+      setCardDetails,
+    } = useContext(ListingDataContext);
 
   useEffect(() => {
     let today = new Date().toISOString().split("T")[0];
@@ -34,11 +40,8 @@ export default function Booking({ bookingPopup, setBookingPopup }) {
                 </h1>
               </div>
 
-              {/* Body */}
               <div className="p-6 space-y-5">
-                {/* Date Inputs */}
                 <div className="space-y-4">
-                  {/* Check In */}
                   <div>
                     <label
                       htmlFor="checkIn"
@@ -81,14 +84,31 @@ export default function Booking({ bookingPopup, setBookingPopup }) {
                   className="w-full py-3.5 px-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base  'opacity-70 cursor-not-allowed' : 'hover:scale-[1.02]"
                 >
                   <FaCheckCircle className="text-sm" />
-                  Book No
+                  Book Now
                 </button>
               </div>
             </form>
           </div>
-             
-             
+                <div
+        className="max-w-[450px] w-[90%] h-[450px]
+bg-
+[#f7fbfcfe] p-[20px] rounded-lg flex items-center justify-center flex-col gap-[10px]
+border-[1px]
+border
+[#e2e1e1]"
+      >
+      <div className='w-[95%] h-[30%] border-[1px] border-[#dedddd] rounded-1g flex justify-center items-center gap-[8px] p-[20px] overflow-hidden'></div>
+     <div><img src={cardDetails.image1} alt="" srcset="" /></div>
+<div className='w-[80%] h-[100px] gap-[5px]'>
+<h1 className='w-[90%] truncate'>{`IN $
+{ cardDetails.landMark.toUpperCase()}, ${cardDetails.
+city.toUpperCase()} `}</h1>
+<h1>{cardDetails.title.toUpperCase()}</h1>
+<h1>{cardDetails.category.toUpperCase()}</h1>
+</div>             
+      </div>
         </div>
+        
       )}
     </div>
   );

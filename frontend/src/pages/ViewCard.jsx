@@ -3,7 +3,6 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-
 import { FaArrowLeftLong } from "react-icons/fa6";
 import {
   FaMapMarkerAlt,
@@ -16,6 +15,7 @@ import {
   FaTag,
   FaCheckCircle,
   FaTrash,
+  FaStar,
 } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
 import { GiHouse } from "react-icons/gi";
@@ -30,8 +30,7 @@ import EditingCard from "../components/EditingCard";
 
 export default function ViewCard() {
   let { serverUrl } = useContext(authDataContext);
-        const navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   const {
     cardDetails,
@@ -41,6 +40,7 @@ export default function ViewCard() {
     deleting,
     setDeleting,
   } = useContext(ListingDataContext);
+
   let { UserData } = useContext(userDataContext);
 
   let [updatePopup, setUpdatePop] = useState(false);
@@ -63,9 +63,6 @@ export default function ViewCard() {
     }
   };
 
-
-
-  
   return (
     <>
       <div className="min-h-screen px-4 py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -110,8 +107,9 @@ export default function ViewCard() {
 
             <div className="p-6 md:p-8">
               {/* Location Badge */}
-              <div className="flex items-center justify-center mb-6">
-                <div className="flex items-center gap-2 px-4 py-2 border border-blue-200 rounded-full bg-blue-50">
+              {/* Location Badge */}
+              <div className="flex flex-wrap items-center justify-between mb-6">
+                <div className="flex items-center gap-2 px-4 py-2 mx-auto border border-blue-200 rounded-full bg-blue-50 md:mx-0">
                   <FaMapMarkerAlt className="text-blue-600" />
                   <span className="font-semibold text-gray-700">
                     {cardDetails.landMark && cardDetails.city
@@ -119,8 +117,13 @@ export default function ViewCard() {
                       : "Location not provided"}
                   </span>
                 </div>
+                <div className="flex items-center gap-1 px-3 py-1.5 bg-green-50 rounded-full border border-green-200 mx-auto md:mx-0">
+                  <FaStar className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500" />
+                  <span className="text-xs font-semibold text-green-700">
+                    4.8
+                  </span>
+                </div>
               </div>
-
               <div className="grid grid-cols-1 gap-[10px] md:grid-cols-3">
                 {/* Main Image */}
                 <div className="md:col-span-2">
@@ -273,9 +276,16 @@ export default function ViewCard() {
         </div>
 
         {/* update listing page    */}
-    <EditingCard updatePopup={updatePopup} setUpdatePop={setUpdatePop}></EditingCard>
+        <EditingCard
+          updatePopup={updatePopup}
+          setUpdatePop={setUpdatePop}
+        ></EditingCard>
 
-                <Booking bookingPopup={bookingPopup} setBookingPopup={setBookingPopup}></Booking>
+        {/* Booking page */}
+        <Booking
+          bookingPopup={bookingPopup}
+          setBookingPopup={setBookingPopup}
+        ></Booking>
       </div>
     </>
   );

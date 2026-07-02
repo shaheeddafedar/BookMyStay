@@ -115,7 +115,7 @@ const handleClick = () =>{
           
           {/* Rating (Placeholder) */}
           <div className='flex items-center gap-1 bg-green-50 px-2 py-0.5 rounded-full'>
-            <FaStar className='w-3 h-3 text-green-600' />
+            <FaStar className='w-3 h-3 text-yellow-500 fill-yellow-500' />
             <span className='text-xs font-semibold text-green-700'>{ratings}</span>
           </div>
         </div>
