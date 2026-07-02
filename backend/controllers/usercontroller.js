@@ -7,7 +7,13 @@ export const getcurrentUser = async (req, res) => {
       .populate({
         path: "listing",
         select:
-          "title image1 image2 image3 description rent category city landMark",
+          "title image1 image2 image3 description rent category city landMark isBooked host rating like",
+        options: { sort: { createdAt: -1 } },
+      })
+      .populate({
+        path: "booking",
+        select:
+          "title image1 image2 image3 description rent category city landMark isBooked host rating like",
         options: { sort: { createdAt: -1 } },
       });
 

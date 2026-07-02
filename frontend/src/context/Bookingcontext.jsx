@@ -2,9 +2,13 @@ import axios from "axios";
 import React, { createContext, useContext, useState } from "react";import { userDataContext } from "./UserContext";
 import { authDataContext } from "./Authcontext";
 import { ListingDataContext } from "./ListingContext";
+import { useNavigate } from "react-router-dom";
+
 export const bookingDataContext = createContext();
 
 export default function Bookingcontext({ children }) {
+    let navigate = useNavigate()
+  
   let [checkIn, setCheckIn] = useState("");
   let [checkOut, setCheckOut] = useState("");
   let [total, setTotal] = useState(0);
@@ -25,11 +29,14 @@ let {getListing} = useContext(ListingDataContext)
       await getCurrentUser()
       await getListing()
       setBookingData(result.data)
-      console.log(result.data);
+      toast.success("Booking Added successfully");
+      navigate("/MyBooking")
+
       
       } catch (error) {
-        console.log(error);
-        setBookingData(null)
+    console.log(error.response.data);
+    console.log(error.response.status);        
+    setBookingData(null)
       }
     }
 

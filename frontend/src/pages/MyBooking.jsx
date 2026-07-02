@@ -31,9 +31,9 @@ export default function MyBooking() {
 
       {/* Cards Grid */}
       <div className="w-full px-4 py-8 md:px-8 md:py-10">
-        {UserData?.listing && UserData.listing.length > 0 ? (
+        {UserData?.booking && UserData.booking.length > 0 ? (
           <div className="grid grid-cols-1 gap-6 mx-auto sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center max-w-7xl">
-            {UserData.listing.map((list) => (
+     {UserData.booking.map((list) => (
               <Card
                 key={list._id}
                 title={list.title}
@@ -44,6 +44,8 @@ export default function MyBooking() {
                 image3={list.image3}
                 rent={list.rent}
                 id={list._id}
+                 isBooked={list.isBooked}
+                  host={list.host}
               />
             ))}
           </div>
@@ -65,16 +67,16 @@ export default function MyBooking() {
               </svg>
             </div>
             <h3 className="mb-2 text-2xl font-bold text-gray-700">
-              No Listings Yet
+             No Booking Yet
             </h3>
             <p className="max-w-md text-center text-gray-500">
-              Turn your space into a stay. Add your first property now!
+  You haven't booked any stays yet. Explore amazing properties and reserve your next stay today!
             </p>
             <button
-              onClick={() => navigate("/listingpage1")}
+              onClick={() => navigate("/")}
               className="mt-6 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
             >
-              ✨ List Your Property
+  🔍 Explore Properties
             </button>
           </div>
         )}

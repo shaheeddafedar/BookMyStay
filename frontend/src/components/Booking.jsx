@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
+
 import { RxCross1 } from "react-icons/rx";
 import { FaCheckCircle, FaStar } from "react-icons/fa";
+
 import { ListingDataContext } from "../context/ListingContext";
 import { bookingDataContext } from "../context/Bookingcontext";
 
@@ -73,7 +75,7 @@ export default function Booking({ bookingPopup, setBookingPopup }) {
             </button>
 
             {/* LEFT COLUMN: Booking Form */}
-            <form className="flex flex-col justify-center w-full p-4 border-b border-gray-100 sm:p-6 md:w-1/2 md:p-8 md:border-b-0 md:border-r" onSubmit={(e)=>e.preventDefault}>
+            <form className="flex flex-col justify-center w-full p-4 border-b border-gray-100 sm:p-6 md:w-1/2 md:p-8 md:border-b-0 md:border-r" onSubmit={(e)=>e.preventDefault()}>
               <div className="mb-4 sm:mb-6">
                 <h1 className="text-xl font-bold text-gray-800 sm:text-2xl md:text-3xl">
                   Confirm & Book
