@@ -107,7 +107,6 @@ export default function ViewCard() {
 
             <div className="p-6 md:p-8">
               {/* Location Badge */}
-              {/* Location Badge */}
               <div className="flex flex-wrap items-center justify-between mb-6">
                 <div className="flex items-center gap-2 px-4 py-2 mx-auto border border-blue-200 rounded-full bg-blue-50 md:mx-0">
                   <FaMapMarkerAlt className="text-blue-600" />
