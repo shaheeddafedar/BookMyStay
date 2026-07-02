@@ -89,7 +89,7 @@ export default function ViewCard() {
             </div>
           )}
 
-          {cardDetails.host !== UserData._id && (
+          {cardDetails?.host !== UserData._id && (
             <div className="mb-8 text-center">
               <h1 className="mb-4 text-4xl font-bold text-gray-800 md:text-5xl">
                 Review Your Booking
@@ -111,8 +111,8 @@ export default function ViewCard() {
                 <div className="flex items-center gap-2 px-4 py-2 mx-auto border border-blue-200 rounded-full bg-blue-50 md:mx-0">
                   <FaMapMarkerAlt className="text-blue-600" />
                   <span className="font-semibold text-gray-700">
-                    {cardDetails.landMark && cardDetails.city
-                      ? `${cardDetails.landMark}, ${cardDetails.city}`
+                    {cardDetails?.landMark && cardDetails.city
+                      ? `${cardDetails?.landMark}, ${cardDetails.city}`
                       : "Location not provided"}
                   </span>
                 </div>
@@ -128,7 +128,7 @@ export default function ViewCard() {
                 <div className="md:col-span-2">
                   <div className="overflow-hidden shadow-lg rounded-2xl">
                     <img
-                      src={cardDetails.image1}
+                      src={cardDetails?.image1}
                       alt="Main Property"
                       className="object-cover w-full h-[400px] transition-transform duration-500 hover:scale-105"
                     />
@@ -137,21 +137,21 @@ export default function ViewCard() {
 
                 {/* Side Images */}
                 <div className="flex flex-col gap-4">
-                  {cardDetails.image2 && (
+                  {cardDetails?.image2 && (
                     <div className="overflow-hidden shadow-lg rounded-2xl">
                       <img
-                        src={cardDetails.image2}
+                        src={cardDetails?.image2}
                         alt="Property Image 2"
                         className="object-cover w-full h-[192px] transition-transform duration-500 hover:scale-105"
                       />
                     </div>
                   )}
 
-                  {cardDetails.image3 && (
+                  {cardDetails?.image3 && (
                     <div className="overflow-hidden shadow-lg rounded-2xl">
                       <img
                         src={
-                          cardDetails.image3 ||
+                          cardDetails?.image3 ||
                           "https://via.placeholder.com/300x200?text=Image+3"
                         }
                         alt="Property Image 3"
@@ -187,9 +187,9 @@ export default function ViewCard() {
                     </span>
                   </div>
                   <p className="text-lg font-semibold text-gray-800">
-                    {cardDetails.category
-                      ? cardDetails.category.charAt(0).toUpperCase() +
-                        cardDetails.category.slice(1)
+                    {cardDetails?.category
+                      ? cardDetails?.category.charAt(0).toUpperCase() +
+                        cardDetails?.category.slice(1)
                       : "Not selected"}
                   </p>
                 </div>
@@ -241,7 +241,7 @@ export default function ViewCard() {
               </div>
 
               <div className="flex items-center w-full gap-4 mt-3 sm:w-auto">
-                {cardDetails.host === UserData._id && (
+                {cardDetails?.host === UserData._id && (
                   <>
                     <button
                       className="flex-1 sm:flex-none px-8 py-3.5 text-white font-semibold rounded-xl bg-green-600 hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
@@ -261,7 +261,7 @@ export default function ViewCard() {
                     </button>
                   </>
                 )}
-                {cardDetails.host !== UserData._id && (
+                {cardDetails?.host !== UserData._id && (
                   <button
                     className="flex-1 sm:flex-none px-8 py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-[10px]"
                     onClick={() => setBookingPopup((prev) => !prev)}

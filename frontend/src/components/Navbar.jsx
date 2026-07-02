@@ -50,8 +50,8 @@ const Navbar = () => {
         serverUrl + "/api/auth/logout",
         {},
         { withCredentials: true },
-        setUserData(null),
       );
+      setUserData(null),
       navigate("/");
       setshowpopup(false);
       console.log(result.data);
@@ -228,7 +228,10 @@ const Navbar = () => {
                   {UserData && (
                     <li
                       className="flex items-center gap-3 px-4 py-3 transition-all duration-200 cursor-pointer hover:bg-blue-50 group"
-                      onClick={() => setshowpopup(false)}
+                      onClick={() => { 
+                        setshowpopup(false);
+                        navigate("/MyBooking")
+                      }}
                     >
                       <MdBookOnline className="w-4 h-4 text-orange-600 transition-transform group-hover:scale-110" />
                       <span className="flex-1 text-sm font-medium text-gray-700 group-hover:text-orange-600">

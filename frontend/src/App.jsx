@@ -13,6 +13,7 @@ import Listingpage2 from "./pages/Listingpage2";
 import Listingpage3 from "./pages/Listingpage3";
 import Mylisting from "./pages/Mylisting";
 import ViewCard from "./pages/ViewCard";
+import MyBooking from "./pages/MyBooking";
 
 
 
@@ -51,6 +52,10 @@ function App() {
         <Route
           path="/ViewCard"
           element={UserData ? <ViewCard /> : <Navigate to="/" />}
+        ></Route>
+        <Route
+          path="/MyBooking"
+          element={UserData ? <MyBooking/> : <Navigate to="/" />}
         ></Route>
       </Routes>
     </>

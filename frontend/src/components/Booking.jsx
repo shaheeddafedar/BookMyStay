@@ -29,7 +29,7 @@ export default function Booking({ bookingPopup, setBookingPopup }) {
       const nights = (outDate - inDate) / (24 * 60 * 60 * 1000);
       setNight(nights);
 
-      const stayAmount = cardDetails.rent * nights;
+      const stayAmount = cardDetails?.rent * nights;
       const serviceCharge = stayAmount * 0.07;
       const tax = stayAmount * 0.07;
 
@@ -40,7 +40,7 @@ export default function Booking({ bookingPopup, setBookingPopup }) {
         setTotal(0);
       }
     }
-  }, [checkIn, checkOut, cardDetails.rent, total]);
+  }, [checkIn, checkOut, cardDetails?.rent, total]);
 
   useEffect(() => {
     let today = new Date().toISOString().split("T")[0];
@@ -188,15 +188,15 @@ export default function Booking({ bookingPopup, setBookingPopup }) {
                     <>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Subtotal ({night} nights)</span>
-                        <span className="font-medium text-gray-800">₹{Math.round(cardDetails.rent * night).toLocaleString()}</span>
+                        <span className="font-medium text-gray-800">₹{Math.round(cardDetails?.rent * night).toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Service Charge (7%)</span>
-                        <span className="font-medium text-gray-800">₹{Math.round((cardDetails.rent * night * 7) / 100).toLocaleString()}</span>
+                        <span className="font-medium text-gray-800">₹{Math.round((cardDetails?.rent * night * 7) / 100).toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Tax (7%)</span>
-                        <span className="font-medium text-gray-800">₹{Math.round((cardDetails.rent * night * 7) / 100).toLocaleString()}</span>
+                        <span className="font-medium text-gray-800">₹{Math.round((cardDetails?.rent * night * 7) / 100).toLocaleString()}</span>
                       </div>
                     </>
                   )}
