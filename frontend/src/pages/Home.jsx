@@ -38,6 +38,8 @@ function Home() {
                   id={list._id}
                   ratings={list.ratings}
                   like={list.like}
+                  isBooked={list.isBooked}
+                  host={list.host}
                 />
               ))
             ) : (

@@ -10,7 +10,7 @@ import { FaHeart, FaRegHeart, FaStar, FaMapMarkerAlt,
 
 
 
-export default function Card({ title, landMark, image1, image2, image3, rent, city, id,ratings,like }) {
+export default function Card({ title, landMark, image1, image2, image3, rent, city, id,ratings,like,isBooked,host }) {
 let navigate = useNavigate()
  
 let {UserData} = useContext(userDataContext)
