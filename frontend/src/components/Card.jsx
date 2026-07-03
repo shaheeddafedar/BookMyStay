@@ -7,6 +7,8 @@ import { ListingDataContext } from "../context/ListingContext";
 
 import { FaHeart, FaRegHeart, FaStar, FaMapMarkerAlt, 
   FaRupeeSign, FaBed, FaBath } from 'react-icons/fa';
+  import { GiConfirmed } from "react-icons/gi";
+
 
 
 
@@ -39,9 +41,11 @@ const handleClick = () =>{
   };
 
   return (
-<div className='group w-full max-w-[350px] h-[420px] bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer hover:scale-[1.02]' onClick={handleClick}>      
+<div className='group w-full max-w-[350px] h-[420px] bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer hover:scale-[1.02]' onClick={handleClick}>    
       {/* Image Container */}
       <div className='relative w-full h-[65%] bg-gray-200 overflow-hidden'>
+          {isBooked && <div className='text-[green] bg-white rounded-lg absolute flex items-center justify-center right-12 top-1 gap-[5px] p-[5px]'> <GiConfirmed /> Booked</div>}
+
         <img
           src={images[currentImage] || "https://via.placeholder.com/400x300?text=No+Image"}
           alt={title}

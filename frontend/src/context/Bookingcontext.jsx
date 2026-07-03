@@ -1,5 +1,10 @@
 import axios from "axios";
-import React, { createContext, useContext, useState } from "react";import { userDataContext } from "./UserContext";
+import React, { createContext, useContext, useState } from "react";
+import toast from "react-hot-toast";
+
+
+
+import { userDataContext } from "./UserContext";
 import { authDataContext } from "./Authcontext";
 import { ListingDataContext } from "./ListingContext";
 import { useNavigate } from "react-router-dom";
@@ -17,10 +22,14 @@ export default function Bookingcontext({ children }) {
 
 let {serverUrl} = useContext(authDataContext)
 let {getCurrentUser} =useContext(userDataContext)
-let {getListing} = useContext(ListingDataContext)
-
+let {getListing,cardDetails} = useContext(ListingDataContext)
 
     const handleBooking = async (id) => {
+if (cardDetails?.isBooked) {
+  toast.error("This property is already booked");
+  navigate("/");
+  return;
+}
       try {
       let result = await axios.post(serverUrl+`/api/booking/create/${id}`,{
         checkIn,checkOut,totalRent:total

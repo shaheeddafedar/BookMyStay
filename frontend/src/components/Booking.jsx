@@ -18,7 +18,7 @@ export default function Booking({ bookingPopup, setBookingPopup }) {
     setTotal,
     night,
     setNight,
-        bookingData,setBookingData,
+    bookingData,setBookingData,
     handleBooking,
   } = useContext(bookingDataContext);
   const { cardDetails } = useContext(ListingDataContext);

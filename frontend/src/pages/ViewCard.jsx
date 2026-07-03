@@ -30,6 +30,7 @@ import EditingCard from "../components/EditingCard";
 
 export default function ViewCard() {
   let { serverUrl } = useContext(authDataContext);
+  
   const navigate = useNavigate();
 
   const {
@@ -261,15 +262,23 @@ export default function ViewCard() {
                     </button>
                   </>
                 )}
-                {cardDetails?.host !== UserData._id && (
-                  <button
-                    className="flex-1 sm:flex-none px-8 py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-[10px]"
-                    onClick={() => setBookingPopup((prev) => !prev)}
-                  >
-                    <span>Reserve </span>
-                  </button>
-                )}
-              </div>
+{cardDetails?.host !== UserData?._id && (
+  cardDetails?.isBooked ? (
+    <button
+      disabled
+      className="flex-1 sm:flex-none px-8 py-3.5 bg-gray-400 text-white font-semibold rounded-xl cursor-not-allowed"
+    >
+      Already Booked
+    </button>
+  ) : (
+    <button
+      className="flex-1 sm:flex-none px-8 py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-[10px]"
+      onClick={() => setBookingPopup((prev) => !prev)}
+    >
+      Reserve
+    </button>
+  )
+)}          </div>
             </div>
           </div>
         </div>
