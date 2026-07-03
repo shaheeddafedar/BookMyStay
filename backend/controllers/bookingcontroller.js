@@ -42,3 +42,20 @@ export const createBooking = async (req,res) => {
          return res.status(201).json({message:`booking error ${error}`})
     }
 }
+
+export const cancelBooking = async (req,res) => {
+    try {
+       let {id} = req.params
+        let listing = await Listing.findByIdAndUpdate(id,{isBooked:false})
+        let user = await User.findByIdAndUpdate(listing.guest,{
+            $pull:{booking:listing._id}
+        },{new:true});
+        if (!user) {
+        return res.status(404).json({message:"user is not found"})
+        
+       } 
+       return res.status(200).json({message:"Booking cancelled"})
+    } catch (error) {
+       return res.status(500).json({message:"booking cancel error"})
+    }
+}
