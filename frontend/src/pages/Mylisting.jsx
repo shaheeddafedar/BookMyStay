@@ -47,6 +47,8 @@ export default function Mylisting() {
                 id={list._id}
                  isBooked={list.isBooked}
                   host={list.host}
+                   ratings={list.ratings}
+                  like = {list.like}
               />
             ))}
           </div>
