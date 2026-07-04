@@ -9,7 +9,7 @@ function UserContext({ children }) {
   let { serverUrl } = useContext(authDataContext);
   let [UserData, setUserData] = useState(null);
 
-  const getcurrentUser = async () => {
+  const getCurrentUser = async () => {
     try {
       let result = await axios.get(serverUrl + "/api/user/currentuser", {
         withCredentials: true,
@@ -21,12 +21,12 @@ function UserContext({ children }) {
     }
   };
   useEffect(() => {
-    getcurrentUser();
+    getCurrentUser();
   }, []);
   let value = {
     UserData,
     setUserData,
-    getcurrentUser,
+    getCurrentUser,
   };
   return (
     <div>

@@ -53,13 +53,14 @@ export default function Bookingcontext({ children }) {
 
   const cancelBookings = async (id) => {
     try {
-      let result = await axios.post(serverUrl + `/api/booking/cancel/${id}`, {
+      let result = await axios.delete(serverUrl + `/api/booking/cancel/${id}`, {
         withCredentials: true,
       });
       await getCurrentUser();
       await getListing();
       console.log(result.data);
       toast.success("Booking Canceled successfully");
+      navigate("/");
     } catch (error) {
       console.log(`Cancel Booking ${error}`);
     }
@@ -77,7 +78,7 @@ export default function Bookingcontext({ children }) {
     bookingData,
     setBookingData,
     handleBooking,
-    cancelBookings
+    cancelBookings,
   };
   return (
     <bookingDataContext.Provider value={value}>
