@@ -242,42 +242,33 @@ export default function ViewCard() {
               </div>
 
               <div className="flex items-center w-full gap-4 mt-3 sm:w-auto">
-                {cardDetails?.host === UserData._id && (
-                  <>
-                    <button
-                      className="flex-1 sm:flex-none px-8 py-3.5 text-white font-semibold rounded-xl bg-green-600 hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
-                      onClick={() => setUpdatePop((prev) => !prev)}
-                    >
-                      <FaPencilAlt className="text-sm" />
-                      Edit
-                    </button>
-
-                    <button
-                      className="flex-1 sm:flex-none px-8 py-3.5 text-white font-semibold rounded-xl bg-red-600 hover:bg-red-700 hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
-                      onClick={handleDeleteListing}
-                      disabled={deleting}
-                    >
-                      <FaTrash className="text-sm" />
-                      {deleting ? "Delete..." : "Delete"}
-                    </button>
-                  </>
-                )}
-                {cardDetails?.host !== UserData?._id &&
-                  (cardDetails?.isBooked ? (
-                    <button
-                      disabled
-                      className="flex-1 sm:flex-none px-8 py-3.5 bg-red-500 text-white font-semibold rounded-xl cursor-not-allowed"
-                    >
-                      Already Booked
-                    </button>
-                  ) : (
-                    <button
-                      className="flex-1 sm:flex-none px-8 py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-[10px]"
-                      onClick={() => setBookingPopup((prev) => !prev)}
-                    >
-                      Reserve
-                    </button>
-                  ))}{" "}
+     {cardDetails?.host !== UserData?._id && (
+  <>
+    {cardDetails?.isBooked ? (
+      cardDetails?.guest === UserData?._id ? (
+        <button
+          className="flex-1 sm:flex-none px-8 py-3.5 bg-red-500 text-white font-semibold rounded-xl"
+        >
+          Cancel Booking
+        </button>
+      ) : (
+        <button
+          disabled
+          className="flex-1 sm:flex-none px-8 py-3.5 bg-gray-500 text-white font-semibold rounded-xl cursor-not-allowed"
+        >
+          Already Booked
+        </button>
+      )
+    ) : (
+      <button
+        className="flex-1 sm:flex-none px-8 py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:shadow-xl hover:scale-105"
+        onClick={() => setBookingPopup(true)}
+      >
+        Reserve
+      </button>
+    )}
+  </>
+)}
               </div>
             </div>
           </div>
