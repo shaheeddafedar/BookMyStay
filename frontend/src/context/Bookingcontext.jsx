@@ -17,6 +17,7 @@ export default function Bookingcontext({ children }) {
   let [total, setTotal] = useState(0);
   let [night, setNight] = useState(0);
   let [bookingData, setBookingData] = useState([]);
+  let[booking,setBooking] = useState(false)
 
   let { serverUrl } = useContext(authDataContext);
   let { getCurrentUser } = useContext(userDataContext);
