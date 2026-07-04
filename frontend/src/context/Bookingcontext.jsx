@@ -24,6 +24,7 @@ export default function Bookingcontext({ children }) {
   let { getListing, cardDetails } = useContext(ListingDataContext);
 
   const handleBooking = async (id) => {
+    setBooking(true)
     if (cardDetails?.isBooked) {
       toast.error("This property is already booked");
       navigate("/");
