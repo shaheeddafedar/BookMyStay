@@ -245,83 +245,87 @@ export default function ViewCard() {
               </div>
 
               <div className="flex items-center w-full gap-4 mt-3 sm:w-auto">
-                {cardDetails?.host !== UserData?._id && (
-                  <>
-                    {!cardDetails?.isBooked ? (
-                      <button
-                        className="px-8 py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:shadow-xl hover:scale-105"
-                        onClick={() => setBookingPopup(true)}
-                      >
-                        Reserve
-                      </button>
-                    ) : cardDetails?.guest === UserData?._id ? (
-                      <>
+                {cardDetails?.host !== UserData?._id ? (
+                  !cardDetails?.isBooked ? (
+                    <button
+                      className="px-8 py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-300"
+                      onClick={() => setBookingPopup(true)}
+                    >
+                      Reserve
+                    </button>
+                  ) : cardDetails?.guest === UserData?._id ? (
+                   <>
+                    <button
+                      className="px-8 py-3 text-white transition-all duration-300 bg-red-500 rounded-xl hover:bg-red-600"
+                      onClick={() => setShowCancelPopup(true)}
+                    >
+                      Cancel Booking
+                    </button>
+                     <button
+                      className="px-8 py-3 text-white transition-all duration-300 bg-red-500 rounded-xl hover:bg-red-600"
+                      onClick={() => setShowCancelPopup(true)}
+                    >
+                        View  details
+                    </button>
+                   </>
+                    
+                  ) : (
+                    <button
+                      disabled
+                      className="px-8 py-3 text-white bg-gray-400 cursor-not-allowed rounded-xl"
+                    >
+                      Already Booked
+                    </button>
+                  )
+                ) : (
+                  // Host view
+                  <button
+                    className="px-8 py-3.5 bg-gradient-to-r from-red-600 to-red-600 text-white font-semibold rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-300"
+                    onClick={() => setUpdatePop(true)}
+                  >
+                     Edit Listing
+                  </button>
+                )}
+
+                {showCancelPopup && (
+                  <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+                    <div className="w-[400px] max-w-full p-6 bg-white rounded-2xl shadow-2xl">
+                      <h2 className="text-xl font-bold text-gray-800">
+                        Cancel Booking?
+                      </h2>
+                      <p className="mt-3 text-gray-600">
+                        Are you sure you want to cancel this booking?
+                      </p>
+                      <div className="flex justify-end gap-3 mt-6">
                         <button
-                          className="px-8 py-3 text-white bg-red-500 rounded-xl hover:bg-red-600"
-                          onClick={() => setShowCancelPopup(true)}
+                          onClick={() => setShowCancelPopup(false)}
+                          className="px-6 py-2 font-semibold text-gray-700 transition-colors bg-gray-200 rounded-xl hover:bg-gray-300"
                         >
-                          Cancel Booking
+                          No
                         </button>
-                        {showCancelPopup && (
-                          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-                            {" "}
-                            <div className="w-[350px] p-6 bg-white rounded-2xl shadow-xl">
-                              {" "}
-                              <h2 className="text-xl font-bold">
-                                {" "}
-                                Cancel Booking?{" "}
-                              </h2>{" "}
-                              <p className="mt-3 text-gray-600">
-                                {" "}
-                                Are you sure you want to cancel this
-                                booking?{" "}
-                              </p>{" "}
-                              <div className="flex justify-end gap-3 mt-6">
-                                {" "}
-                                <button
-                                  onClick={() => setShowCancelPopup(false)}
-                                  className="px-5 py-2 bg-gray-300 rounded-lg"
-                                >
-                                  {" "}
-                                  No{" "}
-                                </button>{" "}
-                                <button
-                                  onClick={() => {
-                                    cancelBookings(cardDetails._id);
-                                    setShowCancelPopup(false);
-                                  }}
-                                  className="px-5 py-2 text-white bg-red-600 rounded-lg hover:bg-red-700"
-                                >
-                                  {" "}
-                                  Yes{" "}
-                                </button>{" "}
-                              </div>{" "}
-                            </div>{" "}
-                          </div>
-                        )}{" "}
-                      </>
-                    ) : (
-                      <button
-                        disabled
-                        className="px-8 py-3 text-white bg-gray-500 cursor-not-allowed rounded-xl"
-                      >
-                        Already Booked
-                      </button>
-                    )}
-                  </>
+                        <button
+                          onClick={() => {
+                            cancelBookings(cardDetails._id);
+                            setShowCancelPopup(false);
+                          }}
+                          className="px-6 py-2 font-semibold text-white transition-colors bg-red-500 rounded-xl hover:bg-red-600"
+                        >
+                          Yes, Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
           </div>
         </div>
 
-        {/* update listing page    */}
         <EditingCard
           updatePopup={updatePopup}
           setUpdatePop={setUpdatePop}
         ></EditingCard>
 
-        {/* Booking page */}
         <Booking
           bookingPopup={bookingPopup}
           setBookingPopup={setBookingPopup}
