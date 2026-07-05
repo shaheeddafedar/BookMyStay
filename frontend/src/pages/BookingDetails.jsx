@@ -6,7 +6,7 @@ import { bookingDataContext } from "../context/Bookingcontext";
 
 export default function BookingDetails() {
     let { bookingData } = useContext(bookingDataContext)
-
+console.log("Booking Data:", bookingData);
     const formatDate = (dateString) => {
         if (!dateString) return "N/A";
         return new Date(dateString).toLocaleDateString('en-IN', {
