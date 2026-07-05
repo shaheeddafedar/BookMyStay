@@ -30,7 +30,7 @@ export const createBooking = async (req,res) => {
        })
        let user = await User.findByIdAndUpdate(req.userId,{
         $push:{booking:listing}
-       },{new:true})
+       },{returnDocument: "after"})
        if (!user) {
         return res.status(404).json({message:"User is not found"})
        }
@@ -49,7 +49,7 @@ export const cancelBooking = async (req,res) => {
         let listing = await Listing.findByIdAndUpdate(id,{isBooked:false})
         let user = await User.findByIdAndUpdate(listing.guest,{
             $pull:{booking:listing._id}
-        },{new:true});
+        },{returnDocument: "after"});
         if (!user) {
         return res.status(404).json({message:"user is not found"})
         

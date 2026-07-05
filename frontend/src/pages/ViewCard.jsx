@@ -31,7 +31,7 @@ import { bookingDataContext } from "../context/Bookingcontext";
 
 export default function ViewCard() {
   let { serverUrl } = useContext(authDataContext);
-  let[showCancelPopup,setShowCancelPopup] = useState(false)
+  let [showCancelPopup, setShowCancelPopup] = useState(false);
 
   const navigate = useNavigate();
 
@@ -45,7 +45,7 @@ export default function ViewCard() {
   } = useContext(ListingDataContext);
 
   let { UserData } = useContext(userDataContext);
-  let {cancelBookings} = useContext(bookingDataContext)
+  let { cancelBookings } = useContext(bookingDataContext);
 
   let [updatePopup, setUpdatePop] = useState(false);
   let [bookingPopup, setBookingPopup] = useState(false);
@@ -244,71 +244,73 @@ export default function ViewCard() {
                 </div>
               </div>
 
-<div className="flex items-center w-full gap-4 mt-3 sm:w-auto">
-  {cardDetails?.host !== UserData?._id && (
-    <>
-      {cardDetails?.isBooked ? (
-        cardDetails?.guest === UserData?._id ? (
-          <>
-            <button
-              className="px-8 py-3 text-white bg-red-500 rounded-xl hover:bg-red-600"
-              onClick={() => setShowCancelPopup(true)}
-            >
-              Cancel Booking
-            </button>
-
-            {showCancelPopup && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-                <div className="w-[350px] p-6 bg-white rounded-2xl shadow-xl">
-                  <h2 className="text-xl font-bold">
-                    Cancel Booking?
-                  </h2>
-
-                  <p className="mt-3 text-gray-600">
-                    Are you sure you want to cancel this booking?
-                  </p>
-
-                  <div className="flex justify-end gap-3 mt-6">
-                    <button
-                      onClick={() => setShowCancelPopup(false)}
-                      className="px-5 py-2 bg-gray-300 rounded-lg"
-                    >
-                      No
-                    </button>
-
-                    <button
-                      onClick={() => {
-                        cancelBookings(cardDetails._id);
-                        setShowCancelPopup(false);
-                      }}
-                      className="px-5 py-2 text-white bg-red-600 rounded-lg hover:bg-red-700"
-                    >
-                      Yes
-                    </button>
-                  </div>
-                </div>
+              <div className="flex items-center w-full gap-4 mt-3 sm:w-auto">
+                {cardDetails?.host !== UserData?._id && (
+                  <>
+                    {!cardDetails?.isBooked ? (
+                      <button
+                        className="px-8 py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:shadow-xl hover:scale-105"
+                        onClick={() => setBookingPopup(true)}
+                      >
+                        Reserve
+                      </button>
+                    ) : cardDetails?.guest === UserData?._id ? (
+                      <>
+                        <button
+                          className="px-8 py-3 text-white bg-red-500 rounded-xl hover:bg-red-600"
+                          onClick={() => setShowCancelPopup(true)}
+                        >
+                          Cancel Booking
+                        </button>
+                        {showCancelPopup && (
+                          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+                            {" "}
+                            <div className="w-[350px] p-6 bg-white rounded-2xl shadow-xl">
+                              {" "}
+                              <h2 className="text-xl font-bold">
+                                {" "}
+                                Cancel Booking?{" "}
+                              </h2>{" "}
+                              <p className="mt-3 text-gray-600">
+                                {" "}
+                                Are you sure you want to cancel this
+                                booking?{" "}
+                              </p>{" "}
+                              <div className="flex justify-end gap-3 mt-6">
+                                {" "}
+                                <button
+                                  onClick={() => setShowCancelPopup(false)}
+                                  className="px-5 py-2 bg-gray-300 rounded-lg"
+                                >
+                                  {" "}
+                                  No{" "}
+                                </button>{" "}
+                                <button
+                                  onClick={() => {
+                                    cancelBookings(cardDetails._id);
+                                    setShowCancelPopup(false);
+                                  }}
+                                  className="px-5 py-2 text-white bg-red-600 rounded-lg hover:bg-red-700"
+                                >
+                                  {" "}
+                                  Yes{" "}
+                                </button>{" "}
+                              </div>{" "}
+                            </div>{" "}
+                          </div>
+                        )}{" "}
+                      </>
+                    ) : (
+                      <button
+                        disabled
+                        className="px-8 py-3 text-white bg-gray-500 cursor-not-allowed rounded-xl"
+                      >
+                        Already Booked
+                      </button>
+                    )}
+                  </>
+                )}
               </div>
-            )}
-          </>
-        ) : (
-          <button
-            disabled
-            className="px-8 py-3 text-white bg-gray-500 cursor-not-allowed rounded-xl"
-          >
-            Already Booked
-          </button>
-        )
-      ) : (
-        <button
-          className="px-8 py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:shadow-xl hover:scale-105"
-          onClick={() => setBookingPopup(true)}
-        >
-          Reserve
-        </button>
-      )}
-    </>
-  )}
-</div>
             </div>
           </div>
         </div>
@@ -328,8 +330,3 @@ export default function ViewCard() {
     </>
   );
 }
-
-
-
-
- 

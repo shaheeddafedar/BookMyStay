@@ -122,7 +122,7 @@ export const deleListing = async (req,res) => {
     let listing = await Listing.findByIdAndDelete(id)
     let user = await User.findByIdAndUpdate(listing.host,{
            $pull:{listing:listing._id}
-    },{new:true})
+    },{returnDocument: "after"})
    if (!user) {
     return res.status(404).json({message :"user is not found"})
    }

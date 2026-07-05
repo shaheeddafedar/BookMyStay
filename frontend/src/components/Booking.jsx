@@ -20,6 +20,7 @@ export default function Booking({ bookingPopup, setBookingPopup }) {
     setNight,
     bookingData,setBookingData,
     handleBooking,
+    booking,
   } = useContext(bookingDataContext);
   const { cardDetails } = useContext(ListingDataContext);
 
@@ -129,9 +130,10 @@ export default function Booking({ bookingPopup, setBookingPopup }) {
                   type="submit"
                   className="w-full py-2.5 px-4 mt-1 text-sm bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.01] transform transition-all duration-300 flex items-center justify-center gap-2 sm:py-3.5 sm:px-6 sm:mt-2 sm:text-base"
                   onClick={()=>handleBooking(cardDetails._id)}
+                  disabled={booking}
                 >
                   <FaCheckCircle className="text-xs sm:text-sm" />
-                  Book Now
+                  {booking ? "Booking...":"Book Now"}
                 </button>
               </div>
             </form>

@@ -49,12 +49,6 @@ export default function Card({ title, landMark, image1, image2, image3, rent, ci
             </div>
           )}
           
-          {isBooked &&  host === UserData?._id &&(
-            <div className='flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-semibold text-emerald-700 bg-emerald-50/95 rounded-full shadow-lg sm:text-xs backdrop-blur-sm border border-emerald-200'>
-              <GiConfirmed className='w-3 h-3 text-emerald-500 sm:w-3.5 sm:h-3.5' />
-              <span>Cancel Booking</span>
-            </div>
-          )}
         </div>
 
         {/* Image */}

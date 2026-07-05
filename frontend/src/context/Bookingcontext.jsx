@@ -46,10 +46,13 @@ export default function Bookingcontext({ children }) {
       setBookingData(result.data);
       toast.success("Booking Added successfully");
       navigate("/MyBooking");
+      setBooking(false)
     } catch (error) {
       console.log(error.response.data);
       console.log(error.response.status);
       setBookingData(null);
+            setBooking(false)
+
     }
   };
 
@@ -81,6 +84,7 @@ export default function Bookingcontext({ children }) {
     setBookingData,
     handleBooking,
     cancelBookings,
+    booking,setBooking,
   };
   return (
     <bookingDataContext.Provider value={value}>
