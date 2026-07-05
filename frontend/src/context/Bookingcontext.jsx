@@ -17,14 +17,14 @@ export default function Bookingcontext({ children }) {
   let [total, setTotal] = useState(0);
   let [night, setNight] = useState(0);
   let [bookingData, setBookingData] = useState([]);
-  let[booking,setBooking] = useState(false)
+  let [booking, setBooking] = useState(false);
 
   let { serverUrl } = useContext(authDataContext);
   let { getCurrentUser } = useContext(userDataContext);
   let { getListing, cardDetails } = useContext(ListingDataContext);
 
   const handleBooking = async (id) => {
-    setBooking(true)
+    setBooking(true);
     if (cardDetails?.isBooked) {
       toast.error("This property is already booked");
       navigate("/");
@@ -43,16 +43,16 @@ export default function Bookingcontext({ children }) {
 
       await getCurrentUser();
       await getListing();
-      setBookingData(result.data);
+      console.log(result.data.booking);
+      setBookingData(result.data.booking);
       toast.success("Booking Added successfully");
-      navigate("/MyBooking");
-      setBooking(false)
+      navigate("/Booked");
+      setBooking(false);
     } catch (error) {
       console.log(error.response.data);
       console.log(error.response.status);
       setBookingData(null);
-            setBooking(false)
-
+      setBooking(false);
     }
   };
 
@@ -84,7 +84,8 @@ export default function Bookingcontext({ children }) {
     setBookingData,
     handleBooking,
     cancelBookings,
-    booking,setBooking,
+    booking,
+    setBooking,
   };
   return (
     <bookingDataContext.Provider value={value}>

@@ -18,6 +18,7 @@ import MyBooking from "./pages/MyBooking";
 
 
 import { userDataContext } from "./context/UserContext";
+import Booked from "./pages/Booked";
 // import './App.css'
 function App() {
   let { UserData } = useContext(userDataContext);
@@ -56,6 +57,10 @@ function App() {
         <Route
           path="/MyBooking"
           element={UserData ? <MyBooking/> : <Navigate to="/" />}
+        ></Route>
+           <Route
+          path="/Booked"
+          element={UserData ? <Booked/> : <Navigate to="/" />}
         ></Route>
       </Routes>
     </>
