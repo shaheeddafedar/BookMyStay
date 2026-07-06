@@ -1,12 +1,16 @@
 import React, { useContext } from "react";
+import { useParams } from "react-router-dom";
+
 import { GiConfirmed } from "react-icons/gi";
 import { FaCalendarCheck, FaUser, FaEnvelope, FaRupeeSign, FaCalendarAlt } from "react-icons/fa";
 import { MdOutlineVerified } from "react-icons/md";
+
 import { bookingDataContext } from "../context/Bookingcontext";
 
 export default function BookingDetails() {
-    let { bookingData } = useContext(bookingDataContext)
-console.log("Booking Data:", bookingData);
+    const { id } = useParams();
+
+    console.log("Booking Data:", bookingData);
     const formatDate = (dateString) => {
         if (!dateString) return "N/A";
         return new Date(dateString).toLocaleDateString('en-IN', {

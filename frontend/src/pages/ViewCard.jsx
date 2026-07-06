@@ -263,7 +263,7 @@ export default function ViewCard() {
                     </button>
                      <button
                       className="px-8 py-3 text-white transition-all duration-300 bg-blue-500 rounded-xl hover:bg-blue-600"
-                      onClick={() => navigate(`/BookingDetails`)}
+                      onClick={() =>navigate(`/BookingDetails/${booking._id}`)}
                     >
                         View  details
                     </button>
