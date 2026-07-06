@@ -263,7 +263,7 @@ export default function ViewCard() {
                     </button>
                     <button
                       className="px-8 py-3 text-white transition-all duration-300 bg-blue-500 rounded-xl hover:bg-blue-600"
-                      onClick={() => setShowCancelPopup(true)}
+                      onClick={() => navigate(`/BookingDetails/${cardDetails._id}`)}
                       
                     >
                       View Details

@@ -17,12 +17,10 @@ const [loading, setLoading] = useState(true);
 
 const getBooking = async () => {
   try {
-    const result = await axios.get(
-      `${serverUrl}/api/booking/${id}`,
-      {
-        withCredentials: true,
-      }
-    );
+    console.log("Booking ID:", id);
+    const result = await axios.get(`${serverUrl}/api/booking/listing/${id}`, {
+  withCredentials: true,
+});
 
     console.log(result.data);
 
