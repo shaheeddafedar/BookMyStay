@@ -25,10 +25,9 @@ import { ListingDataContext } from "../context/ListingContext";
 import { userDataContext } from "../context/UserContext";
 import { authDataContext } from "../context/Authcontext";
 
-import Booking from "../components/Booking";
 import EditingCard from "../components/EditingCard";
 import { bookingDataContext } from "../context/Bookingcontext";
-
+import Booking from "../components/Booking";
 export default function ViewCard() {
   let { serverUrl } = useContext(authDataContext);
   let [showCancelPopup, setShowCancelPopup] = useState(false);
@@ -254,7 +253,7 @@ export default function ViewCard() {
                       Reserve
                     </button>
                   ) : cardDetails?.guest === UserData?._id ? (
-                   <>
+                    <> 
                     <button
                       className="px-8 py-3 text-white transition-all duration-300 bg-red-500 rounded-xl hover:bg-red-600"
                       onClick={() => setShowCancelPopup(true)}
@@ -262,15 +261,14 @@ export default function ViewCard() {
                     >
                       Cancel Booking
                     </button>
-                     <button
+                    <button
                       className="px-8 py-3 text-white transition-all duration-300 bg-blue-500 rounded-xl hover:bg-blue-600"
-                      onClick={() =>navigate(`/BookingDetails/${booking._id}`)}
-
+                      onClick={() => setShowCancelPopup(true)}
+                      
                     >
-                        View  details
+                      View Details
                     </button>
-                   </>
-                    
+                    </>
                   ) : (
                     <button
                       disabled

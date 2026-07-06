@@ -60,3 +60,27 @@ export const cancelBooking = async (req,res) => {
        return res.status(500).json({message:"booking cancel error"})
     }
 }
+
+export const getBooking = async (req, res) => {
+    try {
+        let { id } = req.params;
+
+        let booking = await Booking.findById(id)
+            .populate("host")
+            .populate("guest")
+            .populate("listing");
+
+        if (!booking) {
+            return res.status(404).json({
+                message: "Booking not found",
+            });
+        }
+
+        return res.status(200).json(booking);
+
+    } catch (error) {
+        return res.status(500).json({
+            message: "Error fetching booking",
+        });
+    }
+};

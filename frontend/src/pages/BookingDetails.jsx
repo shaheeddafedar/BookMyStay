@@ -1,15 +1,41 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 import { GiConfirmed } from "react-icons/gi";
 import { FaCalendarCheck, FaUser, FaEnvelope, FaRupeeSign, FaCalendarAlt } from "react-icons/fa";
 import { MdOutlineVerified } from "react-icons/md";
 
+import { authDataContext } from "../context/Authcontext";
+
 
 export default function BookingDetails() {
+    let { serverUrl } = useContext(authDataContext);
     const { id } = useParams();
     const [booking, setBooking] = useState(null);
 const [loading, setLoading] = useState(true);
+
+const getBooking = async () => {
+  try {
+    const result = await axios.get(
+      `${serverUrl}/api/booking/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+
+    console.log(result.data);
+
+    setBooking(result.data);
+
+    setLoading(false);
+
+  } catch (error) {
+    console.log(error);
+
+    setLoading(false);
+  }
+};
 
     console.log(booking);
     const formatDate = (dateString) => {
@@ -24,8 +50,8 @@ const [loading, setLoading] = useState(true);
     };
 
 
-    useEffect(() => {
-
+useEffect(() => {
+  getBooking();
 }, []);
     return (
         <div className="w-full max-w-3xl p-4 mx-auto sm:p-6 md:p-8">
