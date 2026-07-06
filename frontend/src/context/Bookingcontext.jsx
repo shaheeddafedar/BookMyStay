@@ -38,6 +38,7 @@ export default function Bookingcontext({ children }) {
           checkOut,
           totalRent: total,
         },
+        
         { withCredentials: true },
       );
 
