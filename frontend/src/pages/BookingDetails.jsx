@@ -17,6 +17,7 @@ export default function BookingDetails() {
             day: 'numeric',
             month: 'short',
             year: 'numeric'
+            
         });
     };
 
