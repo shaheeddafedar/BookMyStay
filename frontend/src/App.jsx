@@ -64,7 +64,7 @@ function App() {
           element={UserData ? <Booked/> : <Navigate to="/" />}
         ></Route>
         <Route
-          path="/BookingDetails"
+          path="/BookingDetails/:id"
           element={UserData ? <BookingDetails/> : <Navigate to="/" />}
         ></Route>
       </Routes>

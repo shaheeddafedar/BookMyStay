@@ -1,16 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { GiConfirmed } from "react-icons/gi";
 import { FaCalendarCheck, FaUser, FaEnvelope, FaRupeeSign, FaCalendarAlt } from "react-icons/fa";
 import { MdOutlineVerified } from "react-icons/md";
 
-import { bookingDataContext } from "../context/Bookingcontext";
 
 export default function BookingDetails() {
     const { id } = useParams();
+    const [booking, setBooking] = useState(null);
+const [loading, setLoading] = useState(true);
 
-    console.log("Booking Data:", bookingData);
+    console.log(booking);
     const formatDate = (dateString) => {
         if (!dateString) return "N/A";
         return new Date(dateString).toLocaleDateString('en-IN', {
@@ -22,6 +23,10 @@ export default function BookingDetails() {
         });
     };
 
+
+    useEffect(() => {
+
+}, []);
     return (
         <div className="w-full max-w-3xl p-4 mx-auto sm:p-6 md:p-8">
             <div className="overflow-hidden bg-white border border-gray-100 shadow-2xl rounded-3xl">
@@ -51,7 +56,7 @@ export default function BookingDetails() {
                                 <span className="text-sm font-semibold text-gray-600">Booking ID</span>
                             </div>
                             <span className="text-sm font-mono font-bold text-blue-700 bg-white px-4 py-1.5 rounded-lg shadow-sm border border-blue-100">
-                                {bookingData?._id || "N/A"}
+                             {booking?._id || "N/A"}
                             </span>
                         </div>
                     </div>
@@ -65,7 +70,7 @@ export default function BookingDetails() {
                             <div className="flex items-center gap-2 mt-1">
                                 <FaEnvelope className="w-3.5 h-3.5 text-gray-400" />
                                 <span className="text-sm font-medium text-gray-700 truncate">
-                                    {bookingData?.host?.email || "N/A"}
+                                    {booking?.host?.email || "N/A"}
                                 </span>
                             </div>
                         </div>
@@ -78,7 +83,7 @@ export default function BookingDetails() {
                             <div className="flex items-baseline gap-1 mt-1">
                                 <span className="text-2xl font-bold text-gray-800">₹</span>
                                 <span className="text-2xl font-bold text-gray-800">
-                                    {bookingData?.totalRent || "0"}
+                                    {booking?.totalRent || "0"}
                                 </span>
                             </div>
                         </div>
@@ -89,7 +94,7 @@ export default function BookingDetails() {
                                 <span className="text-xs font-semibold tracking-wider uppercase text-emerald-700">Check In</span>
                             </div>
                             <span className="text-sm font-semibold text-gray-700">
-                                {formatDate(bookingData?.checkIn)}
+                                {formatDate(booking?.checkIn)}
                             </span>
                         </div>
 
@@ -99,12 +104,12 @@ export default function BookingDetails() {
                                 <span className="text-xs font-semibold tracking-wider uppercase text-rose-700">Check Out</span>
                             </div>
                             <span className="text-sm font-semibold text-gray-700">
-                                {formatDate(bookingData?.checkOut)}
+                                {formatDate(booking?.checkOut)}
                             </span>
                         </div>
                     </div>
 
-                    {bookingData?.checkIn && bookingData?.checkOut && (
+                    {booking?.checkIn && booking?.checkOut && (
                         <div className="p-4 mt-6 border border-blue-100 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl">
                             <div className="flex flex-col items-center justify-between gap-2 sm:flex-row">
                                 <span className="text-sm font-medium text-gray-600">
@@ -112,7 +117,7 @@ export default function BookingDetails() {
                                 </span>
                                 <span className="text-sm font-bold text-blue-700">
                                     {Math.ceil(
-                                        (new Date(bookingData.checkOut) - new Date(bookingData.checkIn)) / 
+                                        (new Date(booking.checkOut) - new Date(booking.checkIn)) / 
                                         (1000 * 60 * 60 * 24)
                                     )} days
                                 </span>

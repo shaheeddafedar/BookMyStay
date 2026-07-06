@@ -8,5 +8,6 @@ let bookingRouter = express.Router()
 
 bookingRouter.post("/create/:id",isAuth,createBooking)
 bookingRouter.delete("/cancel/:id",isAuth,cancelBooking)
+bookingRouter.get("/:id", isAuth, getBooking);
 
 export default bookingRouter
