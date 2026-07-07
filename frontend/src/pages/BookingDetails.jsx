@@ -20,6 +20,7 @@ const getBooking = async () => {
     console.log("Booking ID:", id);
     const result = await axios.get(`${serverUrl}/api/booking/listing/${id}`, {
   withCredentials: true,
+  
 });
 
     console.log(result.data);
